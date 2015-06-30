@@ -1,0 +1,4 @@
+rootProject.name = 'dozor-bot'
+include 'chatbot'
+include 'chatbot'
+
