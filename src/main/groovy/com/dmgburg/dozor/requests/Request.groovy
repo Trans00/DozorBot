@@ -1,4 +1,4 @@
-package requests
+package com.dmgburg.dozor.requests
 
 /**
  * Created by Denis on 28.06.2015.

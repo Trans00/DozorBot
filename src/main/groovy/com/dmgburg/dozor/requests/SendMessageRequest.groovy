@@ -1,6 +1,4 @@
-package requests
-
-import java.nio.charset.Charset
+package com.dmgburg.dozor.requests
 
 class SendMessageRequest extends AbstructRequest{
     final String methodName = "sendMessage"

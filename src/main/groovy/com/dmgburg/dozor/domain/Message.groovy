@@ -1,10 +1,7 @@
-package domain
+package com.dmgburg.dozor.domain
 
 import org.codehaus.jackson.annotate.JsonProperty
 
-/**
- * Created by Denis on 29.06.2015.
- */
 class Message {
     @JsonProperty(value = "message_id" )int messageId
     User from

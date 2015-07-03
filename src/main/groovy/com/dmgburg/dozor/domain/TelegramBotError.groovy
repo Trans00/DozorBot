@@ -1,10 +1,7 @@
-package domain
+package com.dmgburg.dozor.domain
 
 import org.codehaus.jackson.annotate.JsonProperty
 
-/**
- * Created by Denis on 28.06.2015.
- */
 class TelegramBotError {
     boolean ok
     @JsonProperty(value = "error_code")int errorCode

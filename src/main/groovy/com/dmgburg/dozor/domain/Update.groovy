@@ -1,8 +1,5 @@
-package domain
+package com.dmgburg.dozor.domain
 
-/**
- * Created by Denis on 28.06.2015.
- */
 class Update {
     int update_id
     Message message

@@ -1,10 +1,7 @@
-package handlers
+package com.dmgburg.dozor.handlers
 
-import domain.Message
+import com.dmgburg.dozor.domain.Message
 
-/**
- * Created by Denis on 29.06.2015.
- */
 class NopHandler implements Handler{
     @Override
     void handle(Message update) {

@@ -1,4 +1,4 @@
-package domain
+package com.dmgburg.dozor.domain
 
 import com.sun.istack.internal.Nullable
 import org.codehaus.jackson.annotate.JsonProperty
@@ -12,6 +12,9 @@ class User {
     @Nullable
     String username
 
+    public String getName(){
+        firstName ?: lastName?: username
+    }
 
     @Override
     public String toString() {
