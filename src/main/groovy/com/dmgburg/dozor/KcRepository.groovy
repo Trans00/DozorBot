@@ -9,14 +9,16 @@ class KcRepository {
     public void setKs(List<String> ks){
         ksByNumber.clear()
         int i = 1
-        ks.each {String it -> ksByNumber.put(i++,it)}
+        ks.each {String it ->
+            ksByNumber.put(i++,it)
+        }
     }
 
     public Map<Integer,String> getKs(){
         return ksByNumber
     }
 
-    public void removekKs(int number){
+    public void removeKs(int number){
         ksByNumber.remove(number)
     }
 }

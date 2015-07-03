@@ -24,22 +24,12 @@ class Chat {
         Chat chat = (Chat) o
 
         if (id != chat.id) return false
-        if (firstName != chat.firstName) return false
-        if (lastName != chat.lastName) return false
-        if (title != chat.title) return false
-        if (username != chat.username) return false
 
         return true
     }
 
     int hashCode() {
-        int result
-        result = id
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0)
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0)
-        result = 31 * result + (username != null ? username.hashCode() : 0)
-        result = 31 * result + (title != null ? title.hashCode() : 0)
-        return result
+        return id
     }
 
     @Override

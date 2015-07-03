@@ -1,11 +1,13 @@
 package com.dmgburg.dozor.core
 
 import com.dmgburg.dozor.domain.Update
+import com.dmgburg.dozor.handlers.CancelHandler
 import com.dmgburg.dozor.handlers.Handler
 import com.dmgburg.dozor.handlers.HelpHandler
 import com.dmgburg.dozor.handlers.KcHandler
 import com.dmgburg.dozor.handlers.KcNewHandler
 import com.dmgburg.dozor.handlers.NopHandler
+import com.dmgburg.dozor.handlers.PassedHandler
 import com.dmgburg.dozor.handlers.StartHandler
 import org.apache.log4j.Logger
 
@@ -15,7 +17,12 @@ class HelloTG {
     static int lastUpdate = 0
     static long sleepTime = 1000
     static Logger log = Logger.getLogger(HelloTG)
-    static def handlers = [new StartHandler(),new HelpHandler(),new KcHandler(),new KcNewHandler()]
+    static List<Handler> handlers = [new StartHandler(),
+                                     new HelpHandler(),
+                                     new KcHandler(),
+                                     new KcNewHandler(),
+                                     new PassedHandler(),
+                                     new CancelHandler()]
 
     public static void main(String[] args) {
         log.info("Application started")
@@ -37,6 +44,7 @@ class HelloTG {
                 updates = LocalApi.getUpdates(lastUpdate + 1)
             }catch (Throwable t){
                 log.error("Unhandled exception: ", t)
+                updates.remove(0)
             }
         }
     }

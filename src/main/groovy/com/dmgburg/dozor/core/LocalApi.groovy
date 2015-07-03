@@ -21,22 +21,20 @@ class LocalApi {
         HttpResponseDecorator resp
         try {
             RESTClient client = new RESTClient("https://api.telegram.org/")
-//            client.contentType = ContentType.URLENC
+            client.contentType = ContentType.TEXT
 
             resp = client.post(path: "/bot${Credentials.AUTH_TOKEN}/${request.methodName}",
                     body: request.parameters, requestContentType: ContentType.URLENC )
         } catch (HttpResponseException exception){
-            resp = exception.response
-            def responseData = resp.data as Map<String,String>
-            log.error("TelegramBotError executing request: $request: " +
-                    "${mapper.readValue(responseData.keySet().last(),TelegramBotError).description}")
+            try {
+                resp = exception.response
+                log.error("TelegramBotError executing request: $request: ${resp.data.str}",exception)
+            } catch (Exception e){
+                log.error("Exception in catch: ", e)
+            }
         }
         log.debug("Request $request processed with result code ${resp.status}")
-        if(resp.data.size()>1){
-            log.error("Responce data has more than one key for request $request")
-            return ""
-        }
-        return resp.data.keySet().last()
+        return resp.data.str
     }
 
     public static void sendMessage(int chatId, String message) {
