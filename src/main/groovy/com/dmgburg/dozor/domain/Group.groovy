@@ -1,5 +1,8 @@
 package com.dmgburg.dozor.domain
 
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class Group {
     int id
     String title

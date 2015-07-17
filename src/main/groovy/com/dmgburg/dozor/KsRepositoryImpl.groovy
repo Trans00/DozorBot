@@ -3,7 +3,7 @@ package com.dmgburg.dozor
 import java.util.concurrent.ConcurrentHashMap
 
 @Singleton
-class KcRepository {
+class KsRepositoryImpl implements KsRepository {
     private Map<Integer,String> ksByNumber =  new ConcurrentHashMap<>()
 
     public void setKs(List<String> ks){

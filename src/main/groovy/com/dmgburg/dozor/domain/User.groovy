@@ -1,8 +1,10 @@
 package com.dmgburg.dozor.domain
 
 import com.sun.istack.internal.Nullable
+import groovy.transform.CompileStatic
 import org.codehaus.jackson.annotate.JsonProperty
 
+@CompileStatic
 class User {
     int id
     @JsonProperty(value = "first_name")String firstName

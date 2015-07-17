@@ -1,7 +1,9 @@
 package com.dmgburg.dozor.domain
 
+import groovy.transform.CompileStatic
 import org.codehaus.jackson.annotate.JsonProperty
 
+@CompileStatic
 class Chat {
     int id
     @JsonProperty(value = "first_name")String firstName

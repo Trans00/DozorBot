@@ -1,30 +1,44 @@
 package com.dmgburg.dozor.handlers
 
+import com.dmgburg.dozor.ChatState
 import com.dmgburg.dozor.ChatStateRepository
-import com.dmgburg.dozor.KcRepository
-import com.dmgburg.dozor.core.LocalApi
+import com.dmgburg.dozor.KsRepository
+import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
+import groovy.transform.CompileStatic
 import org.apache.log4j.Logger
 
-class PassedHandler implements Handler{
+@CompileStatic
+class PassedHandler extends AbstractHandler{
+
 static Logger log = Logger.getLogger(PassedHandler)
+
+    KsRepository ksRepository
+    ChatStateRepository chatStateRepository
+
+    PassedHandler(TgApi tgApi, KsRepository ksRepository, ChatStateRepository chatStateRepository) {
+        super(tgApi)
+        this.ksRepository = ksRepository
+        this.chatStateRepository = chatStateRepository
+    }
+
     @Override
-    void handle(Message message) {
+    void doHandle(Message message) {
         if(message.text.trim().startsWith("/pass")) {
-            ChatStateRepository.instance.setState(message.chat, "pass")
-            LocalApi.sendMessage(message.chat.id, "Введите номер взятого кода")
-        } else if(ChatStateRepository.instance.getState(message.chat)== "pass"
-            && message.text.trim() ==~ /\d+/){
-            KcRepository.instance.removeKs(Integer.valueOf(message.text.trim()))
-            log.info("Код ${message.text.trim()} взят")
-            LocalApi.sendMessage(message.chat.id, "Код ${message.text.trim()} взят")
-            ChatStateRepository.instance.setState(message.chat, "noState")
+            chatStateRepository.setState(message.chat, ChatState.pass)
+            api.sendMessage(message.chat.id, "Введите номер взятого кода")
+        } else if(chatStateRepository.getState(message.chat)== ChatState.pass
+            && message.text ==~ /\d+/){
+            ksRepository.removeKs(Integer.valueOf(message.text))
+            log.info("Код ${message.text} взят")
+            api.sendMessage(message.chat.id, "Код ${message.text} взят")
+            chatStateRepository.setState(message.chat, ChatState.noState)
         }
     }
 
     @Override
-    boolean isHandled(Message message) {
-        return message.text.trim().toLowerCase().startsWith("/pass") ||
-                ChatStateRepository.instance.getState(message.chat) == "pass"
+    boolean doIsHandled(Message message) {
+        return message.text.startsWith("/pass") ||
+                chatStateRepository.getState(message.chat) == ChatState.pass
     }
 }

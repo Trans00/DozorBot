@@ -1,5 +1,8 @@
 package com.dmgburg.dozor.domain
 
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class Update {
     int update_id
     Message message

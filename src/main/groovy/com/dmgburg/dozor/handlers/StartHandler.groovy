@@ -1,13 +1,20 @@
 package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.core.LocalApi
+import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
+import groovy.transform.CompileStatic
 
-class StartHandler implements Handler {
+@CompileStatic
+class StartHandler extends AbstractHandler {
+
+    StartHandler(TgApi tgApi) {
+        super(tgApi)
+    }
 
     @Override
-    void handle(Message message) {
+    void doHandle(Message message) {
         Chat chat = message.chat
         GString text
         if(chat.isUser()){
@@ -15,11 +22,11 @@ class StartHandler implements Handler {
         }else if(chat.isGroup()){
             text = "Привет жителям ${chat.title}, я дурак и не лечесь и теперь я буду жить с вами!"
         }
-        LocalApi.sendMessage(chat.id, text)
+        api.sendMessage(chat.id, text)
     }
 
     @Override
-    boolean isHandled(Message message) {
+    boolean doIsHandled(Message message) {
         return message.text.toLowerCase().startsWith("/start")
     }
 }

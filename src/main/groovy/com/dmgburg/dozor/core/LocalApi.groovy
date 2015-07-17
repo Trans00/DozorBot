@@ -3,6 +3,7 @@ package com.dmgburg.dozor.core
 import com.dmgburg.dozor.domain.TelegramBotError
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.domain.UpdatesResult
+import groovy.transform.CompileStatic
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.HttpResponseException
@@ -13,11 +14,11 @@ import com.dmgburg.dozor.requests.GetUpdatesRequest
 import com.dmgburg.dozor.requests.Request
 import com.dmgburg.dozor.requests.SendMessageRequest
 
-class LocalApi {
+@Singleton
+class LocalApi implements TgApi{
     private static Logger log = Logger.getLogger(LocalApi)
 
-    public static String doRequest(Request request){
-        def mapper = new ObjectMapper()
+    private String doRequest(Request request){
         HttpResponseDecorator resp
         try {
             RESTClient client = new RESTClient("https://api.telegram.org/")
@@ -37,12 +38,12 @@ class LocalApi {
         return resp.data.str
     }
 
-    public static void sendMessage(int chatId, String message) {
+    public void sendMessage(int chatId, String message) {
         def request = new SendMessageRequest(chatId,message)
         doRequest(request)
     }
 
-    public static List<Update> getUpdates(int offset = 0) {
+    public List<Update> getUpdates(int offset = 0) {
         def request
         if (offset != 0) {
             request = new GetUpdatesRequest(offset)
