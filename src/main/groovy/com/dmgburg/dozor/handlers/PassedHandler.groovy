@@ -6,12 +6,13 @@ import com.dmgburg.dozor.KsRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 import groovy.transform.CompileStatic
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 @CompileStatic
 class PassedHandler extends AbstractHandler{
 
-static Logger log = Logger.getLogger(PassedHandler)
+static Logger log = LoggerFactory.getLogger(PassedHandler)
 
     KsRepository ksRepository
     ChatStateRepository chatStateRepository

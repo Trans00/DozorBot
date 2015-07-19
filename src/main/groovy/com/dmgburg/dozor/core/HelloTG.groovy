@@ -3,6 +3,7 @@ package com.dmgburg.dozor.core
 import com.dmgburg.dozor.ChatStateRepositoryImpl
 import com.dmgburg.dozor.KsRepository
 import com.dmgburg.dozor.KsRepositoryImpl
+import com.dmgburg.dozor.ParsingKsRepository
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.handlers.CancelHandler
 import com.dmgburg.dozor.handlers.Handler
@@ -13,17 +14,18 @@ import com.dmgburg.dozor.handlers.NopHandler
 import com.dmgburg.dozor.handlers.PassedHandler
 import com.dmgburg.dozor.handlers.StartHandler
 import groovy.transform.CompileStatic
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import static com.dmgburg.dozor.core.LocalApi.updates
 
 class HelloTG {
     static int lastUpdate = 0
     static long sleepTime = 1000
-    static Logger log = Logger.getLogger(HelloTG)
+    static Logger log = LoggerFactory.getLogger(HelloTG)
     static List<Handler> handlers = [new StartHandler(LocalApi.instance),
                                      new HelpHandler(LocalApi.instance),
-                                     new KsHandler(LocalApi.instance, KsRepositoryImpl.instance),
+                                     new KsHandler(LocalApi.instance, new ParsingKsRepository()),
                                      new KsNewHandler(LocalApi.instance,
                                              KsRepositoryImpl.instance,
                                              ChatStateRepositoryImpl.instance),

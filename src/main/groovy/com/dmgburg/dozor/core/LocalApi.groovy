@@ -8,15 +8,16 @@ import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
-import org.apache.log4j.Logger
 import org.codehaus.jackson.map.ObjectMapper
 import com.dmgburg.dozor.requests.GetUpdatesRequest
 import com.dmgburg.dozor.requests.Request
 import com.dmgburg.dozor.requests.SendMessageRequest
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 @Singleton
 class LocalApi implements TgApi{
-    private static Logger log = Logger.getLogger(LocalApi)
+    private static Logger log = LoggerFactory.getLogger(LocalApi)
 
     private String doRequest(Request request){
         HttpResponseDecorator resp
