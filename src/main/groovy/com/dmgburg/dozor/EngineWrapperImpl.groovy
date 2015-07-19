@@ -22,7 +22,7 @@ class EngineWrapperImpl implements EngineWrapper{
 
     @Override
     NodeChild getHtml() {
-        String baseUrl = 'http://classic.dzzzr.ru/moscow/go/'
+        String baseUrl = uri
         def http = new HTTPBuilder(baseUrl)
         http.contentType = ContentType.HTML
         http.headers['Authorization'] = 'Basic ' + "moscow_zorgyk:448982".getBytes('iso-8859-1').encodeBase64()
