@@ -26,9 +26,7 @@ class EngineWrapperTest {
 
     @Test
     void "first test"() {
-        def http = new HTTPBuilder("http://google.com/")
-        http.request(Method.GET){
+        def http = new EncounterKsRepository().ks
 
-        }
     }
 }

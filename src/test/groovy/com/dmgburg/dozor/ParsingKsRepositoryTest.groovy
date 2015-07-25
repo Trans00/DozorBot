@@ -1,5 +1,7 @@
 package com.dmgburg.dozor
 
+import groovy.util.slurpersupport.NodeChild
+import org.cyberneko.html.parsers.SAXParser
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -7,7 +9,7 @@ import org.mockito.MockitoAnnotations
 
 import static org.mockito.Mockito.*
 
-class PrasingKsRepositoryTest {
+class ParsingKsRepositoryTest {
     ParsingKsRepository repository
     @Mock EngineWrapper wrapper
 
@@ -16,16 +18,16 @@ class PrasingKsRepositoryTest {
         MockitoAnnotations.initMocks(this)
         repository = new ParsingKsRepository(wrapper)
 
-        def html = this.getClass().getResource('/1.htm').text
-        def slurper  = new XmlSlurper()
-        def parsed = slurper.parseText(html)
+        def html = this.getClass().getResource('/dzzzr2.html').text
+        def slurper  = new XmlSlurper(new SAXParser())
+        NodeChild parsed = slurper.parseText(html)
         parsed.childNodes()
-//        when(wrapper.html).thenReturn(())
-//        wrapper.html
+        when(wrapper.getHtml()).thenReturn(parsed)
+        wrapper.html
     }
 
     @Test
     void "should return ks from html"(){
-        repository.ks == [1:"null"]
+        assert repository.ks == [1:"null"]
     }
 }
