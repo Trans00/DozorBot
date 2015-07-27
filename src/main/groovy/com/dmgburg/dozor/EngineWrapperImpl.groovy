@@ -21,6 +21,10 @@ class EngineWrapperImpl implements EngineWrapper{
     }
 
     @Override
+    void login(String baseUrl, String username, String password) {
+    }
+
+    @Override
     NodeChild getHtml() {
         String baseUrl = uri
         def http = new HTTPBuilder(baseUrl)

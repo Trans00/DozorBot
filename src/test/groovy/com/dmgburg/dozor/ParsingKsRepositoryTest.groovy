@@ -23,7 +23,6 @@ class ParsingKsRepositoryTest {
         NodeChild parsed = slurper.parseText(html)
         parsed.childNodes()
         when(wrapper.getHtml()).thenReturn(parsed)
-        wrapper.html
     }
 
     @Test
