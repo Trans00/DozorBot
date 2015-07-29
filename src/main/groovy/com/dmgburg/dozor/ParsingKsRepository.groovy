@@ -1,13 +1,15 @@
 package com.dmgburg.dozor
 
-import groovy.util.slurpersupport.NodeChild
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+import org.jsoup.nodes.Node
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class ParsingKsRepository implements KsRepository {
     EngineWrapper htmlExtractor
     Logger log = LoggerFactory.getLogger(ParsingKsRepository)
-
     ParsingKsRepository() {
         htmlExtractor = new EngineWrapperImpl("http://classic.dzzzr.ru/moscow/go/")
     }
@@ -18,13 +20,48 @@ class ParsingKsRepository implements KsRepository {
 
     @Override
     Map<Integer, String> getKs() {
-        NodeChild result = htmlExtractor.html."**".find{
-            it.@class == "zad" && it.text().contains("основные коды:")
+        def ks = [:]
+        def i = 1
+        String html = htmlExtractor.html
+        Document parsed = Jsoup.parse(html)
+        parsed.select("div")
+        def zadNodesIter = parsed.select("div").attr("class","zad").find{
+            it.text().contains("основные коды:")
+        }.childNodes().iterator()
+        def node = zadNodesIter.next()
+        while (!node.text().contains("основные коды:")){
+            node = zadNodesIter.next()
         }
-        result.children().each{NodeChild it ->
-            log.info(it.text())
+        def ksString = getKsString(node)
+        if(ksString){
+            for (String kss:ksString.split(",")){
+                ks.put(i++,kss)
+            }
         }
-        result
+        while (zadNodesIter.hasNext()){
+            node = zadNodesIter.next()
+            if(node instanceof Element){
+                i++
+            } else {
+                ksString = normalize(node.text())
+                if(ksString){
+                    for (String kss:ksString.split(",")){
+                        if(kss) {
+                            ks.put(i++, kss)
+                        }
+                    }
+                }
+            }
+        }
+        return ks
+    }
+
+    String getKsString(Node node){
+        normalize(node.text().split(":")[1])
+    }
+
+    String normalize(String ksString){
+        ksString.replace("\\s","").replace(" ", "")
     }
 
     @Override

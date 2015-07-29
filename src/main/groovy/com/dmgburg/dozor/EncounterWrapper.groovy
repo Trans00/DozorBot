@@ -45,7 +45,7 @@ class EncounterWrapper implements EngineWrapper{
     }
 
     @Override
-    NodeChild getHtml() {
+    String getHtml() {
         if(!authToken){
             throw new IllegalStateException("Not logged in")
         }

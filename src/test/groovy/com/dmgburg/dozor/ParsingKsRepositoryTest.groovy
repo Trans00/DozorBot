@@ -19,14 +19,11 @@ class ParsingKsRepositoryTest {
         repository = new ParsingKsRepository(wrapper)
 
         def html = this.getClass().getResource('/dzzzr2.html').text
-        def slurper  = new XmlSlurper(new SAXParser())
-        NodeChild parsed = slurper.parseText(html)
-        parsed.childNodes()
-        when(wrapper.getHtml()).thenReturn(parsed)
+        when(wrapper.getHtml()).thenReturn(html)
     }
 
     @Test
     void "should return ks from html"(){
-        assert repository.ks == [1:"null"]
+        assert repository.ks == [1:"1", 2:"2", 7:"1+", 13:"2", 18:"2", 26:"null"]
     }
 }

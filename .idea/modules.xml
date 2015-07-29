@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/chatbot/chatbot.iml" filepath="$PROJECT_DIR$/chatbot/chatbot.iml" />
       <module fileurl="file://$PROJECT_DIR$/dozor-bot.iml" filepath="$PROJECT_DIR$/dozor-bot.iml" />
     </modules>
   </component>

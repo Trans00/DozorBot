@@ -25,7 +25,7 @@ class EngineWrapperImpl implements EngineWrapper{
     }
 
     @Override
-    NodeChild getHtml() {
+    String getHtml() {
         String baseUrl = uri
         def http = new HTTPBuilder(baseUrl)
         http.contentType = ContentType.HTML
@@ -79,7 +79,7 @@ class EngineWrapperImpl implements EngineWrapper{
                 }
         }
 
-        def result = http.request(Method.GET,ContentType.HTML){ req ->
+        def result = http.request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
             uriBuilder.path = "/moscow/go/"
             uriBuilder.query = [notags:"",err:"22"]

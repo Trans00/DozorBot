@@ -5,5 +5,5 @@ import groovyx.net.http.HttpResponseDecorator
 
 interface EngineWrapper {
     public void login(String url, String username, String password)
-    public NodeChild getHtml()
+    public String getHtml()
 }
