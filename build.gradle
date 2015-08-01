@@ -3,7 +3,10 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply plugin: 'application'
 
+mainClassName = "com.dmgburg.dozor.core.HelloTG"
+applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 repositories {
     mavenCentral()
     mavenLocal()

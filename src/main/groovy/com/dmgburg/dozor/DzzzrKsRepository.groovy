@@ -7,14 +7,15 @@ import org.jsoup.nodes.Node
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class ParsingKsRepository implements KsRepository {
+class DzzzrKsRepository implements KsRepository {
     EngineWrapper htmlExtractor
-    Logger log = LoggerFactory.getLogger(ParsingKsRepository)
-    ParsingKsRepository() {
-        htmlExtractor = new EngineWrapperImpl("http://classic.dzzzr.ru/moscow/go/")
+    Logger log = LoggerFactory.getLogger(DzzzrKsRepository)
+
+    DzzzrKsRepository() {
+        htmlExtractor = new DzzzrWrapper("http://classic.dzzzr.ru/moscow/go/")
     }
 
-    ParsingKsRepository(EngineWrapper htmlExtractor) {
+    DzzzrKsRepository(EngineWrapper htmlExtractor) {
         this.htmlExtractor = htmlExtractor
     }
 
@@ -25,9 +26,12 @@ class ParsingKsRepository implements KsRepository {
         String html = htmlExtractor.html
         Document parsed = Jsoup.parse(html)
         parsed.select("div")
-        def zadNodesIter = parsed.select("div").attr("class","zad").find{
+        def zadNodesIter = parsed?.select("div")?.attr("class","zad")?.find{
             it.text().contains("основные коды:")
-        }.childNodes().iterator()
+        }?.childNodes()?.iterator()
+        if(!zadNodesIter){
+            return [:]
+        }
         def node = zadNodesIter.next()
         while (!node.text().contains("основные коды:")){
             node = zadNodesIter.next()

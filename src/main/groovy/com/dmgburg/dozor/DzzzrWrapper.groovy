@@ -1,22 +1,18 @@
 package com.dmgburg.dozor
 
-import groovy.util.slurpersupport.NodeChild
-import groovyx.net.http.ContentEncoding
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.Method
-import groovyx.net.http.RESTClient
 import groovyx.net.http.URIBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class EngineWrapperImpl implements EngineWrapper{
+class DzzzrWrapper implements EngineWrapper{
 
     String uri
-    Logger log = LoggerFactory.getLogger(EngineWrapperImpl)
+    Logger log = LoggerFactory.getLogger(DzzzrWrapper)
 
-    EngineWrapperImpl(String uri) {
+    DzzzrWrapper(String uri) {
         this.uri = uri
     }
 
@@ -29,7 +25,7 @@ class EngineWrapperImpl implements EngineWrapper{
         String baseUrl = uri
         def http = new HTTPBuilder(baseUrl)
         http.contentType = ContentType.HTML
-        http.headers['Authorization'] = 'Basic ' + "moscow_zorgyk:448982".getBytes('iso-8859-1').encodeBase64()
+        http.headers['Authorization'] = 'Basic ' + "${CredentialsRepository.instance.login}:${CredentialsRepository.instance.password}".getBytes('iso-8859-1').encodeBase64()
         def cookies = []
         http.request(Method.GET,ContentType.URLENC){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
