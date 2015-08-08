@@ -49,7 +49,7 @@ class EncounterWrapper implements EngineWrapper{
         if(!authToken){
             throw new IllegalStateException("Not logged in")
         }
-        def result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.HTML){ req ->
+        def result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
             uriBuilder.path = "/"
             uri = uriBuilder.toURI()

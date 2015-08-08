@@ -1,12 +1,15 @@
-group 'com.dmg'
-version '1.0-SNAPSHOT'
-
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'application'
 
+group 'com.dmg'
+version '1.0-SNAPSHOT'
 mainClassName = "com.dmgburg.dozor.core.HelloTG"
 applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
+
+compileJava.options.encoding = 'UTF-8'
+compileGroovy.options.encoding = 'UTF-8'
+
 repositories {
     mavenCentral()
     mavenLocal()
@@ -21,4 +24,10 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
     compile 'org.slf4j:jcl-over-slf4j:1.7.12'
     compile 'org.jsoup:jsoup:1.8.2'
+
+    testCompile 'org.eclipse.jetty:jetty-webapp:9.3.1.v20150714'
+    testCompile 'org.eclipse.jetty:jetty-server:9.3.1.v20150714'
+    testCompile 'org.eclipse.jetty:jetty-annotations:9.3.1.v20150714'
+    testCompile 'org.eclipse.jetty:jetty-jsp:9.2.12.v20150709'
+    testCompile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
 }

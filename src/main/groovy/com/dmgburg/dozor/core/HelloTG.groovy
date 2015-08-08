@@ -1,6 +1,7 @@
 package com.dmgburg.dozor.core
 
 import com.dmgburg.dozor.ChatStateRepositoryImpl
+import com.dmgburg.dozor.EncounterKsRepository
 import com.dmgburg.dozor.KsRepositoryImpl
 import com.dmgburg.dozor.DzzzrKsRepository
 import com.dmgburg.dozor.domain.Update
@@ -22,7 +23,10 @@ class HelloTG {
     static Logger log = LoggerFactory.getLogger(HelloTG)
     static List<Handler> handlers = [new StartHandler(LocalApi.instance),
                                      new HelpHandler(LocalApi.instance),
-                                     new KsHandler(LocalApi.instance, new DzzzrKsRepository()),
+                                     new KsHandler(LocalApi.instance,
+                                             new EncounterKsRepository("http://moscow.en.cx/",
+                                             "enc_test_user",
+                                             "a123456789")),
                                      new KsNewHandler(LocalApi.instance,
                                              KsRepositoryImpl.instance,
                                              ChatStateRepositoryImpl.instance),

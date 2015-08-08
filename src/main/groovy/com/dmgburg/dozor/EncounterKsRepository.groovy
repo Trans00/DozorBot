@@ -1,12 +1,8 @@
 package com.dmgburg.dozor
 
-import groovy.util.slurpersupport.NodeChild
-import groovyx.net.http.ContentType
-import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.Method
-import groovyx.net.http.URIBuilder
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
 
 class EncounterKsRepository implements KsRepository{
     EngineWrapper wrapper
@@ -27,9 +23,14 @@ class EncounterKsRepository implements KsRepository{
 
     @Override
     Map<Integer, String> getKs() {
-        NodeChild html = getHtml()
-
-        return null
+        String html = getHtml()
+        Document parsed = Jsoup.parse(html)
+        parsed?.select("div")?.attr("class","cols")?.each {
+            for(Element child :it.childNodes()){
+                println child.text()
+            }
+        }
+        return [:]
     }
 
     @Override
@@ -37,7 +38,7 @@ class EncounterKsRepository implements KsRepository{
         throw new UnsupportedOperationException("Can't remove KS on parsing repository")
     }
 
-    NodeChild getHtml() {
+    String getHtml() {
         return wrapper.html
     }
 

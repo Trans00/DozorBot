@@ -1,26 +1,45 @@
 package com.dmgburg.dozor
 
+import com.dmgburg.dozor.configs.HtmlPublishingContext
+import com.dmgburg.dozor.engine.TestJettyServer
+import org.junit.AfterClass
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 import static org.mockito.Mockito.*
 
 class DzzzrKsRepositoryTest {
+    private static final String ADDRESS = "http://localhost:8080"
     DzzzrKsRepository repository
-    @Mock EngineWrapper wrapper
+    DzzzrWrapper wrapper
+    static TestJettyServer server
 
     @Before
     void setUp(){
         MockitoAnnotations.initMocks(this)
+        wrapper = new DzzzrWrapper("$ADDRESS")
         repository = new DzzzrKsRepository(wrapper)
     }
 
+    @BeforeClass
+    static void start(){
+        CountDownLatch latch = new CountDownLatch(1)
+        server = new TestJettyServer(latch)
+        server.start()
+        latch.await(60, TimeUnit.SECONDS)
+    }
+    @AfterClass
+    static void destroy(){
+        server.stop()
+    }
     @Test
     void "should return ks from html"(){
-        def html = this.getClass().getResource('/dzzzr2.html').text
-        when(wrapper.getHtml()).thenReturn(html)
+        HtmlPublishingContext.name = "dzzzr2"
         assert repository.ks == [1:"1", 2:"2", 7:"1+", 13:"2", 18:"2", 26:"null"]
     }
 
