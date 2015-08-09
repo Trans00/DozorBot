@@ -3,15 +3,15 @@ package com.dmgburg.dozor
 import groovy.util.slurpersupport.NodeChild
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.Method
 import groovyx.net.http.URIBuilder
 
-/**
- * Created by Denis on 26.07.2015.
- */
 class EncounterWrapper implements EngineWrapper{
     String authToken
+    String sessionToken
     String baseUrl
+    String localPath
 
     @Override
     void login(String baseUrl, String username, String password) {
@@ -38,6 +38,9 @@ class EncounterWrapper implements EngineWrapper{
                         if(cookie[0].contains("atoken=")){
                             authToken = cookie[0]
                         }
+                        if(cookie[0].contains("stoken=")){
+                            sessionToken = cookie[0]
+                        }
                     }
                     return reader
                 }
@@ -49,9 +52,9 @@ class EncounterWrapper implements EngineWrapper{
         if(!authToken){
             throw new IllegalStateException("Not logged in")
         }
-        def result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
+        String result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
-            uriBuilder.path = "/"
+            uriBuilder.path = "/$localPath"
             uri = uriBuilder.toURI()
 
             headers.'Accept' = "text/html"
@@ -59,8 +62,13 @@ class EncounterWrapper implements EngineWrapper{
             headers.'Accept-Language' = ""
             headers.'Cache-Control' = "max-age=0"
             headers.'User-Agent' = "MyAgent"
-            headers.'Cookie' = authToken
+            headers.'Cookie' = "$authToken; $sessionToken"
             headers.'Upgrade-Insecure-Requests' = "1"
+
+            response.success = { HttpResponseDecorator resp, reader ->
+                return reader.text
+            }
+
         }
         result
     }

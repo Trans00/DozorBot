@@ -17,7 +17,7 @@ class KsHandler extends AbstractHandler{
 
     @Override
     void doHandle(Message message) {
-        Map<Integer,String> ks = ksRepository.ks
+        Map<String,String> ks = ksRepository.ks
         if(ks.size() >0) {
             String result = getKsString(ks)
             api.sendMessage(message.chat.id, result)
@@ -32,9 +32,9 @@ class KsHandler extends AbstractHandler{
                 message.text.trim().toLowerCase() == "/ks"
     }
 
-    public static String getKsString(Map<Integer,String> ks){
+    public static String getKsString(Map<String,String> ks){
         StringBuilder sb = new StringBuilder()
-        ks.each {Integer key,String value ->
+        ks.each {key,value ->
             sb.append(key).append(":").append(value).append("\n")
         }
         sb.toString()

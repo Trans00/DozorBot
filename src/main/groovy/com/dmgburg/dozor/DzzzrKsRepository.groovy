@@ -20,7 +20,7 @@ class DzzzrKsRepository implements KsRepository {
     }
 
     @Override
-    Map<Integer, String> getKs() {
+    Map<String, String> getKs() {
         def ks = [:]
         def i = 1
         String html = htmlExtractor.html

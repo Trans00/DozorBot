@@ -24,7 +24,7 @@ class HelloTG {
     static List<Handler> handlers = [new StartHandler(LocalApi.instance),
                                      new HelpHandler(LocalApi.instance),
                                      new KsHandler(LocalApi.instance,
-                                             new EncounterKsRepository("http://moscow.en.cx/",
+                                             new EncounterKsRepository("http://moscow.en.cx/gameengines/encounter/play/52259/",
                                              "enc_test_user",
                                              "a123456789")),
                                      new KsNewHandler(LocalApi.instance,

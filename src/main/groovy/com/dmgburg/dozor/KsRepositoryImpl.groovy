@@ -14,7 +14,7 @@ class KsRepositoryImpl implements KsRepository {
         }
     }
 
-    public Map<Integer,String> getKs(){
+    public Map<String,String> getKs(){
         return ksByNumber
     }
 
