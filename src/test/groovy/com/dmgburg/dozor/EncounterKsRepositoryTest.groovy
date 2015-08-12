@@ -43,8 +43,8 @@ class EncounterKsRepositoryTest {
     @Before
     void setUp(){
         MockitoAnnotations.initMocks(this)
-        repository = new EncounterKsRepository(url, userName, password)
-//        repository = new EncounterKsRepository("http://localhost:8080/", userName, password)
+//        repository = new EncounterKsRepository(url, userName, password)
+        repository = new EncounterKsRepository("http://localhost:8080/", userName, password)
     }
 
     @Test
@@ -61,13 +61,8 @@ class EncounterKsRepositoryTest {
     }
 
     @Test
-    void "should return ks"(){
-//        HtmlPublishingContext.name = "enc2"
-//        def html = repository.html
-//        Document parsed = Jsoup.parse(html)
-//        def file = new File("123.html")
-//        file << parsed.html().bytes
-//        println html
+    void "should return bonus text"(){
+        HtmlPublishingContext.name = "enc3"
         println repository.ks
     }
 

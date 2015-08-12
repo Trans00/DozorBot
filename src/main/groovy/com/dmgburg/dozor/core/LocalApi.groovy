@@ -1,8 +1,10 @@
 package com.dmgburg.dozor.core
 
+import com.dmgburg.dozor.domain.Message
 import com.dmgburg.dozor.domain.TelegramBotError
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.domain.UpdatesResult
+import com.dmgburg.dozor.requests.SendStickerRequest
 import groovy.transform.CompileStatic
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseDecorator
@@ -44,18 +46,27 @@ class LocalApi implements TgApi{
         doRequest(request)
     }
 
+    public void sendSticker(int chatId, String stickerId) {
+        def request = new SendStickerRequest(chatId,stickerId)
+        doRequest(request)
+    }
+
     public List<Update> getUpdates(int offset = 0) {
-        def request
-        if (offset != 0) {
-            request = new GetUpdatesRequest(offset)
-        } else {
-            request = new GetUpdatesRequest()
+        try {
+            def request
+            if (offset != 0) {
+                request = new GetUpdatesRequest(offset)
+            } else {
+                request = new GetUpdatesRequest()
+            }
+            def respResult = doRequest(request)
+            def updates = new ObjectMapper().readValue(respResult, UpdatesResult)
+            if (updates.result.size() > 0) {
+                log.debug("Received updates: $updates")
+            }
+            updates.result
+        } catch (Exception e){
+            log.error("Unhandled exceptiuon on get updates:", e)
         }
-        def respResult = doRequest(request)
-        def updates = new ObjectMapper().readValue(respResult, UpdatesResult)
-        if(updates.result.size()>0) {
-            log.info("Received updates: $updates")
-        }
-        updates.result
     }
 }

@@ -14,13 +14,14 @@ public class HtmlPublishingContext {
     Logger logger = LoggerFactory.getLogger(HtmlPublishingContext)
     static String name
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/**", method = RequestMethod.GET)
     public String showIndexGet() {
         logger.info("forward:/html/${name}.html")
         return "forward:/html/${name}.html"
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/**", method = RequestMethod.POST)
     @ResponseBody
     public String showIndexPost() {
         return "forward:/html/${name}.html"

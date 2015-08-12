@@ -17,6 +17,12 @@ static Logger log = LoggerFactory.getLogger(PassedHandler)
     KsRepository ksRepository
     ChatStateRepository chatStateRepository
 
+    PassedHandler(KsRepository ksRepository, ChatStateRepository chatStateRepository) {
+        super()
+        this.ksRepository = ksRepository
+        this.chatStateRepository = chatStateRepository
+    }
+
     PassedHandler(TgApi tgApi, KsRepository ksRepository, ChatStateRepository chatStateRepository) {
         super(tgApi)
         this.ksRepository = ksRepository

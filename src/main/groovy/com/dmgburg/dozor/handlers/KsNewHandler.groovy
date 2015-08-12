@@ -16,6 +16,12 @@ class KsNewHandler extends AbstractHandler {
     KsRepository ksRepository
     ChatStateRepository chatStateRepository
 
+    KsNewHandler(KsRepository ksRepository, ChatStateRepository chatStateRepository) {
+        super()
+        this.ksRepository = ksRepository
+        this.chatStateRepository = chatStateRepository
+    }
+
     KsNewHandler(TgApi tgApi, KsRepository ksRepository, ChatStateRepository chatStateRepository) {
         super(tgApi)
         this.ksRepository = ksRepository
@@ -34,8 +40,9 @@ class KsNewHandler extends AbstractHandler {
             List<String> ks = message.text.split(",") as List<String>
             setKs(ks,message)
         }else{
-            chatStateRepository.setState(message.chat,ChatState.ksNew)
-            api.sendMessage(message.chat.id, "Введите новые КС, фомат ввода: 1,1+,2,3,2+,1+,1,1,2+,null,null")
+            chatStateRepository.setState(message.from.chat,ChatState.ksNew)
+            api.sendMessage(message.chat.id, "Введите новые КС, фомат ввода: 1,1+,2,3,2+,1+,1,1,2+,null,null\n" +
+                    "Для отмены введите /cancel")
         }
     }
 
@@ -54,6 +61,6 @@ class KsNewHandler extends AbstractHandler {
     boolean doIsHandled(Message message) {
         return message.text.startsWith("/kcnew")||
                message.text.startsWith("/ksnew")||
-                chatStateRepository.getState(message.chat) == ChatState.ksNew
+                chatStateRepository.getState(message.from.chat) == ChatState.ksNew
     }
 }

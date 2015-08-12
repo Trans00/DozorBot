@@ -9,6 +9,9 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class StartHandler extends AbstractHandler {
 
+    StartHandler() {
+    }
+
     StartHandler(TgApi tgApi) {
         super(tgApi)
     }
@@ -19,8 +22,8 @@ class StartHandler extends AbstractHandler {
         GString text
         if(chat.isUser()){
             text = "Привет ${message.from.name}, зачем ты пробудил меня?"
-        }else if(chat.isGroup()){
-            text = "Привет жителям ${chat.title}, я дурак и не лечесь и теперь я буду жить с вами!"
+        } else if(chat.isGroup()){
+            text = "Привет жителям ${chat.title}, я дурак и а вы не лечитесь и теперь я буду жить с вами!"
         }
         api.sendMessage(chat.id, text)
     }

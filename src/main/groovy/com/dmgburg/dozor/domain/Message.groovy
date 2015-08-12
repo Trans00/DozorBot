@@ -15,7 +15,7 @@ class Message {
     Object audio
     Object document
     Object photo
-    Object sticker
+    Sticker sticker
     Object video
     Object contact
     Object location

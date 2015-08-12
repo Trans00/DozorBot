@@ -7,20 +7,19 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 class HelpHandler extends AbstractHandler{
+
+    HelpHandler() {
+        super()
+    }
+
     HelpHandler(TgApi tgApi) {
         super(tgApi)
     }
 
     @Override
     void doHandle(Message message) {
-        if(message.chat.isUser()) {
-            api.sendMessage(message.chat.id,"/start Пооздороваться \n" +
-                    "/help Выдать это сообщение \n" +
-                    "/ksnew Ввести новые КС\n" +
-                    "/ks Отобразить имеющиеся КС\n" +
-                    "/pass Ввести номер взятого кода\n" +
-                    "/cancel Прервать ожидания ввода данных для предыдущей команды\n")
-        }
+            api.sendMessage(message.chat.id,"Здесь будет сообщение о возможных сейчас командах, а пока здесь саммон: " +
+                    "@${message?.from?.username}")
     }
 
     @Override

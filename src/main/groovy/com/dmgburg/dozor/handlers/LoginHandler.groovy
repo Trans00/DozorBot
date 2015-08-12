@@ -5,6 +5,11 @@ import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 
 class LoginHandler extends AbstractHandler{
+
+    LoginHandler() {
+        super()
+    }
+
     LoginHandler(TgApi tgApi) {
         super(tgApi)
     }

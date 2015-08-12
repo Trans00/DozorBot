@@ -10,6 +10,12 @@ import groovy.transform.CompileStatic
 class CancelHandler extends AbstractHandler{
 
     ChatStateRepository chatStateRepository
+
+    CancelHandler(ChatStateRepository chatStateRepository) {
+        super()
+        this.chatStateRepository = chatStateRepository
+    }
+
     CancelHandler(TgApi tgApi,ChatStateRepository chatStateRepository) {
         super(tgApi)
         this.chatStateRepository = chatStateRepository

@@ -8,14 +8,15 @@ import org.codehaus.jackson.annotate.JsonProperty
 class User {
     int id
     @JsonProperty(value = "first_name")String firstName
-    @Nullable
-    @JsonProperty(value = "last_name")
-    String lastName
-    @Nullable
+    @JsonProperty(value = "last_name") String lastName
     String username
 
     public String getName(){
         firstName ?: lastName?: username
+    }
+
+    Chat getChat(){
+        new Chat(id,firstName,lastName,username,"")
     }
 
     @Override

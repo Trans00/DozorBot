@@ -7,5 +7,6 @@ import groovy.transform.CompileStatic
 @CompileStatic
 interface TgApi {
     void sendMessage(int chatId, String message)
+    void sendSticker(int chatId, String stickerId)
     List<Update> getUpdates()
 }

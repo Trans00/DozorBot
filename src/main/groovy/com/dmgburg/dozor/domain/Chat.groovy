@@ -11,6 +11,17 @@ class Chat {
     String username
     String title
 
+    Chat() {
+    }
+
+    Chat(int id, String firstName, String lastName, String username, String title) {
+        this.id = id
+        this.firstName = firstName
+        this.lastName = lastName
+        this.username = username
+        this.title = title
+    }
+
     public boolean isUser(){
         firstName
     }

@@ -14,6 +14,8 @@ import com.dmgburg.dozor.handlers.LoginHandler
 import com.dmgburg.dozor.handlers.NopHandler
 import com.dmgburg.dozor.handlers.PassedHandler
 import com.dmgburg.dozor.handlers.StartHandler
+import com.dmgburg.dozor.handlers.TeaHandler
+import com.dmgburg.dozor.handlers.WantHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -21,21 +23,17 @@ class HelloTG {
     static int lastUpdate = 0
     static long sleepTime = 1000
     static Logger log = LoggerFactory.getLogger(HelloTG)
-    static List<Handler> handlers = [new StartHandler(LocalApi.instance),
-                                     new HelpHandler(LocalApi.instance),
-                                     new KsHandler(LocalApi.instance,
-                                             new EncounterKsRepository("http://moscow.en.cx/gameengines/encounter/play/52259/",
-                                             "enc_test_user",
-                                             "a123456789")),
-                                     new KsNewHandler(LocalApi.instance,
-                                             KsRepositoryImpl.instance,
+    static List<Handler> handlers = [new StartHandler(),
+                                     new HelpHandler(),
+                                     new WantHandler(),
+                                     new KsHandler(KsRepositoryImpl.instance),
+                                     new KsNewHandler(KsRepositoryImpl.instance,
                                              ChatStateRepositoryImpl.instance),
-                                     new PassedHandler(LocalApi.instance,
-                                             KsRepositoryImpl.instance,
+                                     new PassedHandler(KsRepositoryImpl.instance,
                                              ChatStateRepositoryImpl.instance),
-                                     new CancelHandler(LocalApi.instance,
-                                             ChatStateRepositoryImpl.instance),
-                                     new LoginHandler(LocalApi.instance)]
+                                     new CancelHandler(ChatStateRepositoryImpl.instance),
+                                     new LoginHandler(),
+                                     new TeaHandler()]
 
     public static void main(String[] args) {
         LocalApi api = LocalApi.instance

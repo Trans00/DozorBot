@@ -49,9 +49,6 @@ class EncounterWrapper implements EngineWrapper{
 
     @Override
     String getHtml() {
-        if(!authToken){
-            throw new IllegalStateException("Not logged in")
-        }
         String result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
             uriBuilder.path = "/$localPath"

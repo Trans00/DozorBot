@@ -10,6 +10,11 @@ import groovy.transform.CompileStatic
 class KsHandler extends AbstractHandler{
     KsRepository ksRepository
 
+    KsHandler(KsRepository ksRepository) {
+        super()
+        this.ksRepository = ksRepository
+    }
+
     KsHandler(TgApi tgApi, KsRepository ksRepository) {
         super(tgApi)
         this.ksRepository = ksRepository
