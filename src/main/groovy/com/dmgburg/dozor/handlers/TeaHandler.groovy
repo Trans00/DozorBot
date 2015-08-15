@@ -1,16 +1,17 @@
 package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.domain.Message
+import groovy.util.logging.Slf4j
 
-import java.util.stream.IntStream
-
-class TeaHandler extends AbstractHandler{
+@Slf4j
+class TeaHandler extends AbstractHandler {
 
     List<String> teaStickers = []
     Random generator = new Random();
-    TeaHandler(){
+
+    TeaHandler() {
         dropEmptyText = false
-        new File("123.txt").readLines().each {
+        TeaHandler.class.classLoader.getResourceAsStream("teaStickers.txt")?.readLines()?.each {
             teaStickers << it
         }
     }
@@ -22,10 +23,10 @@ class TeaHandler extends AbstractHandler{
 
     @Override
     void doHandle(Message message) {
-        api.sendSticker(message.from.id,teaStickers[getRandomSticker()])
+        api.sendSticker(message.from.id, teaStickers[getRandomSticker()])
     }
 
     int getRandomSticker() {
-        return generator.nextInt(teaStickers.size()-1)
+        return generator.nextInt(teaStickers.size() - 1)
     }
 }

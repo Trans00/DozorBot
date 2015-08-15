@@ -1,22 +1,21 @@
 package com.dmgburg.dozor.configs
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import groovy.util.logging.Slf4j
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 
+@Slf4j
 @Controller
 @SuppressWarnings("UnusedDeclaration")
 public class HtmlPublishingContext {
 
-    Logger logger = LoggerFactory.getLogger(HtmlPublishingContext)
     static String name
 
     @RequestMapping(value = "/**", method = RequestMethod.GET)
     public String showIndexGet() {
-        logger.info("forward:/html/${name}.html")
+        log.info("forward:/html/${name}.html")
         return "forward:/html/${name}.html"
     }
 

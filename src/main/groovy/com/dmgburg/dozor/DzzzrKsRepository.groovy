@@ -1,15 +1,14 @@
 package com.dmgburg.dozor
 
+import groovy.util.logging.Slf4j
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
+@Slf4j
 class DzzzrKsRepository implements KsRepository {
     EngineWrapper htmlExtractor
-    Logger log = LoggerFactory.getLogger(DzzzrKsRepository)
 
     DzzzrKsRepository() {
         htmlExtractor = new DzzzrWrapper("http://classic.dzzzr.ru/moscow/go/")

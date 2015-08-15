@@ -16,21 +16,19 @@ import com.dmgburg.dozor.handlers.PassedHandler
 import com.dmgburg.dozor.handlers.StartHandler
 import com.dmgburg.dozor.handlers.TeaHandler
 import com.dmgburg.dozor.handlers.WantHandler
+import groovy.util.logging.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Slf4j
 class HelloTG {
     static int lastUpdate = 0
     static long sleepTime = 1000
-    static Logger log = LoggerFactory.getLogger(HelloTG)
     static List<Handler> handlers = [new StartHandler(),
                                      new HelpHandler(),
                                      new WantHandler(),
-                                     new KsHandler(KsRepositoryImpl.instance),
-                                     new KsNewHandler(KsRepositoryImpl.instance,
-                                             ChatStateRepositoryImpl.instance),
-                                     new PassedHandler(KsRepositoryImpl.instance,
-                                             ChatStateRepositoryImpl.instance),
+                                     new LoginHandler(),
+                                     new KsHandler(new DzzzrKsRepository()),
                                      new CancelHandler(ChatStateRepositoryImpl.instance),
                                      new LoginHandler(),
                                      new TeaHandler()]

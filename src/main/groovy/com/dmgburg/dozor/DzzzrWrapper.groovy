@@ -1,16 +1,19 @@
 package com.dmgburg.dozor
 
+import groovy.util.logging.Slf4j
 import groovyx.net.http.ContentType
+import groovyx.net.http.EncoderRegistry
 import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.Method
 import groovyx.net.http.URIBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Slf4j
 class DzzzrWrapper implements EngineWrapper{
 
     String uri
-    Logger log = LoggerFactory.getLogger(DzzzrWrapper)
 
     DzzzrWrapper(String uri) {
         this.uri = uri
@@ -75,24 +78,18 @@ class DzzzrWrapper implements EngineWrapper{
                 }
         }
 
-        def result = http.request(Method.GET,ContentType.TEXT){ req ->
+        def result = http.request(Method.GET,ContentType.BINARY){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
             uriBuilder.path = "/moscow/go/"
             uriBuilder.query = [notags:"",err:"22"]
 
-            headers.'Accept' = ContentType.HTML
             headers.'User-Agent' = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36"
             headers.'Cookie' = cookies.join(";")
 
             response.success = { resp, reader ->
-                cookies = []
-                resp.getHeaders('Set-Cookie').each {
-                    def cookie = it.value.split(";")
-                    log.debug("Adding cookie ${cookie}")
-                    cookies.addAll(cookie)
-                }
-                return reader
+                return reader.text
             }
+
         }
         result
     }

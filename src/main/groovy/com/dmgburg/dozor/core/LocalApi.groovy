@@ -6,6 +6,7 @@ import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.domain.UpdatesResult
 import com.dmgburg.dozor.requests.SendStickerRequest
 import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.HttpResponseException
@@ -17,9 +18,9 @@ import com.dmgburg.dozor.requests.SendMessageRequest
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Slf4j
 @Singleton
 class LocalApi implements TgApi{
-    private static Logger log = LoggerFactory.getLogger(LocalApi)
 
     private String doRequest(Request request){
         HttpResponseDecorator resp

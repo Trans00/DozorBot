@@ -8,5 +8,3 @@ Amarok: /steelkillfuckgeese
 Damet: /classic.dzzzr.ru/uploaded/moscow/night/00kubki/gold10.png
 Damet: //classic.dzzzr.ru/uploaded/moscow/night/00kubki/gold10.png
 Виталик: /четвертыйорден
-Dinya: команды с состояниям по фром, а не по чату
-Dinya: добавить команду отмены в подсказку

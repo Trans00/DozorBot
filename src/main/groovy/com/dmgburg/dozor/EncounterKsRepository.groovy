@@ -1,14 +1,15 @@
 package com.dmgburg.dozor
 
+import groovy.util.logging.Slf4j
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Slf4j
 class EncounterKsRepository implements KsRepository{
     EngineWrapper wrapper
-    Logger log = LoggerFactory.getLogger(EncounterKsRepository)
 
     EncounterKsRepository(String baseUrl, String username, String password) {
         wrapper = new EncounterWrapper()

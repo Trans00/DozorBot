@@ -4,13 +4,14 @@ import com.dmgburg.dozor.core.LocalApi
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Slf4j
 @CompileStatic
 abstract class AbstractHandler implements Handler{
     protected TgApi api
-    Logger log = LoggerFactory.getLogger(AbstractHandler)
     protected dropEmptyText = true
 
     AbstractHandler(){

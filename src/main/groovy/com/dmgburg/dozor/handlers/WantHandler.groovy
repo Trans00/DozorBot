@@ -5,13 +5,14 @@ import com.dmgburg.dozor.ChatStateRepository
 import com.dmgburg.dozor.ChatStateRepositoryImpl
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
+import groovy.util.logging.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+@Slf4j
 class WantHandler extends AbstractHandler{
     File file
     ChatStateRepository chatStateRepository
-    Logger log = LoggerFactory.getLogger(WantHandler)
 
     WantHandler() {
         super()
