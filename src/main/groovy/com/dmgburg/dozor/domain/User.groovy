@@ -28,4 +28,19 @@ class User {
                 ", username='" + username + '\'' +
                 '}';
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (getClass() != o.class) return false
+
+        User user = (User) o
+
+        if (id != user.id) return false
+
+        return true
+    }
+
+    int hashCode() {
+        return id
+    }
 }

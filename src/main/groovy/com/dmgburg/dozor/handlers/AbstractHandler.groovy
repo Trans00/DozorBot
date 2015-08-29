@@ -25,7 +25,7 @@ abstract class AbstractHandler implements Handler{
     @Override
     void handle(Message message) {
         try {
-            doHandle(processMessage(message))
+            doHandle(message)
         } catch (Exception e){
             log.error("doHandle of ${this.class} threw an exeption on message ${message.toString()}: ",e)
         }

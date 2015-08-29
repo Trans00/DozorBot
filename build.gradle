@@ -1,6 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: "jacoco"
 
 group 'com.dmg'
 version '1.0-SNAPSHOT'
@@ -9,6 +10,11 @@ applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 
 compileJava.options.encoding = 'UTF-8'
 compileGroovy.options.encoding = 'UTF-8'
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+    reportsDir = file("$buildDir/reports/jaCoCo/")
+}
 
 repositories {
     mavenCentral()

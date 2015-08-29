@@ -28,7 +28,7 @@ class HelloTG {
                                      new HelpHandler(),
                                      new WantHandler(),
                                      new LoginHandler(),
-                                     new KsHandler(new DzzzrKsRepository()),
+//                                     new KsHandler(new DzzzrKsRepository()),
                                      new CancelHandler(ChatStateRepositoryImpl.instance),
                                      new LoginHandler(),
                                      new TeaHandler()]

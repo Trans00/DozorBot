@@ -11,11 +11,15 @@ class EncounterWrapper implements EngineWrapper{
     String authToken
     String sessionToken
     String baseUrl
-    String localPath
+    String localPath = "/"
+
+    EncounterWrapper(String baseUrl) {
+        this.baseUrl = baseUrl
+    }
 
     @Override
-    void login(String baseUrl, String username, String password) {
-        this.baseUrl = baseUrl
+    void login(String username, String password) {
+
         new HTTPBuilder(baseUrl).request(Method.POST,ContentType.URLENC){
             req ->
                 URIBuilder uriBuilder = new URIBuilder(baseUrl)
@@ -51,7 +55,7 @@ class EncounterWrapper implements EngineWrapper{
     String getHtml() {
         String result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
-            uriBuilder.path = "/$localPath"
+            uriBuilder.path = "$localPath"
             uri = uriBuilder.toURI()
 
             headers.'Accept' = "text/html"

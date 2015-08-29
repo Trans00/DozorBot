@@ -12,8 +12,8 @@ class EncounterKsRepository implements KsRepository{
     EngineWrapper wrapper
 
     EncounterKsRepository(String baseUrl, String username, String password) {
-        wrapper = new EncounterWrapper()
-        wrapper.login(baseUrl,username,password)
+        wrapper = new EncounterWrapper(baseUrl)
+        wrapper.login(username,password)
         def matcher = baseUrl =~/http\:\/\/.*en.cx\/(.*)/
         if(matcher.matches()){
             wrapper.localPath = matcher.group(1)

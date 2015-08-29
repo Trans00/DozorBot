@@ -20,11 +20,12 @@ class DzzzrWrapper implements EngineWrapper{
     }
 
     @Override
-    void login(String baseUrl, String username, String password) {
+    void login(String username, String password) {
     }
 
     @Override
     String getHtml() {
+        log.info("Requesting $uri for ks")
         String baseUrl = uri
         def http = new HTTPBuilder(baseUrl)
         http.contentType = ContentType.HTML

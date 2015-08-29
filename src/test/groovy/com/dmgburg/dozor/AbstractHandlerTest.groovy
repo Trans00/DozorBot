@@ -23,19 +23,6 @@ class AbstractHandlerTest {
         handler = new TestHandler(api)
     }
 
-    @Test
-    void "sould trim messages"(){
-        message.text = "  /ks  "
-        handler.handle(message)
-        assert processedMessage.text == "/ks"
-    }
-
-    @Test
-    void "sould set to lower case"(){
-        message.text = "/Ks"
-        handler.handle(message)
-        assert processedMessage.text == "/ks"
-    }
 
     class TestHandler extends AbstractHandler{
 
