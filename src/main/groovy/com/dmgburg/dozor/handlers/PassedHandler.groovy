@@ -2,6 +2,7 @@ package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.ChatState
 import com.dmgburg.dozor.ChatStateRepository
+import com.dmgburg.dozor.ChatStateRepositoryImpl
 import com.dmgburg.dozor.KsRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
@@ -9,6 +10,8 @@ import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+
+import static com.dmgburg.dozor.handlers.Command.PASSED
 
 @Slf4j
 @CompileStatic
@@ -18,14 +21,15 @@ class PassedHandler extends AbstractHandler{
     KsRepository ksRepository
     ChatStateRepository chatStateRepository
 
-    PassedHandler(KsRepository ksRepository, ChatStateRepository chatStateRepository) {
-        super()
+
+    PassedHandler(KsRepository ksRepository, ChatStateRepository chatStateRepository = ChatStateRepositoryImpl.instance) {
+        super([PASSED])
         this.ksRepository = ksRepository
         this.chatStateRepository = chatStateRepository
     }
 
     PassedHandler(TgApi tgApi, KsRepository ksRepository, ChatStateRepository chatStateRepository) {
-        super(tgApi)
+        super([PASSED],tgApi)
         this.ksRepository = ksRepository
         this.chatStateRepository = chatStateRepository
     }

@@ -2,13 +2,17 @@ package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.ChatState
 import com.dmgburg.dozor.ChatStateRepository
+import com.dmgburg.dozor.ChatStateRepositoryImpl
 import com.dmgburg.dozor.KsRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
+import org.omg.PortableInterceptor.SUCCESSFUL
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+
+import static com.dmgburg.dozor.handlers.Command.*
 
 @Slf4j
 @CompileStatic
@@ -17,14 +21,14 @@ class KsNewHandler extends AbstractHandler {
     KsRepository ksRepository
     ChatStateRepository chatStateRepository
 
-    KsNewHandler(KsRepository ksRepository, ChatStateRepository chatStateRepository) {
-        super()
+    KsNewHandler(KsRepository ksRepository, ChatStateRepository chatStateRepository = ChatStateRepositoryImpl.instance) {
+        super([KSNEW])
         this.ksRepository = ksRepository
         this.chatStateRepository = chatStateRepository
     }
 
-    KsNewHandler(TgApi tgApi, KsRepository ksRepository, ChatStateRepository chatStateRepository) {
-        super(tgApi)
+    KsNewHandler(TgApi tgApi, KsRepository ksRepository, ChatStateRepository chatStateRepository = ChatStateRepositoryImpl.instance) {
+        super([KSNEW],tgApi)
         this.ksRepository = ksRepository
         this.chatStateRepository = chatStateRepository
     }
@@ -60,8 +64,7 @@ class KsNewHandler extends AbstractHandler {
 
     @Override
     boolean doIsHandled(Message message) {
-        return message.text.startsWith("/kcnew")||
-               message.text.startsWith("/ksnew")||
+        return super.doIsHandled(message) ||
                 chatStateRepository.getState(message.from.chat) == ChatState.ksNew
     }
 }

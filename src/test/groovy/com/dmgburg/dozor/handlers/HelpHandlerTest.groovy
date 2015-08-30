@@ -1,5 +1,6 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.handlers
 
+import com.dmgburg.dozor.ChatStateRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message

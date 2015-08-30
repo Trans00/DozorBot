@@ -9,21 +9,16 @@ import groovy.transform.CompileStatic
 class HelpHandler extends AbstractHandler{
 
     HelpHandler() {
-        super()
+        super([Command.HELP])
     }
 
     HelpHandler(TgApi tgApi) {
-        super(tgApi)
+        super([Command.HELP],tgApi)
     }
 
     @Override
     void doHandle(Message message) {
             api.sendMessage(message.chat.id,"Здесь будет сообщение о возможных сейчас командах, а пока здесь саммон: " +
                     "@${message?.from?.username}")
-    }
-
-    @Override
-    boolean doIsHandled(Message message) {
-        return message.text.toLowerCase().startsWith("/help")
     }
 }

@@ -1,38 +1,30 @@
 package com.dmgburg.dozor.core
 
-import com.dmgburg.dozor.ChatStateRepositoryImpl
-import com.dmgburg.dozor.EncounterKsRepository
-import com.dmgburg.dozor.KsRepositoryImpl
-import com.dmgburg.dozor.DzzzrKsRepository
 import com.dmgburg.dozor.domain.Update
-import com.dmgburg.dozor.handlers.CancelHandler
 import com.dmgburg.dozor.handlers.Handler
 import com.dmgburg.dozor.handlers.HelpHandler
-import com.dmgburg.dozor.handlers.KsHandler
-import com.dmgburg.dozor.handlers.KsNewHandler
-import com.dmgburg.dozor.handlers.LoginHandler
 import com.dmgburg.dozor.handlers.NopHandler
-import com.dmgburg.dozor.handlers.PassedHandler
 import com.dmgburg.dozor.handlers.StartHandler
 import com.dmgburg.dozor.handlers.TeaHandler
 import com.dmgburg.dozor.handlers.WantHandler
+import com.dmgburg.dozor.handlers.plugin.ManualKsPlugin
 import groovy.util.logging.Slf4j
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 @Slf4j
-class HelloTG {
+class Application {
     static int lastUpdate = 0
     static long sleepTime = 1000
-    static List<Handler> handlers = [new StartHandler(),
-                                     new HelpHandler(),
-                                     new WantHandler(),
-                                     new LoginHandler(),
-                                     new KsHandler(new DzzzrKsRepository()),
-                                     new CancelHandler(ChatStateRepositoryImpl.instance),
-                                     new TeaHandler()]
+    private Map<String, Handler> handlersById = [start: new StartHandler(),
+                                                 help : new HelpHandler(),
+                                                 want : new WantHandler(),
+                                                 tea  : new TeaHandler(),
+                                                 ks   : new ManualKsPlugin()]
 
     public static void main(String[] args) {
+        new Application().run()
+    }
+
+    void run() {
         LocalApi api = LocalApi.instance
         log.info("Application started")
         List<Update> updates = []
@@ -60,8 +52,8 @@ class HelloTG {
         }
     }
 
-    static List<Handler> getHandlers(Update update) {
-        def result = handlers.findAll { Handler handler ->
+    List<Handler> getHandlers(Update update) {
+        def result = handlersById.values().findAll { Handler handler ->
             handler.isHandled(update.message)
         }
         if (!result) {

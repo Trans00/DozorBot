@@ -6,6 +6,7 @@ import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 import java.util.concurrent.CountDownLatch
@@ -19,12 +20,14 @@ class DzzzrKsRepositoryTest {
     DzzzrWrapper wrapper
     static TestJettyServer server
     def main = "основные коды"
+    @Mock CredentialsRepository credentialsRepository
 
     @Before
     void setUp(){
         MockitoAnnotations.initMocks(this)
-        wrapper = new DzzzrWrapper("$ADDRESS")
+        wrapper = new DzzzrWrapper(credentialsRepository)
         repository = new DzzzrKsRepository(wrapper)
+        when(credentialsRepository.url).thenReturn("$ADDRESS")
     }
 
     @BeforeClass

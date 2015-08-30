@@ -3,6 +3,8 @@ package com.dmgburg.dozor.handlers
 import com.dmgburg.dozor.domain.Message
 import groovy.util.logging.Slf4j
 
+import static com.dmgburg.dozor.handlers.Command.TEA
+
 @Slf4j
 class TeaHandler extends AbstractHandler {
 
@@ -10,15 +12,11 @@ class TeaHandler extends AbstractHandler {
     Random generator = new Random();
 
     TeaHandler() {
+        super([TEA])
         dropEmptyText = false
         TeaHandler.class.classLoader.getResourceAsStream("teaStickers.txt")?.readLines()?.each {
             teaStickers << it
         }
-    }
-
-    @Override
-    boolean doIsHandled(Message message) {
-        return message.text.startsWith("/tea")
     }
 
     @Override

@@ -6,17 +6,19 @@ import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 import groovy.transform.CompileStatic
 
+import static com.dmgburg.dozor.handlers.Command.KS
+
 @CompileStatic
 class KsHandler extends AbstractHandler{
     KsRepository ksRepository
 
     KsHandler(KsRepository ksRepository) {
-        super()
+        super([KS])
         this.ksRepository = ksRepository
     }
 
     KsHandler(TgApi tgApi, KsRepository ksRepository) {
-        super(tgApi)
+        super([KS],tgApi)
         this.ksRepository = ksRepository
     }
 
@@ -29,12 +31,6 @@ class KsHandler extends AbstractHandler{
         } else {
             api.sendMessage(message.chat.id, "Все коды взяты")
         }
-    }
-
-    @Override
-    boolean doIsHandled(Message message) {
-        return message.text.trim().toLowerCase() == "/kc" ||
-                message.text.trim().toLowerCase() == "/ks"
     }
 
     public static String getKsString(Map<String,String> ks){

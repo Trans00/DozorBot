@@ -11,13 +11,8 @@ import org.slf4j.LoggerFactory
 class EncounterKsRepository implements KsRepository{
     EngineWrapper wrapper
 
-    EncounterKsRepository(String baseUrl, String username, String password) {
-        wrapper = new EncounterWrapper(baseUrl)
-        wrapper.login(username,password)
-        def matcher = baseUrl =~/http\:\/\/.*en.cx\/(.*)/
-        if(matcher.matches()){
-            wrapper.localPath = matcher.group(1)
-        }
+    EncounterKsRepository() {
+        wrapper = new EncounterWrapper()
     }
 
     EncounterKsRepository(EngineWrapper wrapper){
@@ -71,6 +66,13 @@ class EncounterKsRepository implements KsRepository{
     void removeKs(int number) {
         throw new UnsupportedOperationException("Can't remove KS on parsing repository")
     }
+
+    void setUrl(String url){
+        wrapper.url
+    }
+
+    void setLogin(){}
+
 
     String getHtml() {
         return wrapper.html

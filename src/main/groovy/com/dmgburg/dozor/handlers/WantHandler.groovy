@@ -9,32 +9,28 @@ import groovy.util.logging.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+import static com.dmgburg.dozor.handlers.Command.WANT
+
 @Slf4j
 class WantHandler extends AbstractHandler{
     File file
     ChatStateRepository chatStateRepository
 
     WantHandler() {
-        super()
+        super([WANT])
         chatStateRepository = ChatStateRepositoryImpl.instance
         file = new File("wanties.txt")
     }
 
-    WantHandler(TgApi tgApi) {
-        super(tgApi)
-        chatStateRepository = ChatStateRepositoryImpl.instance
-        file = new File("wanties.txt")
-    }
-
-    WantHandler(TgApi tgApi, File file, ChatStateRepository chatStateRepository) {
-        super(tgApi)
+    WantHandler(TgApi tgApi, File file = new File("wanties.txt"), ChatStateRepository chatStateRepository = ChatStateRepositoryImpl.instance) {
+        super([WANT],tgApi)
         this.file = file
         this.chatStateRepository = chatStateRepository
     }
 
     @Override
     boolean doIsHandled(Message message) {
-        return message.text.startsWith("/want") ||
+        return super.doIsHandled(message) ||
                 chatStateRepository.getState(message.chat) == ChatState.want
     }
 

@@ -4,6 +4,8 @@ import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 
+import static com.dmgburg.dozor.handlers.Command.LOGIN
+
 class LoginHandler extends AbstractHandler{
 
     LoginHandler() {
@@ -11,7 +13,7 @@ class LoginHandler extends AbstractHandler{
     }
 
     LoginHandler(TgApi tgApi) {
-        super(tgApi)
+        super([LOGIN], tgApi)
     }
 
     @Override

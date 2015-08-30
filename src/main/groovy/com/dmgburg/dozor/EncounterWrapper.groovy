@@ -8,18 +8,20 @@ import groovyx.net.http.Method
 import groovyx.net.http.URIBuilder
 
 class EncounterWrapper implements EngineWrapper{
+    CredentialsRepository credentialsRepository
     String authToken
     String sessionToken
-    String baseUrl
-    String localPath = "/"
 
-    EncounterWrapper(String baseUrl) {
-        this.baseUrl = baseUrl
+    EncounterWrapper() {
+        this.credentialsRepository = CredentialsRepository.instance
     }
 
-    @Override
-    void login(String username, String password) {
+    EncounterWrapper(CredentialsRepository credentialsRepository) {
+        this.credentialsRepository = credentialsRepository
+    }
 
+    void login() {
+        def baseUrl = credentialsRepository.url
         new HTTPBuilder(baseUrl).request(Method.POST,ContentType.URLENC){
             req ->
                 URIBuilder uriBuilder = new URIBuilder(baseUrl)
@@ -33,8 +35,8 @@ class EncounterWrapper implements EngineWrapper{
                 body = [socialAssign  : "0",
                         ddlNetwork  : "1",
                         EnButton1  : "Вход",
-                        Login   : username,
-                        Password: password]
+                        Login   : credentialsRepository.userLogin,
+                        Password: credentialsRepository.userPassword]
 
                 response.success = { resp, reader ->
                     resp.getHeaders('Set-Cookie').each {
@@ -53,6 +55,15 @@ class EncounterWrapper implements EngineWrapper{
 
     @Override
     String getHtml() {
+        if(!authToken && !sessionToken){
+            login()
+        }
+        def baseUrl = credentialsRepository.url
+        def localPath
+        def matcher = baseUrl =~/http\:\/\/.*en.cx\/(.*)/
+        if(matcher.matches()){
+            localPath = matcher.group(1)
+        }
         String result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
             uriBuilder.path = "$localPath"

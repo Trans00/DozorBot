@@ -2,34 +2,30 @@ package com.dmgburg.dozor
 
 import groovy.util.logging.Slf4j
 import groovyx.net.http.ContentType
-import groovyx.net.http.EncoderRegistry
 import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.Method
 import groovyx.net.http.URIBuilder
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 @Slf4j
 class DzzzrWrapper implements EngineWrapper{
 
-    String uri
+    CredentialsRepository credentialsRepository
 
-    DzzzrWrapper(String uri) {
-        this.uri = uri
+    DzzzrWrapper() {
+        this.credentialsRepository = CredentialsRepository.instance
     }
 
-    @Override
-    void login(String username, String password) {
+    DzzzrWrapper(CredentialsRepository credentialsRepository) {
+        this.credentialsRepository = credentialsRepository
     }
 
     @Override
     String getHtml() {
-        log.info("Requesting $uri for ks")
-        String baseUrl = uri
+        log.info("Requesting ${credentialsRepository.url} for ks")
+        String baseUrl = credentialsRepository.url
         def http = new HTTPBuilder(baseUrl)
         http.contentType = ContentType.HTML
-        http.headers['Authorization'] = 'Basic ' + "${CredentialsRepository.instance.login}:${CredentialsRepository.instance.password}".getBytes('iso-8859-1').encodeBase64()
+        http.headers['Authorization'] = 'Basic ' + "${credentialsRepository.login}:${credentialsRepository.password}".getBytes('iso-8859-1').encodeBase64()
         def cookies = []
         http.request(Method.GET,ContentType.URLENC){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
@@ -65,8 +61,8 @@ class DzzzrWrapper implements EngineWrapper{
 
                 body = [notags  : "",
                         action  : "auth",
-                        login   : "transformator00",
-                        password: "Huy45808jD"]
+                        login   : credentialsRepository.userLogin,
+                        password: credentialsRepository.userPassword]
 
                 response.success = { resp, reader ->
                     cookies = []

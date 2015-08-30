@@ -1,5 +1,6 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.handlers
 
+import com.dmgburg.dozor.KsRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
@@ -30,12 +31,6 @@ class KsHandlerTest {
     @Test
     void "sould handle /ks"(){
         message.text = "/ks"
-        assert handler.isHandled(message)
-    }
-
-    @Test
-    void "sould handle /kc"(){
-        message.text = "/kc"
         assert handler.isHandled(message)
     }
 

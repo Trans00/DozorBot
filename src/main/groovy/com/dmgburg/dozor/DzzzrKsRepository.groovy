@@ -8,19 +8,19 @@ import org.jsoup.nodes.Node
 
 @Slf4j
 class DzzzrKsRepository implements KsRepository {
-    EngineWrapper htmlExtractor
+    DzzzrWrapper dzzzrWrapper
 
     DzzzrKsRepository() {
-        htmlExtractor = new DzzzrWrapper("http://classic.dzzzr.ru/moscow/go/")
+        dzzzrWrapper = new DzzzrWrapper()
     }
 
-    DzzzrKsRepository(EngineWrapper htmlExtractor) {
-        this.htmlExtractor = htmlExtractor
+    DzzzrKsRepository(DzzzrWrapper dzzzrWrapper) {
+        this.dzzzrWrapper = dzzzrWrapper
     }
 
     @Override
     Map<String, String> getKs() {
-        String html = htmlExtractor.html
+        String html = dzzzrWrapper.html
         Document parsed = Jsoup.parse(html)
         parsed.select("div")
         LinkedHashMap ks = [:]
@@ -50,7 +50,7 @@ class DzzzrKsRepository implements KsRepository {
         def ksString = getKsString(node)
         if (ksString) {
             for (String kss : ksString.split(",")) {
-                ks.put("${i++}", kss)
+                ks.put(i++, kss)
             }
         }
         while (zadNodesIter.hasNext()) {
@@ -62,12 +62,28 @@ class DzzzrKsRepository implements KsRepository {
                 if (ksString) {
                     for (String kss : ksString.split(",")) {
                         if (kss) {
-                            ks.put("${i++}", kss)
+                            ks.put(i++, kss)
                         }
                     }
                 }
             }
         }
+    }
+
+    void setGameLogin(String gameLogin){
+        dzzzrWrapper.gameLogin = gameLogin
+    }
+
+    void setGamePassword(String gamePassword){
+        dzzzrWrapper.gamePassword = gamePassword
+    }
+
+    void setUserLogin(String userLogin){
+        dzzzrWrapper.gameLogin = userLogin
+    }
+
+    void setUserPassword(String userPassword){
+        dzzzrWrapper.gamePassword = userPassword
     }
 
     static String getKsString(Node node) {

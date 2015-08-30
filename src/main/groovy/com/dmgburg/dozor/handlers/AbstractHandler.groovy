@@ -10,15 +10,12 @@ import org.slf4j.LoggerFactory
 
 @Slf4j
 @CompileStatic
-abstract class AbstractHandler implements Handler{
+abstract class AbstractHandler implements Handler {
     protected TgApi api
     protected dropEmptyText = true
-
-    AbstractHandler(){
-        api = LocalApi.instance
-    }
-
-    AbstractHandler(TgApi tgApi) {
+    protected List<Command> commands
+    AbstractHandler(List<Command> commands = [], TgApi tgApi = LocalApi.instance) {
+        this.commands = commands
         api = tgApi
     }
 
@@ -26,30 +23,31 @@ abstract class AbstractHandler implements Handler{
     void handle(Message message) {
         try {
             doHandle(message)
-        } catch (Exception e){
-            log.error("doHandle of ${this.class} threw an exeption on message ${message.toString()}: ",e)
+        } catch (Exception e) {
+            log.error("doHandle of ${this.class} threw an exeption on message ${message.toString()}: ", e)
         }
     }
 
     @Override
     boolean isHandled(Message message) {
         try {
-            if(!message.text && dropEmptyText){
+            if (!message.text && dropEmptyText) {
                 return false
             }
-            return doIsHandled(processMessage(message))
-        } catch (Exception e){
-            log.error("doIshandled of ${this.class} threw an exeption on message ${message.toString()}: ",e)
+            return doIsHandled(message.normalize())
+        } catch (Exception e) {
+            log.error("doIshandled of ${this.class} threw an exeption on message ${message.toString()}: ", e)
         }
     }
 
-    public static Message processMessage(Message message){
-        Message processedMess = message
-        processedMess.text = processedMess?.text?.trim()?.toLowerCase()
-        return processedMess
+    @Override
+    List<Command> getCommands() {
+        return commands
     }
 
-    abstract boolean doIsHandled(Message message)
+    boolean doIsHandled(Message message){
+        return getCommands().find{it.command == message.getCommand()}
+    }
 
     abstract void doHandle(Message message)
 

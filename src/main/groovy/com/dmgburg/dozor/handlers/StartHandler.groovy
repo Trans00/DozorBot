@@ -10,10 +10,11 @@ import groovy.transform.CompileStatic
 class StartHandler extends AbstractHandler {
 
     StartHandler() {
+        super([Command.START])
     }
 
     StartHandler(TgApi tgApi) {
-        super(tgApi)
+        super([Command.START],tgApi)
     }
 
     @Override
@@ -26,10 +27,5 @@ class StartHandler extends AbstractHandler {
             text = "Привет жителям ${chat.title}, я дурак и а вы не лечитесь и теперь я буду жить с вами!"
         }
         api.sendMessage(chat.id, text)
-    }
-
-    @Override
-    boolean doIsHandled(Message message) {
-        return message.text.toLowerCase().startsWith("/start")
     }
 }

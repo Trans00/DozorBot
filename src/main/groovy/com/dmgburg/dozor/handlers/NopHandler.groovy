@@ -12,4 +12,9 @@ class NopHandler implements Handler{
     boolean isHandled(Message update) {
         return false
     }
+
+    @Override
+    List<Command> getCommands() {
+        return []
+    }
 }

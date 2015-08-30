@@ -23,7 +23,9 @@ import org.mockito.MockitoAnnotations
 class EncounterKsRepositoryTest {
 
     EncounterKsRepository repository
+    EncounterWrapper wrapper
     static TestJettyServer server
+    @Mock CredentialsRepository credentialsRepository
 
     @BeforeClass
     static void start(){
@@ -40,7 +42,9 @@ class EncounterKsRepositoryTest {
     @Before
     void setUp(){
         MockitoAnnotations.initMocks(this)
-        repository = new EncounterKsRepository("http://localhost:8080/", "", "")
+        wrapper = new EncounterWrapper(credentialsRepository)
+        repository = new EncounterKsRepository(wrapper)
+        when(credentialsRepository.url)thenReturn("http://localhost:8080/")
     }
 
     @Test

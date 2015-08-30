@@ -1,9 +1,8 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
-import com.dmgburg.dozor.handlers.AbstractHandler
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -22,6 +21,7 @@ class AbstractHandlerTest {
         message.chat = chat
         handler = new TestHandler(api)
     }
+
 
 
     class TestHandler extends AbstractHandler{
