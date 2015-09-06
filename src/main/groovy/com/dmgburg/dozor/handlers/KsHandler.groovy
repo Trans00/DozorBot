@@ -2,23 +2,26 @@ package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.KsRepository
 import com.dmgburg.dozor.KsRepositoryImpl
+import com.dmgburg.dozor.RolesRepository
+import com.dmgburg.dozor.RolesRepositoryImpl
+import com.dmgburg.dozor.core.LocalApi
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 import groovy.transform.CompileStatic
 
 import static com.dmgburg.dozor.handlers.Command.KS
+import static com.dmgburg.dozor.security.Role.Admin
+import static com.dmgburg.dozor.security.Role.Team
 
 @CompileStatic
 class KsHandler extends AbstractHandler{
     KsRepository ksRepository
 
-    KsHandler(KsRepository ksRepository) {
-        super([KS])
-        this.ksRepository = ksRepository
-    }
-
-    KsHandler(TgApi tgApi, KsRepository ksRepository) {
-        super([KS],tgApi)
+    KsHandler(TgApi tgApi = LocalApi.instance,
+              KsRepository ksRepository = KsRepositoryImpl.instance,
+              RolesRepository rolesRepository = RolesRepositoryImpl.instance) {
+        super([KS],tgApi,rolesRepository)
+        acceptedRoles = [Admin,Team]
         this.ksRepository = ksRepository
     }
 
@@ -27,9 +30,9 @@ class KsHandler extends AbstractHandler{
         Map<String,String> ks = ksRepository.ks
         if(ks.size() >0) {
             String result = getKsString(ks)
-            api.sendMessage(message.chat.id, result)
+            tgApi.sendMessage(message.chat.id, result)
         } else {
-            api.sendMessage(message.chat.id, "Все коды взяты")
+            tgApi.sendMessage(message.chat.id, "Все коды взяты")
         }
     }
 

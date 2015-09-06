@@ -25,7 +25,7 @@ class DzzzrWrapper implements EngineWrapper{
         String baseUrl = credentialsRepository.url
         def http = new HTTPBuilder(baseUrl)
         http.contentType = ContentType.HTML
-        http.headers['Authorization'] = 'Basic ' + "${credentialsRepository.login}:${credentialsRepository.password}".getBytes('iso-8859-1').encodeBase64()
+        http.headers['Authorization'] = 'Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64()
         def cookies = []
         http.request(Method.GET,ContentType.URLENC){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
@@ -61,8 +61,8 @@ class DzzzrWrapper implements EngineWrapper{
 
                 body = [notags  : "",
                         action  : "auth",
-                        login   : credentialsRepository.userLogin,
-                        password: credentialsRepository.userPassword]
+                        login   : credentialsRepository.login,
+                        password: credentialsRepository.password]
 
                 response.success = { resp, reader ->
                     cookies = []

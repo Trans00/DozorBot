@@ -21,7 +21,7 @@ class TeaHandler extends AbstractHandler {
 
     @Override
     void doHandle(Message message) {
-        api.sendSticker(message.from.id, teaStickers[getRandomSticker()])
+        tgApi.sendSticker(message.from.id, teaStickers[getRandomSticker()])
     }
 
     int getRandomSticker() {

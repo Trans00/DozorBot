@@ -24,9 +24,9 @@ class LoginHandler extends AbstractHandler{
     @Override
     void doHandle(Message message) {
         def cred = message.text.split(" ")[1].split(":")
-        CredentialsRepository.instance.login = cred[0]
-        CredentialsRepository.instance.password = cred[1]
-        api.sendMessage(message.chat.id,
-                "Установлены новые пользовательские данные: логин '${CredentialsRepository.instance.login}', пароль '${CredentialsRepository.instance.password}'")
+        CredentialsRepository.instance.gameLogin = cred[0]
+        CredentialsRepository.instance.gamePassword = cred[1]
+        tgApi.sendMessage(message.chat.id,
+                "Установлены новые пользовательские данные: логин '${CredentialsRepository.instance.gameLogin}', пароль '${CredentialsRepository.instance.gamePassword}'")
     }
 }

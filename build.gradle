@@ -1,11 +1,12 @@
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
+apply plugin: 'wrapper'
 
 group 'com.dmg'
 version '1.0-SNAPSHOT'
-mainClassName = "com.dmgburg.dozor.core.HelloTG"
+mainClassName = "com.dmgburg.dozor.core.Application"
 applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 
 compileJava.options.encoding = 'UTF-8'

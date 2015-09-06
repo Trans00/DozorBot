@@ -1,9 +1,15 @@
 package com.dmgburg.dozor
 
 enum ChatState {
-    noState,
-    ksNew,
-    pass,
-    want
-
+    NO_STATE,
+    KS_NEW,
+    PASS,
+    WANT,
+    ADMIN,
+    LOGIN,
+    PASSWORD,
+    GAME_LOGIN,
+    GAME_PASSWORD,
+    URL,
+    MANAGE_USERS
 }

@@ -1,7 +1,6 @@
 package com.dmgburg.dozor
 
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.junit.Before
 import org.junit.Test
@@ -22,8 +21,8 @@ class EnkounterWrapperTest {
         MockitoAnnotations.initMocks(this)
         wrapper = new EncounterWrapper(credentialsRepository)
         when(credentialsRepository.url).thenReturn(url)
-        when(credentialsRepository.userLogin).thenReturn(userName)
-        when(credentialsRepository.userPassword).thenReturn(password)
+        when(credentialsRepository.login).thenReturn(userName)
+        when(credentialsRepository.password).thenReturn(password)
     }
 
     @Test

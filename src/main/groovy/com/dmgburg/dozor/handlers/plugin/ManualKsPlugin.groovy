@@ -8,7 +8,7 @@ import com.dmgburg.dozor.handlers.PassedHandler
 
 class ManualKsPlugin extends Plugin{
     ManualKsPlugin() {
-        super([new KsHandler(KsRepositoryImpl.instance),
+        super([new KsHandler(ksRepository: KsRepositoryImpl.instance),
                new KsNewHandler(KsRepositoryImpl.instance),
                new PassedHandler(KsRepositoryImpl.instance)])
     }

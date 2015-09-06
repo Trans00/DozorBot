@@ -1,6 +1,7 @@
 package com.dmgburg.dozor.core
 
 import com.dmgburg.dozor.domain.Message
+import com.dmgburg.dozor.domain.ReplyKeyboardMarkup
 import com.dmgburg.dozor.domain.TelegramBotError
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.domain.UpdatesResult
@@ -20,21 +21,21 @@ import org.slf4j.LoggerFactory
 
 @Slf4j
 @Singleton
-class LocalApi implements TgApi{
+class LocalApi implements TgApi {
 
-    private String doRequest(Request request){
+    private String doRequest(Request request) {
         HttpResponseDecorator resp
         try {
             RESTClient client = new RESTClient("https://api.telegram.org/")
             client.contentType = ContentType.TEXT
 
             resp = client.post(path: "/bot${Credentials.AUTH_TOKEN}/${request.methodName}",
-                    body: request.parameters, requestContentType: ContentType.URLENC )
-        } catch (HttpResponseException exception){
+                    body: request.parameters, requestContentType: ContentType.URLENC)
+        } catch (HttpResponseException exception) {
             try {
                 resp = exception.response
-                log.error("TelegramBotError executing request: $request: ${resp.data.str}",exception)
-            } catch (Exception e){
+                log.error("TelegramBotError executing request: $request: ${resp.data.str}", exception)
+            } catch (Exception e) {
                 log.error("Exception in catch: ", e)
             }
         }
@@ -42,13 +43,13 @@ class LocalApi implements TgApi{
         return resp.data.str
     }
 
-    public void sendMessage(int chatId, String message) {
-        def request = new SendMessageRequest(chatId,message)
+    public void sendMessage(int chatId, String message, ReplyKeyboardMarkup markup = null) {
+        def request = new SendMessageRequest(chatId, message, markup)
         doRequest(request)
     }
 
     public void sendSticker(int chatId, String stickerId) {
-        def request = new SendStickerRequest(chatId,stickerId)
+        def request = new SendStickerRequest(chatId, stickerId)
         doRequest(request)
     }
 
@@ -66,7 +67,7 @@ class LocalApi implements TgApi{
                 log.debug("Received updates: $updates")
             }
             updates.result
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("Unhandled exceptiuon on get updates:", e)
         }
     }

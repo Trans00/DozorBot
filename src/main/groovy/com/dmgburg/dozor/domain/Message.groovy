@@ -32,7 +32,7 @@ class Message {
 
     String getCommand() {
         String text = normalizeText(text)
-        if (!text.startsWith("/")) {
+        if (!text?.startsWith("/")) {
             return ""
         }
         if (!text.contains(" ")) {

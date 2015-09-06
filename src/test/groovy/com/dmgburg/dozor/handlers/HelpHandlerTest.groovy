@@ -1,6 +1,7 @@
 package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.ChatStateRepository
+import com.dmgburg.dozor.core.Application
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
@@ -17,6 +18,7 @@ class HelpHandlerTest {
     HelpHandler handler
     @Mock ChatStateRepository chatStateRepository
     @Mock TgApi tgApi
+    @Mock Application app
     Chat chat
 
     @Before
@@ -26,7 +28,7 @@ class HelpHandlerTest {
         chat.id = 1
         message = new Message()
         message.chat = chat
-        handler = new HelpHandler(tgApi)
+        handler = new HelpHandler(app, tgApi, chatStateRepository)
     }
 
     @Test

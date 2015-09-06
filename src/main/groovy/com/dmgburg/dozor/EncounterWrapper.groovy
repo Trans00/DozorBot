@@ -1,6 +1,5 @@
 package com.dmgburg.dozor
 
-import groovy.util.slurpersupport.NodeChild
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.HttpResponseDecorator
@@ -35,8 +34,8 @@ class EncounterWrapper implements EngineWrapper{
                 body = [socialAssign  : "0",
                         ddlNetwork  : "1",
                         EnButton1  : "Вход",
-                        Login   : credentialsRepository.userLogin,
-                        Password: credentialsRepository.userPassword]
+                        Login   : credentialsRepository.login,
+                        Password: credentialsRepository.password]
 
                 response.success = { resp, reader ->
                     resp.getHeaders('Set-Cookie').each {
@@ -55,7 +54,7 @@ class EncounterWrapper implements EngineWrapper{
 
     @Override
     String getHtml() {
-        if(!authToken && !sessionToken){
+        if(!authToken && !sessionToken || credentialsRepository.loginRequired){
             login()
         }
         def baseUrl = credentialsRepository.url
@@ -66,7 +65,7 @@ class EncounterWrapper implements EngineWrapper{
         }
         String result = new HTTPBuilder(baseUrl).request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
-            uriBuilder.path = "$localPath"
+//            uriBuilder.path = "$localPath"
             uri = uriBuilder.toURI()
 
             headers.'Accept' = "text/html"

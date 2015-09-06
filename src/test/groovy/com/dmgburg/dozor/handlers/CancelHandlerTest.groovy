@@ -5,8 +5,7 @@ import com.dmgburg.dozor.ChatStateRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
-import com.dmgburg.dozor.handlers.CancelHandler
-import com.dmgburg.dozor.handlers.KsHandler
+import com.dmgburg.dozor.domain.User
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -28,6 +27,7 @@ class CancelHandlerTest {
         chat = new Chat()
         chat.id = 1
         message = new Message()
+        message.from = new User(id: 1)
         message.chat = chat
         handler = new CancelHandler(tgApi, chatStateRepository)
     }
@@ -35,7 +35,7 @@ class CancelHandlerTest {
     @Test
     void "should set chat state to noState"(){
         handler.handle(message)
-        verify(chatStateRepository).setState(eq(chat),eq(ChatState.noState))
+        verify(chatStateRepository).setState(eq(chat),eq(ChatState.NO_STATE))
     }
 
     @Test

@@ -6,8 +6,6 @@ import com.dmgburg.dozor.ChatStateRepositoryImpl
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
 import groovy.util.logging.Slf4j
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 import static com.dmgburg.dozor.handlers.Command.WANT
 
@@ -31,18 +29,18 @@ class WantHandler extends AbstractHandler{
     @Override
     boolean doIsHandled(Message message) {
         return super.doIsHandled(message) ||
-                chatStateRepository.getState(message.chat) == ChatState.want
+                chatStateRepository.getState(message.chat) == ChatState.WANT
     }
 
     @Override
     void doHandle(Message message) {
         if(message.text.trim().startsWith("/want")) {
-            chatStateRepository.setState(message.chat, ChatState.want)
-            api.sendMessage(message.chat.id, "Чего изволите?")
+            chatStateRepository.setState(message.chat, ChatState.WANT)
+            tgApi.sendMessage(message.chat.id, "Чего изволите?")
         } else {
             file.append("${message.from.name}: ${message.text}\n")
-            chatStateRepository.setState(message.chat,ChatState.noState)
-            api.sendMessage(message.chat.id,"Готово! Хотелка \"${message.text}\" сохранена")
+            chatStateRepository.setState(message.chat,ChatState.NO_STATE)
+            tgApi.sendMessage(message.chat.id,"Готово! Хотелка \"${message.text}\" сохранена")
         }
 
     }

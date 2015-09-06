@@ -1,15 +1,20 @@
 package com.dmgburg.dozor.handlers
 
 import com.dmgburg.dozor.KsRepository
+import com.dmgburg.dozor.RolesRepository
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
+import com.dmgburg.dozor.domain.User
 import com.dmgburg.dozor.handlers.KsHandler
+import com.dmgburg.dozor.security.Role
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
+import static com.dmgburg.dozor.security.Role.Team
+import static com.dmgburg.dozor.security.Role.Unauthentificated
 import static org.mockito.Mockito.*
 
 class KsHandlerTest {
@@ -17,6 +22,7 @@ class KsHandlerTest {
     KsHandler handler
     @Mock KsRepository ksRepository
     @Mock TgApi tgApi
+    @Mock RolesRepository rolesRepository
 
     @Before
     void setUp(){
@@ -25,7 +31,9 @@ class KsHandlerTest {
         chat.id = 1
         message = new Message()
         message.chat = chat
-        handler = new KsHandler(tgApi, ksRepository)
+        message.from = new User(id:1)
+        handler = new KsHandler(tgApi, ksRepository,rolesRepository)
+        when(rolesRepository.getRoles(any(Chat))).thenReturn([Team])
     }
 
     @Test
@@ -46,5 +54,12 @@ class KsHandlerTest {
         when(ksRepository.getKs()).thenReturn([:])
         handler.handle(message)
         verify(tgApi).sendMessage(eq(1),eq("Все коды взяты"))
+    }
+
+    @Test
+    void "should send reject message when called for unauthorized chat"(){
+        when(rolesRepository.getRoles(any(Chat))).thenReturn([Unauthentificated])
+        handler.handle(message)
+        verify(tgApi).sendMessage(eq(message.chat.id),eq("У Вас нет прав на выполнение этой команды, для авторизации введите команду /start"))
     }
 }
