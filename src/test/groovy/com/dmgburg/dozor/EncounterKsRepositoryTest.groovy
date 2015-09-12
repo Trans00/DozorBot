@@ -17,6 +17,9 @@ import org.mockito.Mock
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
+import static com.dmgburg.dozor.configs.HtmlPublishingContext.*
+import static com.dmgburg.dozor.configs.HtmlPublishingContext.Mode.*
+
 import static org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
@@ -32,6 +35,7 @@ class EncounterKsRepositoryTest {
         CountDownLatch latch = new CountDownLatch(1)
         server = new TestJettyServer(latch)
         server.start()
+        mode = Unit
         latch.await(60, TimeUnit.SECONDS)
     }
     @AfterClass
@@ -53,4 +57,12 @@ class EncounterKsRepositoryTest {
         println repository.ks
     }
 
+    @Test
+    void "should return bonus text after proper login"(){
+        mode = Enc
+        HtmlPublishingContext.name = "enc3"
+        when(credentialsRepository.login)thenReturn("userLogin")
+        when(credentialsRepository.login)thenReturn("userLogin")
+        println repository.ks
+    }
 }
