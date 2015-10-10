@@ -6,8 +6,21 @@ class CredentialsRepository {
     String gamePassword
     String login
     String password
-    String url = "http://moscow.en.cx/gameengines/encounter/play/52550"
+    String url
     boolean loginRequired
+
+    {
+        Properties props = new Properties()
+        def propStream = this.class.getResourceAsStream("/credentials.properties")
+        if (propStream){
+            props.load(propStream)
+        }
+        gameLogin = props.'gameLogin'
+        gamePassword = props.'gamePassword'
+        login = props.'login'
+        password = props.'password'
+        url = props.'url'
+    }
 
     void setGameLogin(String gameLogin) {
         this.gameLogin = gameLogin
