@@ -4,6 +4,7 @@ import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.User
 import com.dmgburg.dozor.security.Role
 import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
 
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.ConcurrentHashMap
@@ -12,6 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 import static com.dmgburg.dozor.security.Role.Team
 import static com.dmgburg.dozor.security.Role.Unauthentificated
 
+@Slf4j
 @Singleton(strict = false)
 @CompileStatic
 class RolesRepositoryImpl implements RolesRepository{
