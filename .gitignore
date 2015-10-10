@@ -58,3 +58,4 @@ crashlytics-build.properties
 
 
 DozorBot.log
+src/main/resources/credentials.properties

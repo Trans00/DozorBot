@@ -20,7 +20,8 @@ class AdminHandler extends AbstractHandler {
                                       ChatState.PASSWORD,
                                       ChatState.GAME_LOGIN,
                                       ChatState.GAME_PASSWORD,
-                                      ChatState.MANAGE_USERS]
+                                      ChatState.MANAGE_USERS,
+                                      ChatState.URL]
 
     ChatStateRepository chatStateRepository
     CredentialsRepository credentialsRepository
@@ -34,7 +35,8 @@ class AdminHandler extends AbstractHandler {
                Command.PASSWORD,
                Command.GAME_LOGIN,
                Command.GAME_PASSWORD,
-               Command.MANAGE_USERS], tgApi, rolesRepository)
+               Command.MANAGE_USERS,
+               Command.URL], tgApi, rolesRepository)
         acceptedRoles = [Role.Admin]
         this.chatStateRepository = chatStateRepository
         this.credentialsRepository = credentialsRepository
