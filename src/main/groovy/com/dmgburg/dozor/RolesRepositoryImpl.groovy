@@ -28,6 +28,7 @@ class RolesRepositoryImpl implements RolesRepository{
         rolesByChatId.put(48569908,[Unauthentificated,Team]) //Dizax
         rolesByChatId.put(21333294,[Unauthentificated,Team]) //Ksu-Ksu
         rolesByChatId.put(33418283,[Unauthentificated,Team]) //Lion
+        rolesByChatId.put(34445229,[Unauthentificated,Team]) //Mari
     }
 
     void addPendingRequest(User user){

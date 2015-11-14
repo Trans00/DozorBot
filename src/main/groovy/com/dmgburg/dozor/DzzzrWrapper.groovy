@@ -75,7 +75,7 @@ class DzzzrWrapper implements EngineWrapper{
                 }
         }
 
-        def result = http.request(Method.GET,ContentType.BINARY){ req ->
+        def result = http.request(Method.GET,ContentType.TEXT){ req ->
             URIBuilder uriBuilder = new URIBuilder(baseUrl)
             uriBuilder.path = "/moscow/go/"
             uriBuilder.query = [notags:"",err:"22"]

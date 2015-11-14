@@ -10,6 +10,7 @@ class Chat {
     @JsonProperty(value = "last_name")String lastName
     String username
     String title
+    String type
 
     Chat() {
     }

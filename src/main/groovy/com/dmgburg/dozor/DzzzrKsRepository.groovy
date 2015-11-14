@@ -9,6 +9,7 @@ import org.jsoup.nodes.Node
 @Slf4j
 class DzzzrKsRepository implements KsRepository {
     DzzzrWrapper dzzzrWrapper
+    def nodeToSearch
 
     DzzzrKsRepository() {
         dzzzrWrapper = new DzzzrWrapper()
@@ -26,43 +27,53 @@ class DzzzrKsRepository implements KsRepository {
         LinkedHashMap ks = [:]
         ks.putAll(getKsList(parsed, "основные коды"))
         ks.putAll(getKsList(parsed, "бонусные коды"))
+        nodeToSearch = null
         return ks
     }
 
     private LinkedHashMap getKsList(Document parsed, String pattern) {
-        def zadNodesIter = parsed?.select("div")?.attr("class", "zad")?.find {
-            it.text().contains("$pattern:")
-        }?.childNodes()?.iterator()
-        if (!zadNodesIter) {
-            return [:]
+        def zadNodesIter
+        def ks = [:]
+        if(!nodeToSearch) {
+            zadNodesIter = parsed?.select("div")?.attr("class", "zad")?.find {
+                it.text().contains("$pattern:")
+            }?.childNodes()?.iterator()
+            if (!zadNodesIter) {
+                return [:]
+            }
+        } else {
+            zadNodesIter = nodeToSearch.childNodes().iterator()
         }
-        def ks = ["$pattern": ""]
         def node = zadNodesIter.next()
-        while (!node.text().contains("$pattern:")) {
+        nodeToSearch = node.parentNode()
+        while (!node.text().contains("$pattern:") && zadNodesIter.hasNext()) {
             node = zadNodesIter.next()
         }
-        fillKs(node, ks, zadNodesIter)
+        fillKs(node, ks, zadNodesIter, pattern)
         ks
     }
 
-    static void fillKs(Node node, LinkedHashMap<String, String> ks, Iterator<Node> zadNodesIter) {
+    static void fillKs(Node node, LinkedHashMap<String, String> ks, Iterator<Node> zadNodesIter, String  pattern) {
         def i = 1
         def ksString = getKsString(node)
         if (ksString) {
             for (String kss : ksString.split(",")) {
-                ks.put(i++, kss)
+                ks.put("$pattern ${i++}", kss)
             }
         }
         while (zadNodesIter.hasNext()) {
             node = zadNodesIter.next()
             if (node instanceof Element) {
+                if(node.tag().name=="br"){
+                    break
+                }
                 i++
             } else {
                 ksString = normalize(node.text())
                 if (ksString) {
                     for (String kss : ksString.split(",")) {
                         if (kss) {
-                            ks.put(i++, kss)
+                            ks.put("$pattern ${i++}", kss)
                         }
                     }
                 }
@@ -87,7 +98,11 @@ class DzzzrKsRepository implements KsRepository {
     }
 
     static String getKsString(Node node) {
-        normalize(node.text().split(":")[1])
+        def text = node.text()
+        if(text.contains(":")) {
+            return normalize(text.split(":")[1])
+        }
+        return ""
     }
 
     static String normalize(String ksString) {
