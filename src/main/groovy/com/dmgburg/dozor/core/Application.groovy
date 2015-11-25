@@ -25,7 +25,7 @@ class Application {
                                                  want : new WantHandler(),
                                                  tea  : new TeaHandler(),
                                                  admin: new AdminHandler(),
-                                                 ks   : new EncounterPlugin()]
+                                                 ks   : new DzzzrPlugin()]
 
     public static void main(String[] args) {
         new Application().run()

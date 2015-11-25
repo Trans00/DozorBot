@@ -2,11 +2,11 @@ package com.dmgburg.dozor
 
 @Singleton
 class CredentialsRepository {
-    String gameLogin
-    String gamePassword
-    String login
-    String password
-    String url = "http://moscow.en.cx/gameengines/encounter/play/52550"
+    String gameLogin = "moscow_Mari_larina"
+    String gamePassword = "825322"
+    String login = "golden_surfer"
+    String password = "a123456789"
+    String url = "http://classic.dzzzr.ru/moscow/go/"
     boolean loginRequired
 
     void setGameLogin(String gameLogin) {

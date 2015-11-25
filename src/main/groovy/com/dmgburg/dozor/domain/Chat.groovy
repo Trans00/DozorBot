@@ -1,6 +1,7 @@
 package com.dmgburg.dozor.domain
 
 import groovy.transform.CompileStatic
+import org.codehaus.jackson.annotate.JsonIgnore
 import org.codehaus.jackson.annotate.JsonProperty
 
 @CompileStatic
@@ -10,6 +11,7 @@ class Chat {
     @JsonProperty(value = "last_name")String lastName
     String username
     String title
+    @JsonIgnore String type
 
     Chat() {
     }
