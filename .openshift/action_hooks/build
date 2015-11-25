@@ -1,1 +1,1 @@
-mvn clean package -Popenshift --log-file $OPENSHIFT_DATA_DIR/build.log
+./gradlew run > app.log
