@@ -3,6 +3,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'jacoco'
 apply plugin: 'wrapper'
+apply plugin: 'war'
+apply plugin: "org.akhikhl.gretty"
 
 group 'com.dmg'
 version '1.0-SNAPSHOT'
@@ -11,6 +13,17 @@ applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 
 compileJava.options.encoding = 'UTF-8'
 compileGroovy.options.encoding = 'UTF-8'
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.akhikhl.gretty:gretty:1.2.4"
+    }
+}
 
 jacoco {
     toolVersion = "0.7.5.201505241946"
@@ -21,6 +34,7 @@ repositories {
     mavenCentral()
     mavenLocal()
 }
+
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile group: 'junit', name: 'junit', version: '4.11'
@@ -31,12 +45,20 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
     compile 'org.slf4j:jcl-over-slf4j:1.7.12'
     compile 'org.jsoup:jsoup:1.8.2'
+    compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 
     testCompile 'org.eclipse.jetty:jetty-webapp:9.3.1.v20150714'
     testCompile 'org.eclipse.jetty:jetty-server:9.3.1.v20150714'
     testCompile 'org.eclipse.jetty:jetty-annotations:9.3.1.v20150714'
     testCompile 'org.eclipse.jetty:jetty-jsp:9.2.12.v20150709'
     testCompile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+}
+
+war{
+    includes = ["src/maim/groovy/*"]
+    destinationDir = file("webapps")
+    archiveName = "ROOT.war"
 }
 
 distributions {
