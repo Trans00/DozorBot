@@ -2,12 +2,25 @@ package com.dmgburg.dozor
 
 @Singleton
 class CredentialsRepository {
-    String gameLogin = "moscow_Mari_larina"
-    String gamePassword = "825322"
-    String login = "golden_surfer"
-    String password = "a123456789"
-    String url = "http://classic.dzzzr.ru/moscow/go/"
+    String gameLogin
+    String gamePassword
+    String login
+    String password
+    String url
     boolean loginRequired
+
+    {
+        Properties props = new Properties()
+        def propStream = this.class.getResourceAsStream("/credentials.properties")
+        if (propStream){
+            props.load(propStream)
+        }
+        gameLogin = props.'gameLogin'
+        gamePassword = props.'gamePassword'
+        login = props.'login'
+        password = props.'password'
+        url = props.'url'
+    }
 
     void setGameLogin(String gameLogin) {
         this.gameLogin = gameLogin
