@@ -23,7 +23,6 @@ class DzzzrKsRepository implements KsRepository {
     Map<String, String> getKs() {
         String html = dzzzrWrapper.html
         Document parsed = Jsoup.parse(html)
-        parsed.select("div")
         LinkedHashMap ks = [:]
         ks.putAll(getKsList(parsed, "основные коды"))
         ks.putAll(getKsList(parsed, "бонусные коды"))
