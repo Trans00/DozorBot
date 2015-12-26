@@ -5,6 +5,7 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.Method
 import groovyx.net.http.URIBuilder
+import org.jsoup.nodes.Document
 
 class EncounterWrapper implements EngineWrapper{
     CredentialsRepository credentialsRepository
@@ -53,7 +54,7 @@ class EncounterWrapper implements EngineWrapper{
     }
 
     @Override
-    String getHtml() {
+    Document getHtml() {
         if(!authToken && !sessionToken || credentialsRepository.loginRequired){
             login()
         }
