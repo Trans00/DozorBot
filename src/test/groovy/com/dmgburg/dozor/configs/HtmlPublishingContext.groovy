@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse
 @SuppressWarnings("UnusedDeclaration")
 public class HtmlPublishingContext {
 
-    static String name
+    static volatile String name
     static Mode mode
     static String AUTH_TOKEN = 'validToken'
     static String SESSION_TOKEN = 'validSession'

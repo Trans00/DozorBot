@@ -1,7 +1,5 @@
 package com.dmgburg.dozor
-
 import groovy.util.logging.Slf4j
-import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
@@ -21,8 +19,7 @@ class DzzzrKsRepository implements KsRepository {
 
     @Override
     Map<String, String> getKs() {
-        String html = dzzzrWrapper.html
-        Document parsed = Jsoup.parse(html)
+        Document parsed = dzzzrWrapper.html
         LinkedHashMap ks = [:]
         ks.putAll(getKsList(parsed, "основные коды"))
         ks.putAll(getKsList(parsed, "бонусные коды"))

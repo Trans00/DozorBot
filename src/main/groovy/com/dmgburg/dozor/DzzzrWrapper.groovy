@@ -1,16 +1,18 @@
 package com.dmgburg.dozor
 import groovy.util.logging.Slf4j
+import org.apache.http.HttpStatus
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import org.springframework.web.client.HttpStatusCodeException
 
-import static org.jsoup.Connection.Method.GET
 import static org.jsoup.Connection.Method.POST
 
 @Slf4j
 class DzzzrWrapper implements EngineWrapper{
 
     CredentialsRepository credentialsRepository
+    Map<String,String> cookies
 
     DzzzrWrapper() {
         this.credentialsRepository = CredentialsRepository.instance
@@ -22,31 +24,32 @@ class DzzzrWrapper implements EngineWrapper{
 
     @Override
     Document getHtml() {
-        log.info("Requesting ${credentialsRepository.url} for ks")
-        String baseUrl = credentialsRepository.url
-        Connection connection = Jsoup.connect(credentialsRepository.url)
-        Map <String,String> cookies = connection
-                .url("http://classic.dzzzr.ru/moscow/go/")
-                .header('Authorization','Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
-                .method(GET)
-                .execute()
-                .cookies()
-        cookies = connection
-                .url("http://classic.dzzzr.ru/moscow/go/")
-                .header('Referer','http://classic.dzzzr.ru/moscow/go/')
-                .header('Origin','http://classic.dzzzr.ru')
-                .header('Authorization','Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
-                .method(POST)
-                .data([notags  : "",
-                       action  : "auth",
-                       login   : credentialsRepository.login,
-                       password: credentialsRepository.password])
-                .execute()
-                .cookies()
-        return connection
-                .url(credentialsRepository.url)
-                .cookies(cookies)
-                .data([notags:"",err:"22"])
-                .get()
+        try {
+            log.info("Requesting ${credentialsRepository.url} for ks")
+            String baseUrl = credentialsRepository.url
+            Connection connection = Jsoup.connect(credentialsRepository.url)
+            cookies = connection
+                    .url(baseUrl)
+                    .header('Referer', 'http://classic.dzzzr.ru/moscow/go/')
+                    .header('Origin', 'http://classic.dzzzr.ru')
+                    .header('Authorization', 'Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
+                    .method(POST)
+                    .data([notags  : "",
+                           action  : "auth",
+                           login   : credentialsRepository.login,
+                           password: credentialsRepository.password])
+                    .execute()
+                    .cookies()
+            return connection
+                    .url(credentialsRepository.url)
+                    .cookies(cookies)
+                    .data([notags: "", err: "22"])
+                    .get()
+        } catch (HttpStatusCodeException e){
+            if(HttpStatus.SC_UNAUTHORIZED == e.statusCode.value()){
+                throw new AuthorizationException("Autorization failed: ", e);
+            }
+            throw e;
+        }
     }
 }
