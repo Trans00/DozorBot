@@ -1,10 +1,11 @@
 package com.dmgburg.dozor
+
 import groovy.util.logging.Slf4j
 import org.apache.http.HttpStatus
 import org.jsoup.Connection
+import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.springframework.web.client.HttpStatusCodeException
 
 import static org.jsoup.Connection.Method.POST
 
@@ -45,8 +46,8 @@ class DzzzrWrapper implements EngineWrapper{
                     .cookies(cookies)
                     .data([notags: "", err: "22"])
                     .get()
-        } catch (HttpStatusCodeException e){
-            if(HttpStatus.SC_UNAUTHORIZED == e.statusCode.value()){
+        } catch (HttpStatusException e){
+            if(HttpStatus.SC_UNAUTHORIZED == e.statusCode){
                 throw new AuthorizationException("Autorization failed: ", e);
             }
             throw e;

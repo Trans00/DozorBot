@@ -1,12 +1,11 @@
 package com.dmgburg.dozor
 
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import static org.mockito.Mockito.*
+
+import static org.mockito.Mockito.when
 
 class EnkounterWrapperTest {
 
@@ -28,7 +27,6 @@ class EnkounterWrapperTest {
     @Test
     void "should login as test user"(){
         def html = wrapper.html
-        Element parsed = Jsoup.parse(html)
-        parsed?.getElementsByAttributeValue("id","boxUser")[0].text().contains(userName)
+        html?.getElementsByAttributeValue("id","boxUser")[0].text().contains(userName)
     }
 }

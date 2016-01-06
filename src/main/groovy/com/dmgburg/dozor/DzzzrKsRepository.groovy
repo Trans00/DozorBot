@@ -54,7 +54,7 @@ class DzzzrKsRepository implements KsRepository {
         def ksString = getKsString(node)
         if (ksString) {
             for (String kss : ksString.split(",")) {
-                ks.put("$pattern ${i++}", kss)
+                ks.put("$pattern ${i++}".toString(), kss)
             }
         }
         while (zadNodesIter.hasNext()) {
@@ -69,7 +69,7 @@ class DzzzrKsRepository implements KsRepository {
                 if (ksString) {
                     for (String kss : ksString.split(",")) {
                         if (kss) {
-                            ks.put("$pattern ${i++}", kss)
+                            ks.put("$pattern ${i++}".toString(), kss)
                         }
                     }
                 }

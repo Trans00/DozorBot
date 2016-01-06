@@ -57,21 +57,38 @@ public class HtmlPublishingContext {
     @ResponseBody
     public String showIndexPost(HttpServletResponse response,
                                 @RequestHeader(value = "Authorization", required = false) String basicAuth,
-                                @RequestParam(value="login", required=false) String login,
-                                @RequestParam(value="password", required=false) String password,
-                                @RequestParam(value="action", required=false) String action) {
+                                @RequestParam(value = "login", required = false) String login,
+                                @RequestParam(value = "password", required = false) String password,
+                                @RequestParam(value = "action", required = false) String action,
+                                @RequestParam(value = "socialAssign", required = false) String socialAssign,
+                                @RequestParam(value = "ddlNetwork", required = false) String ddlNetwork,
+                                @RequestParam(value = "EnButton1", required = false) String EnButton1,
+                                @RequestParam(value = "Login", required = false) String Login,
+                                @RequestParam(value = "Password", required = false) String Password) {
         try {
             log.info("Post request: basicAuth = $basicAuth; action=$action; login=$login;  password=$password")
             if (mode == Mode.Dzzzr) {
                 assert authValid(basicAuth)
-                if(action != "auth" || login != userLogin || password != userPass){
+                if (action != "auth" || login != userLogin || password != userPass) {
                     log.info("login failed")
                     return "forward:/html/dzzzr_login_failed.html"
                 }
                 response.addCookie(new Cookie('atoken', AUTH_TOKEN))
                 return "forward:/html/${name}.html"
+            } else if (mode == Mode.Enc) {
+                if (socialAssign != "0" ||
+                    ddlNetwork != "1" ||
+                    EnButton1 != "Вход" ||
+                    Login != "userLogin" ||
+                    Password != "userPass"){
+                    log.info("login failed")
+                    return "forward:/html/enc_login_failed.html"
+                }
+                response.addCookie(new Cookie('atoken', AUTH_TOKEN))
+                response.addCookie(new Cookie('stoken', SESSION_TOKEN))
+                return "forward:/html/${name}.html"
             }
-        } catch (AssertionError e){
+        } catch (AssertionError e) {
             log.error("Post request: $mode: \n${e.message}")
             return response.sendError(401, "Unauthorized")
         }

@@ -52,4 +52,9 @@ class CredentialsRepository {
         loginRequired = false
         return result
     }
+
+    @Override
+    String toString() {
+        return "CredentialsRepository {gameLogin:$gameLogin, login:$login, url:$url}"
+    }
 }

@@ -1,7 +1,6 @@
 package com.dmgburg.dozor
 import com.dmgburg.dozor.configs.HtmlPublishingContext
 import com.dmgburg.dozor.engine.TestJettyServer
-import groovyx.net.http.HttpResponseException
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
@@ -58,11 +57,6 @@ class DzzzrKsRepositoryTest {
         assert repository.ks == ["основные коды 1": "null"]
     }
 
-    @Test(expected = AuthorizationException)
-    void "should throw autorizationException on 401 code"() {
-        HtmlPublishingContext.name = "throw401"
-    }
-
     @Test
     void "should return ks from html"() {
         HtmlPublishingContext.name = "dzzzr2"
@@ -104,7 +98,7 @@ class DzzzrKsRepositoryTest {
         assert repository.ks == ["основные коды 1": "null"]
     }
 
-    @Test(expected = HttpResponseException)
+    @Test(expected = AuthorizationException)
     void "should receive error when game login pass invalid"() {
         HtmlPublishingContext.name = "dzzzr1"
         mode = Dzzzr

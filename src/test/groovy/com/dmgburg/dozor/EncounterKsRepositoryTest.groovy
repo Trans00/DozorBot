@@ -1,27 +1,20 @@
 package com.dmgburg.dozor
-
 import com.dmgburg.dozor.configs.HtmlPublishingContext
 import com.dmgburg.dozor.engine.TestJettyServer
-import groovy.util.slurpersupport.NodeChild
-import groovy.xml.StreamingMarkupBuilder
-import org.cyberneko.html.parsers.SAXParser
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-import static com.dmgburg.dozor.configs.HtmlPublishingContext.*
-import static com.dmgburg.dozor.configs.HtmlPublishingContext.Mode.*
-
-import static org.mockito.Mockito.*
-import org.mockito.MockitoAnnotations
+import static com.dmgburg.dozor.configs.HtmlPublishingContext.Mode.Enc
+import static com.dmgburg.dozor.configs.HtmlPublishingContext.Mode.Unit
+import static com.dmgburg.dozor.configs.HtmlPublishingContext.setMode
+import static org.mockito.Mockito.when
 
 class EncounterKsRepositoryTest {
 
@@ -54,6 +47,8 @@ class EncounterKsRepositoryTest {
     @Test
     void "should return bonus text"(){
         HtmlPublishingContext.name = "enc3"
+        when(credentialsRepository.login)thenReturn("userLogin")
+        when(credentialsRepository.password)thenReturn("userPass")
         println repository.ks
     }
 
@@ -62,7 +57,7 @@ class EncounterKsRepositoryTest {
         mode = Enc
         HtmlPublishingContext.name = "enc3"
         when(credentialsRepository.login)thenReturn("userLogin")
-        when(credentialsRepository.login)thenReturn("userLogin")
+        when(credentialsRepository.password)thenReturn("userPass")
         println repository.ks
     }
 }
