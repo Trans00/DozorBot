@@ -1,5 +1,7 @@
 package com.dmgburg.dozor
 import com.dmgburg.dozor.configs.HtmlPublishingContext
+import com.dmgburg.dozor.dzzzr.DzzzrKsRepository
+import com.dmgburg.dozor.dzzzr.DzzzrWrapper
 import com.dmgburg.dozor.engine.TestJettyServer
 import org.junit.AfterClass
 import org.junit.Before

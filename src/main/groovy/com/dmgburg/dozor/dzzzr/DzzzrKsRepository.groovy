@@ -1,13 +1,15 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.dzzzr
+
+import com.dmgburg.dozor.KsRepository
 import groovy.util.logging.Slf4j
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
+import org.jsoup.select.Elements
 
 @Slf4j
 class DzzzrKsRepository implements KsRepository {
     DzzzrWrapper dzzzrWrapper
-    def nodeToSearch
 
     DzzzrKsRepository() {
         dzzzrWrapper = new DzzzrWrapper()
@@ -20,28 +22,34 @@ class DzzzrKsRepository implements KsRepository {
     @Override
     Map<String, String> getKs() {
         Document parsed = dzzzrWrapper.html
+        Element mainColumn = getMainColumn(parsed)
+        Element mainMission = getMainMission(mainColumn)
         LinkedHashMap ks = [:]
-        ks.putAll(getKsList(parsed, "основные коды"))
-        ks.putAll(getKsList(parsed, "бонусные коды"))
-        nodeToSearch = null
+        ks.putAll(getKsList(mainMission, "основные коды"))
+        ks.putAll(getKsList(mainMission, "бонусные коды"))
         return ks
     }
 
-    private LinkedHashMap getKsList(Document parsed, String pattern) {
-        def zadNodesIter
+    static Element getMainColumn(Element html) {
+        Elements elements = html.select('td[width="70%"]')
+        if(elements.size()>1){
+            log.error("There are more than one main column")
+        }
+        elements.first()
+    }
+
+    static Element getMainMission(Element mainColumn) {
+        mainColumn?.select('div.zad')?.first()
+    }
+
+    private static LinkedHashMap getKsList(Element mainMission, String pattern) {
+
         def ks = [:]
-        if(!nodeToSearch) {
-            zadNodesIter = parsed?.select("div")?.attr("class", "zad")?.find {
-                it.text().contains("$pattern:")
-            }?.childNodes()?.iterator()
-            if (!zadNodesIter) {
-                return [:]
-            }
-        } else {
-            zadNodesIter = nodeToSearch.childNodes().iterator()
+        def zadNodesIter = mainMission?.select('div.zad')?.first()?.childNodes()?.iterator()
+        if (!zadNodesIter) {
+            return [:]
         }
         def node = zadNodesIter.next()
-        nodeToSearch = node.parentNode()
         while (!node.text().contains("$pattern:") && zadNodesIter.hasNext()) {
             node = zadNodesIter.next()
         }
@@ -49,7 +57,7 @@ class DzzzrKsRepository implements KsRepository {
         ks
     }
 
-    static void fillKs(Node node, LinkedHashMap<String, String> ks, Iterator<Node> zadNodesIter, String  pattern) {
+    static void fillKs(Node node, LinkedHashMap<String, String> ks, Iterator<Node> zadNodesIter, String pattern) {
         def i = 1
         def ksString = getKsString(node)
         if (ksString) {
@@ -60,7 +68,7 @@ class DzzzrKsRepository implements KsRepository {
         while (zadNodesIter.hasNext()) {
             node = zadNodesIter.next()
             if (node instanceof Element) {
-                if(node.tag().name=="br"){
+                if (node.tag().name == "br") {
                     break
                 }
                 i++
@@ -77,25 +85,9 @@ class DzzzrKsRepository implements KsRepository {
         }
     }
 
-    void setGameLogin(String gameLogin){
-        dzzzrWrapper.gameLogin = gameLogin
-    }
-
-    void setGamePassword(String gamePassword){
-        dzzzrWrapper.gamePassword = gamePassword
-    }
-
-    void setUserLogin(String userLogin){
-        dzzzrWrapper.gameLogin = userLogin
-    }
-
-    void setUserPassword(String userPassword){
-        dzzzrWrapper.gamePassword = userPassword
-    }
-
     static String getKsString(Node node) {
         def text = node.text()
-        if(text.contains(":")) {
+        if (text.contains(":")) {
             return normalize(text.split(":")[1])
         }
         return ""

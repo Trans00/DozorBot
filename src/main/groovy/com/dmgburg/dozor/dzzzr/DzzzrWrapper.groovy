@@ -1,5 +1,8 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.dzzzr
 
+import com.dmgburg.dozor.AuthorizationException
+import com.dmgburg.dozor.CredentialsRepository
+import com.dmgburg.dozor.EngineWrapper
 import groovy.util.logging.Slf4j
 import org.apache.http.HttpStatus
 import org.jsoup.Connection

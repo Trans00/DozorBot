@@ -1,5 +1,8 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.enc
 
+import com.dmgburg.dozor.AuthorizationException
+import com.dmgburg.dozor.CredentialsRepository
+import com.dmgburg.dozor.EngineWrapper
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

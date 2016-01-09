@@ -1,24 +1,18 @@
 package com.dmgburg.dozor.core
 
 import com.dmgburg.dozor.ChatStateRepositoryImpl
-import com.dmgburg.dozor.EncounterKsRepository
-import com.dmgburg.dozor.KsRepositoryImpl
-import com.dmgburg.dozor.DzzzrKsRepository
+import com.dmgburg.dozor.dzzzr.DzzzrKsRepository
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.handlers.CancelHandler
 import com.dmgburg.dozor.handlers.Handler
 import com.dmgburg.dozor.handlers.HelpHandler
 import com.dmgburg.dozor.handlers.KsHandler
-import com.dmgburg.dozor.handlers.KsNewHandler
 import com.dmgburg.dozor.handlers.LoginHandler
 import com.dmgburg.dozor.handlers.NopHandler
-import com.dmgburg.dozor.handlers.PassedHandler
 import com.dmgburg.dozor.handlers.StartHandler
 import com.dmgburg.dozor.handlers.TeaHandler
 import com.dmgburg.dozor.handlers.WantHandler
 import groovy.util.logging.Slf4j
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 @Slf4j
 class HelloTG {

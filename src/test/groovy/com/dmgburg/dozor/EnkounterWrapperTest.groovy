@@ -1,5 +1,6 @@
 package com.dmgburg.dozor
 
+import com.dmgburg.dozor.enc.EncounterWrapper
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

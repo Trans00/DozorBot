@@ -1,5 +1,7 @@
 package com.dmgburg.dozor
 import com.dmgburg.dozor.configs.HtmlPublishingContext
+import com.dmgburg.dozor.enc.EncounterKsRepository
+import com.dmgburg.dozor.enc.EncounterWrapper
 import com.dmgburg.dozor.engine.TestJettyServer
 import org.junit.AfterClass
 import org.junit.Before

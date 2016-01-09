@@ -1,11 +1,11 @@
-package com.dmgburg.dozor
+package com.dmgburg.dozor.enc
 
+import com.dmgburg.dozor.EngineWrapper
+import com.dmgburg.dozor.KsRepository
 import groovy.util.logging.Slf4j
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 @Slf4j
 class EncounterKsRepository implements KsRepository{
@@ -66,13 +66,6 @@ class EncounterKsRepository implements KsRepository{
     void removeKs(int number) {
         throw new UnsupportedOperationException("Can't remove KS on parsing repository")
     }
-
-    void setUrl(String url){
-        wrapper.url
-    }
-
-    void setLogin(){}
-
 
     String getHtml() {
         return wrapper.html
