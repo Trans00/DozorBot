@@ -8,17 +8,18 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 
 @Slf4j
-class EncounterKsRepository implements KsRepository{
+class EncounterKsRepository implements KsRepository {
     EngineWrapper wrapper
 
     EncounterKsRepository() {
         wrapper = new EncounterWrapper()
     }
 
-    EncounterKsRepository(EngineWrapper wrapper){
+    EncounterKsRepository(EngineWrapper wrapper) {
         this.wrapper = wrapper
 
     }
+
     @Override
     void setKs(List<String> ks) {
         throw new UnsupportedOperationException("Can't set KS on parsing repository")
@@ -26,10 +27,10 @@ class EncounterKsRepository implements KsRepository{
 
     @Override
     Map<String, String> getKs() {
+        Map<String, String> map = [:]
         try {
             String html = getHtml()
             Document parsed = Jsoup.parse(html)
-            def map = [:]
             int i = 1
             def list = []
             parsed?.body()?.getElementsByClass("container")[0]?.getElementsByClass("content")[0]?.getElementsByClass("cols-wrapper")[0]?.getElementsByClass("cols")?.each {
@@ -50,16 +51,14 @@ class EncounterKsRepository implements KsRepository{
             }.each {
                 if (it.className() == "color_bonus") {
                     map.put("${i++}:${it?.childNode(0)?.text?.replaceAll("\\r", "")?.replaceAll("\\n", "")?.replaceAll("\\t", "")}".toString(), it?.nextElementSibling()?.text())
-                } else if (true){
-                    map.put("${i++}:${it?.childNode(0)?.text?.replaceAll("\\r", "")?.replaceAll("\\n", "")?.replaceAll("\\t", "")}".toString(),it?.nextElementSibling()?.text())
                 } else {
-                    i++
+                    map.put("${i++}:${it?.childNode(0)?.text?.replaceAll("\\r", "")?.replaceAll("\\n", "")?.replaceAll("\\t", "")}".toString(), it?.nextElementSibling()?.text())
                 }
             }
-            map
-        }catch (Exception e){
-            log.error("Exception during parsing: ${wrapper.html}",e)
+        } catch (Exception e) {
+            log.error("Exception during parsing: ${wrapper.html}", e)
         }
+        return map
     }
 
     @Override
@@ -69,13 +68,5 @@ class EncounterKsRepository implements KsRepository{
 
     String getHtml() {
         return wrapper.html
-    }
-
-    String getCookieString(){
-        StringBuilder sb = new StringBuilder()
-        cookies.each {String key, String value ->
-            sb.append("$key=$value; ")
-        }
-        return sb.toString()
     }
 }
