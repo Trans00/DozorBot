@@ -24,15 +24,24 @@ class DzzzrKsRepository implements KsRepository {
         Document parsed = dzzzrWrapper.html
         Element mainColumn = getMainColumn(parsed)
         Element mainMission = getMainMission(mainColumn)
-        LinkedHashMap ks = [:]
+        Map ks = [:]
+        ks.put(getMissionTitle(mainColumn), "")
         ks.putAll(getKsList(mainMission, "основные коды"))
         ks.putAll(getKsList(mainMission, "бонусные коды"))
         return ks
     }
 
+    static String getMissionTitle(Element element) {
+        StringBuilder stringBuilder = new StringBuilder()
+        Element title = element?.select('div.title')?.first()
+        stringBuilder.append(title.childNode(0).toString())
+        stringBuilder.append(title.childNode(3).childNode(0).toString())
+        return stringBuilder.toString()
+    }
+
     static Element getMainColumn(Element html) {
         Elements elements = html.select('td[width="70%"]')
-        if(elements.size()>1){
+        if (elements.size() > 1) {
             log.error("There are more than one main column")
         }
         elements.first()
@@ -95,6 +104,17 @@ class DzzzrKsRepository implements KsRepository {
 
     static String normalize(String ksString) {
         ksString.replace("\\s", "").replace(" ", "")
+    }
+
+    @Override
+    boolean tryCode(String code) {
+        Element sysMessage = dzzzrWrapper.tryCode(code).select("div.sysmsg").first()
+        StringBuilder sb = new StringBuilder()
+        sysMessage.childNodes().each {
+            it -> sb.append(it.toString())
+                  sb.append("\n")
+        }
+        return sb.toString()
     }
 
     @Override

@@ -66,4 +66,9 @@ class EncounterWrapper implements EngineWrapper {
                       stoken: sessionToken])
             .get()
     }
+
+    @Override
+    Document tryCode(String code) {
+        return null
+    }
 }

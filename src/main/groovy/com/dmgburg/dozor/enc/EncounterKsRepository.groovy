@@ -66,6 +66,11 @@ class EncounterKsRepository implements KsRepository {
         throw new UnsupportedOperationException("Can't remove KS on parsing repository")
     }
 
+    @Override
+    boolean tryCode(String code) {
+        return false
+    }
+
     String getHtml() {
         return wrapper.html
     }

@@ -119,4 +119,12 @@ class DzzzrKsRepositoryTest {
         when(credentialsRepository.password).thenReturn("invalid")
         assert repository.ks == [:]
     }
+
+    @Test
+    void "test"() {
+        credentialsRepository = CredentialsRepository.instance
+        wrapper = new DzzzrWrapper(credentialsRepository)
+        repository = new DzzzrKsRepository(wrapper)
+        repository.tryCode("аг")
+    }
 }

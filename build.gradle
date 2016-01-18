@@ -45,6 +45,7 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
     compile 'org.slf4j:jcl-over-slf4j:1.7.12'
     compile 'org.jsoup:jsoup:1.8.2'
+    compile 'com.google.guava:guava:19.0'
     compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 
