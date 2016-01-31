@@ -33,6 +33,7 @@ class DzzzrWrapper {
             loginIfRequired(connection, baseUrl)
             return connection
                     .url(credentialsRepository.url)
+                    .header('Authorization', 'Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
                     .cookies(cookies)
                     .data([notags: "", err: "22"])
                     .get()
@@ -57,7 +58,6 @@ class DzzzrWrapper {
                     .postDataCharset("windows-1251")
                     .method(POST)
                     .cookies(cookies)
-//                    .followRedirects(false)
                     .data([log    : "on",
                            mes    : "",
                            legend : "on",

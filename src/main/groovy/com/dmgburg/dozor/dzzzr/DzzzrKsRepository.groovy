@@ -21,14 +21,20 @@ class DzzzrKsRepository implements KsRepository {
 
     @Override
     Map<String, String> getKs() {
-        Document parsed = dzzzrWrapper.html
-        Element mainColumn = getMainColumn(parsed)
-        Element mainMission = getMainMission(mainColumn)
-        Map ks = [:]
-        ks.put(getMissionTitle(mainColumn), "")
-        ks.putAll(getKsList(mainMission, "основные коды"))
-        ks.putAll(getKsList(mainMission, "бонусные коды"))
-        return ks
+        Document parsed = null
+        try {
+            parsed = dzzzrWrapper.html
+            Element mainColumn = getMainColumn(parsed)
+            Element mainMission = getMainMission(mainColumn)
+            Map ks = [:]
+            ks.put(getMissionTitle(mainColumn), "")
+            ks.putAll(getKsList(mainMission, "основные коды"))
+            ks.putAll(getKsList(mainMission, "бонусные коды"))
+            return ks
+        } catch (Throwable t){
+            log.error("Error parsing html: \n${parsed?.html()}\n", t)
+            return ["Не удалось получить КС":" что-то сломалось :-("]
+        }
     }
 
     static String getMissionTitle(Element element) {

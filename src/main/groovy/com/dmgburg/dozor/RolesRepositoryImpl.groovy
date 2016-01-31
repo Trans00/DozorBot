@@ -8,7 +8,7 @@ import groovy.util.logging.Slf4j
 
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.ConcurrentSkipListSet
 
 import static com.dmgburg.dozor.security.Role.Team
 import static com.dmgburg.dozor.security.Role.Unauthentificated
@@ -17,18 +17,19 @@ import static com.dmgburg.dozor.security.Role.Unauthentificated
 @Singleton(strict = false)
 @CompileStatic
 class RolesRepositoryImpl implements RolesRepository{
-    Map<Integer, List<Role>> rolesByChatId = new ConcurrentHashMap<>()
+    Map<Integer, Set<Role>> rolesByChatId = new ConcurrentHashMap<>()
     Queue<User> pendingRequests = new ArrayBlockingQueue<>(10)
 
-    RolesRepositoryImpl(){
-        rolesByChatId.put(111268484,Role.values() as List)
-        rolesByChatId.put(94601591,[Unauthentificated,Team])
-        rolesByChatId.put(23468109,[Unauthentificated,Team])
-        rolesByChatId.put(49007195,[Unauthentificated,Team]) //Zorgik
-        rolesByChatId.put(48569908,[Unauthentificated,Team]) //Dizax
-        rolesByChatId.put(21333294,[Unauthentificated,Team]) //Ksu-Ksu
-        rolesByChatId.put(33418283,[Unauthentificated,Team]) //Lion
-        rolesByChatId.put(34445229,[Unauthentificated,Team]) //Mari
+    private RolesRepositoryImpl(){
+        rolesByChatId.put(111268484,Role.values() as Set)
+        rolesByChatId.put(94601591,[Unauthentificated,Team] as Set)
+        rolesByChatId.put(23468109,[Unauthentificated,Team] as Set)
+        rolesByChatId.put(49007195,[Unauthentificated,Team] as Set) //Zorgik
+        rolesByChatId.put(48569908,[Unauthentificated,Team] as Set) //Dizax
+        rolesByChatId.put(21333294,[Unauthentificated,Team] as Set) //Ksu-Ksu
+        rolesByChatId.put(33418283,[Unauthentificated,Team] as Set) //Lion
+        rolesByChatId.put(34445229,[Unauthentificated,Team] as Set) //Mari
+        rolesByChatId.put(49007195,[Unauthentificated,Team] as Set) //Eugene
     }
 
     void addPendingRequest(User user){
@@ -60,15 +61,15 @@ class RolesRepositoryImpl implements RolesRepository{
     }
 
     @Override
-    List<Role> getRoles(Chat chat) {
+    Collection<Role> getRoles(Chat chat) {
         getRoles(chat.id)
     }
 
     @Override
-    List<Role> getRoles(int chatId) {
+    Collection<Role> getRoles(int chatId) {
         def roles = rolesByChatId.get(chatId)
         if(!roles){
-            roles = new CopyOnWriteArrayList<Role>([Unauthentificated])
+            roles = new ConcurrentSkipListSet<Role>([Unauthentificated])
             rolesByChatId.put(chatId,roles)
         }
         return roles
