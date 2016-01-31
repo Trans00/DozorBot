@@ -21,4 +21,9 @@ class KsRepositoryImpl implements KsRepository {
     public void removeKs(int number){
         ksByNumber.remove(number)
     }
+
+    @Override
+    boolean tryCode(String code) {
+        return false
+    }
 }

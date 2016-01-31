@@ -12,6 +12,6 @@ interface RolesRepository {
     void addRole(int chatId,Role role)
     void removeRole(Chat chat,Role role)
     void removeRole(int chatId,Role role)
-    List<Role> getRoles(Chat chat)
-    List<Role> getRoles(int chatId)
+    Collection<Role> getRoles(Chat chat)
+    Collection<Role> getRoles(int chatId)
 }

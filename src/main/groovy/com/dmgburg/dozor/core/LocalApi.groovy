@@ -1,23 +1,17 @@
 package com.dmgburg.dozor.core
-
-import com.dmgburg.dozor.domain.Message
 import com.dmgburg.dozor.domain.ReplyKeyboardMarkup
-import com.dmgburg.dozor.domain.TelegramBotError
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.domain.UpdatesResult
+import com.dmgburg.dozor.requests.GetUpdatesRequest
+import com.dmgburg.dozor.requests.Request
+import com.dmgburg.dozor.requests.SendMessageRequest
 import com.dmgburg.dozor.requests.SendStickerRequest
-import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.codehaus.jackson.map.ObjectMapper
-import com.dmgburg.dozor.requests.GetUpdatesRequest
-import com.dmgburg.dozor.requests.Request
-import com.dmgburg.dozor.requests.SendMessageRequest
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 @Slf4j
 @Singleton
