@@ -60,6 +60,9 @@ war{
     includes = ["src/maim/groovy/*"]
     destinationDir = file("webapps")
     archiveName = "ROOT.war"
+    manifest {
+        attributes("Implementation-Title": project.name, "Implementation-Version": version, "Implementation-Timestamp": new Date())
+    }
 }
 
 distributions {
