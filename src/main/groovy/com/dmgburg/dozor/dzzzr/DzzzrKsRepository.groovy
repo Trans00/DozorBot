@@ -1,5 +1,6 @@
 package com.dmgburg.dozor.dzzzr
 
+import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.KsRepository
 import groovy.util.logging.Slf4j
 import org.jsoup.nodes.Document
@@ -7,9 +8,14 @@ import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
 import org.jsoup.select.Elements
 
+import java.util.concurrent.atomic.AtomicLong
+
 @Slf4j
 class DzzzrKsRepository implements KsRepository {
+    private static volatile AtomicLong lastSentCode = new AtomicLong(0)
+    private static final long codesFrequency =2000
     DzzzrWrapper dzzzrWrapper
+    CredentialsRepository credentialsRepository = CredentialsRepository.instance
 
     DzzzrKsRepository() {
         dzzzrWrapper = new DzzzrWrapper()
@@ -24,6 +30,9 @@ class DzzzrKsRepository implements KsRepository {
         Document parsed = null
         try {
             parsed = dzzzrWrapper.html
+            if(!valid(parsed)){
+                dzzzrWrapper.cookies.clear()
+            }
             Element mainColumn = getMainColumn(parsed)
             Element mainMission = getMainMission(mainColumn)
             Map ks = [:]
@@ -35,6 +44,10 @@ class DzzzrKsRepository implements KsRepository {
             log.error("Error parsing html: \n${parsed?.html()}\n", t)
             return ["Не удалось получить КС":" что-то сломалось :-("]
         }
+    }
+
+    boolean valid(Document document) {
+        false
     }
 
     static String getMissionTitle(Element element) {
@@ -113,12 +126,19 @@ class DzzzrKsRepository implements KsRepository {
     }
 
     @Override
-    boolean tryCode(String code) {
+    synchronized String tryCode(String code) {
+        if(!credentialsRepository.getTryEnabled()){
+            return "Ввод кодов выключен. Все вопросы к кэпу"
+        }
+        while(System.currentTimeMillis() - lastSentCode.get() <= codesFrequency){
+            sleep(100)
+        }
         Element sysMessage = dzzzrWrapper.tryCode(code).select("div.sysmsg").first()
+        lastSentCode.set(System.currentTimeMillis())
         StringBuilder sb = new StringBuilder()
         sysMessage.childNodes().each {
             it -> sb.append(it.toString())
-                  sb.append("\n")
+                sb.append("\n")
         }
         return sb.toString()
     }

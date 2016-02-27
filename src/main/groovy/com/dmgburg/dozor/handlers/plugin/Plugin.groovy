@@ -8,6 +8,10 @@ class Plugin implements Handler{
 
     List<Handler> handlers
 
+    Plugin(){
+
+    }
+
     Plugin(List<Handler> handlers) {
         this.handlers = handlers
     }

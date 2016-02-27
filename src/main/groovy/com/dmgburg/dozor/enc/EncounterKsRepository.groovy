@@ -67,8 +67,8 @@ class EncounterKsRepository implements KsRepository {
     }
 
     @Override
-    boolean tryCode(String code) {
-        return false
+    synchronized String tryCode(String code) {
+        return "В энке ввод кода пока не накожен"
     }
 
     String getHtml() {

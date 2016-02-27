@@ -30,6 +30,7 @@ class RolesRepositoryImpl implements RolesRepository{
         rolesByChatId.put(33418283,[Unauthentificated,Team] as Set) //Lion
         rolesByChatId.put(34445229,[Unauthentificated,Team] as Set) //Mari
         rolesByChatId.put(49007195,[Unauthentificated,Team] as Set) //Eugene
+        rolesByChatId.put(25055826,[Unauthentificated,Team] as Set) //EKaterina
     }
 
     void addPendingRequest(User user){

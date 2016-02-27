@@ -36,7 +36,9 @@ class AdminHandler extends AbstractHandler {
                Command.GAME_LOGIN,
                Command.GAME_PASSWORD,
                Command.MANAGE_USERS,
-               Command.URL], tgApi, rolesRepository)
+               Command.URL,
+               Command.ENABLE_TRY_CODE,
+               Command.DISABLE_TRY_CODE], tgApi, rolesRepository)
         acceptedRoles = [Role.Admin]
         this.chatStateRepository = chatStateRepository
         this.credentialsRepository = credentialsRepository
@@ -130,6 +132,14 @@ class AdminHandler extends AbstractHandler {
                     List markup = [["${user.id} Команда"], ["${user.id} Админ"], ["${user.id} Отклонить"]]
                     tgApi.sendMessage(message.chat.id, "Заявка: ${user?.name} ${user.id}", new ReplyKeyboardMarkup(markup,true))
                 }
+                break
+            case Command.DISABLE_TRY_CODE.command:
+                credentialsRepository.canTryCode = false
+                tgApi.sendMessage(message.chat.id, "Ввод кодов выключен")
+                break
+            case Command.ENABLE_TRY_CODE.command:
+                credentialsRepository.canTryCode = true
+                tgApi.sendMessage(message.chat.id, "Ввод кодов включен")
                 break
             case Command.URL.command:
                 chatStateRepository.setState(message.from.chat, ChatState.URL)

@@ -23,7 +23,7 @@ class KsRepositoryImpl implements KsRepository {
     }
 
     @Override
-    boolean tryCode(String code) {
-        return false
+    String tryCode(String code) {
+        return "В ввод кода пока не накожен"
     }
 }

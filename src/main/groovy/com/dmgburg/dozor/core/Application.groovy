@@ -1,13 +1,8 @@
 package com.dmgburg.dozor.core
 
+import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.domain.Update
-import com.dmgburg.dozor.handlers.AdminHandler
-import com.dmgburg.dozor.handlers.Handler
-import com.dmgburg.dozor.handlers.HelpHandler
-import com.dmgburg.dozor.handlers.NopHandler
-import com.dmgburg.dozor.handlers.StartHandler
-import com.dmgburg.dozor.handlers.TeaHandler
-import com.dmgburg.dozor.handlers.WantHandler
+import com.dmgburg.dozor.handlers.*
 import com.dmgburg.dozor.handlers.plugin.DzzzrPlugin
 import com.dmgburg.dozor.handlers.plugin.EncounterPlugin
 import com.dmgburg.dozor.handlers.plugin.ManualKsPlugin
@@ -17,11 +12,10 @@ import groovy.util.logging.Slf4j
 import static com.dmgburg.dozor.core.KsHandlerName.*
 
 @Slf4j
-class Application {
+class Application implements Runnable {
     static int lastUpdate = 0
     static long sleepTime = 1000
     private Map<String, Handler> handlersById = [start: new StartHandler(),
-                                                 help : new HelpHandler(this),
                                                  want : new WantHandler(),
                                                  tea  : new TeaHandler(),
                                                  admin: new AdminHandler(),
@@ -39,12 +33,17 @@ class Application {
             try {
                 for (Update update : updates) {
                     lastUpdate = update.update_id
-                    getHandlers(update).each { Handler handler ->
-                        handler.handle(update.message)
+                    log.info("Processing update: ${update.update_id} ${update.message}")
+                    if (CredentialsRepository.instance.applicationEnabled) {
+                        getHandlers(update).each { Handler handler ->
+                            handler.handle(update.message)
+                        }
+                    } else {
+                        log.info("Skipping update: app disabled")
                     }
                 }
                 sleep(sleepTime)
-                if(lastUpdate==0){
+                if (lastUpdate == 0) {
                     updates = api.getUpdates()
                 } else {
                     updates = api.getUpdates(lastUpdate + 1)
@@ -70,10 +69,20 @@ class Application {
         }
     }
 
+    String getKs() {
+        Class aClass = handlersById.get("ks").class
+        if (aClass == DzzzrPlugin) {
+            return DZZZR
+        } else if (aClass == EncounterPlugin) {
+            return ENC
+        } else {
+            return ""
+        }
+    }
+
     private Handler setKsPlugin(Plugin plugin) {
         handlersById.put("ks", plugin)
     }
-
 
     List<Handler> getHandlers(Update update) {
         def result = handlersById.values().findAll { Handler handler ->

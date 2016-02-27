@@ -13,6 +13,8 @@ enum Command {
     GAME_PASSWORD(command : "gamepassword",description: "Изменение пароля игры"),
     URL(command : "url",description: "Изменение url"),
     MANAGE_USERS(command : "manageusers",description: "Заявки от пользователей"),
+    ENABLE_TRY_CODE(command : "enablecodes",description: "Включить ввод кодов"),
+    DISABLE_TRY_CODE(command : "disablecodes",description: "Выключить ввод кодов"),
     START(command : "start",description: "Зарегистрироваться в системе"),
     TEA(command : "tea",description: "Попросить чаю"),
     WANT(command : "want",description: "Оставить хотелку")

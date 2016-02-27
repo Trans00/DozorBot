@@ -35,11 +35,15 @@ repositories {
     mavenLocal()
 }
 
+gretty {
+    port = 8081
+    jvmArgs = applicationDefaultJvmArgs
+}
+
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
-    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
     compile 'org.mockito:mockito-all:1.9.5'
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
@@ -47,6 +51,20 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.2'
     compile 'com.google.guava:guava:19.0'
     compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
+
+    compile 'aopalliance:aopalliance:1.0'
+    compile 'commons-logging:commons-logging:1.2'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+    compile 'org.springframework:spring-aop:4.2.2.RELEASE'
+    compile 'org.springframework:spring-beans:4.2.2.RELEASE'
+    compile 'org.springframework:spring-context:4.2.2.RELEASE'
+    compile 'org.springframework:spring-core:4.2.2.RELEASE'
+    compile 'org.springframework:spring-expression:4.2.2.RELEASE'
+    compile 'org.springframework:spring-web:4.2.2.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
+    compile 'javax.servlet:jstl:1.2'
+
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 
     testCompile 'org.eclipse.jetty:jetty-webapp:9.3.1.v20150714'
@@ -57,12 +75,16 @@ dependencies {
 }
 
 war{
-    includes = ["src/maim/groovy/*"]
     destinationDir = file("webapps")
     archiveName = "ROOT.war"
     manifest {
         attributes("Implementation-Title": project.name, "Implementation-Version": version, "Implementation-Timestamp": new Date())
     }
+}
+
+task deployToTomcat(type: Copy, dependsOn: 'war') {
+    from war.archivePath
+    into "C:/Program Files/Apache Software Foundation/Tomcat 7.0/webapps"
 }
 
 distributions {

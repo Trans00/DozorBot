@@ -19,7 +19,7 @@ class HelpHandler extends AbstractHandler{
     Application application
     ChatStateRepository chatStateRepository
 
-    HelpHandler(Application application,
+    public HelpHandler(Application application,
                 TgApi tgApi = LocalApi.instance,
                 ChatStateRepository chatStateRepository = ChatStateRepositoryImpl.instance,
                 RolesRepository rolesRepository = RolesRepositoryImpl.instance) {

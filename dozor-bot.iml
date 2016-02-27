@@ -75,5 +75,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.eclipse.jetty:jetty-jndi:9.3.1.v20150714" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.ow2.asm:asm-tree:5.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.glassfish:javax.el:3.0.1-b08" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: javax.servlet:jstl:1.2" level="project" />
   </component>
 </module>

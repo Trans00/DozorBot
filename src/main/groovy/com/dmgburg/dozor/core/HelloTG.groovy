@@ -1,17 +1,9 @@
 package com.dmgburg.dozor.core
 
 import com.dmgburg.dozor.ChatStateRepositoryImpl
-import com.dmgburg.dozor.dzzzr.DzzzrKsRepository
 import com.dmgburg.dozor.domain.Update
-import com.dmgburg.dozor.handlers.CancelHandler
-import com.dmgburg.dozor.handlers.Handler
-import com.dmgburg.dozor.handlers.HelpHandler
-import com.dmgburg.dozor.handlers.KsHandler
-import com.dmgburg.dozor.handlers.LoginHandler
-import com.dmgburg.dozor.handlers.NopHandler
-import com.dmgburg.dozor.handlers.StartHandler
-import com.dmgburg.dozor.handlers.TeaHandler
-import com.dmgburg.dozor.handlers.WantHandler
+import com.dmgburg.dozor.dzzzr.DzzzrKsRepository
+import com.dmgburg.dozor.handlers.*
 import groovy.util.logging.Slf4j
 
 @Slf4j
@@ -21,7 +13,6 @@ class HelloTG {
     static List<Handler> handlers = [new StartHandler(),
                                      new HelpHandler(),
                                      new WantHandler(),
-                                     new LoginHandler(),
                                      new KsHandler(new DzzzrKsRepository()),
                                      new CancelHandler(ChatStateRepositoryImpl.instance),
                                      new TeaHandler()]

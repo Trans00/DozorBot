@@ -125,6 +125,6 @@ class DzzzrKsRepositoryTest {
         credentialsRepository = CredentialsRepository.instance
         wrapper = new DzzzrWrapper(credentialsRepository)
         repository = new DzzzrKsRepository(wrapper)
-        repository.tryCode("аг")
+        repository.tryCode("")
     }
 }
