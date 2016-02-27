@@ -13,6 +13,8 @@ applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 
 compileJava.options.encoding = 'UTF-8'
 compileGroovy.options.encoding = 'UTF-8'
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
 
 buildscript {
     repositories {
