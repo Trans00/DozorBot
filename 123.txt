@@ -1,0 +1,7 @@
+{"ok":true,"result":[
+{"update_id":317844047,
+"message":{"message_id":3578,"from":{"id":49007195,"first_name":"Eugene","last_name":"Kovalenko","username":"zorgyk"},"chat":{"id":-7856658,"title":"\u0421&\u041e, \u043f\u043e\u043b\u0435\u0432\u043e\u0439 \u0447\u0430\u0442","type":"group"},"date":1460651224,"left_chat_participant":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"},"left_chat_member":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"}}},
+{"update_id":317844048,
+"message":{"message_id":3579,"from":{"id":49007195,"first_name":"Eugene","last_name":"Kovalenko","username":"zorgyk"},"chat":{"id":-7856658,"title":"\u0421&\u041e, \u043f\u043e\u043b\u0435\u0432\u043e\u0439 \u0447\u0430\u0442","type":"group"},"date":1460651335,"new_chat_participant":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"},"new_chat_member":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"}}},
+{"update_id":317844049,
+"message":{"message_id":3580,"from":{"id":111268484,"first_name":"Dinya","username":"DinyaG"},"chat":{"id":111268484,"first_name":"Dinya","username":"DinyaG","type":"private"},"date":1460879123,"text":"\/start","entities":[{"type":"bot_command","offset":0,"length":6}]}}]}

@@ -42,6 +42,10 @@
                     <td><input type="radio" name="engine" value="DZZZR" <c:if test="${plugin == 'DZZZR'}">checked</c:if>>Дозор</td>
                     <td><input type="radio" name="engine" value="ENC" <c:if test="${plugin == 'ENC'}">checked</c:if>>Энка</td>
                 </tr>
+                <tr>
+                    <td>Url игры</td>
+                    <td><input type="text" name="url" size="40" value="${credentialsRepository.url}"></td>
+                </tr>
             </tbody>
         </table>
         <input type="submit" value="Отправить">

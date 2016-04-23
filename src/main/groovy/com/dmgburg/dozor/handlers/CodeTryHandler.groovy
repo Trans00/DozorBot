@@ -19,7 +19,7 @@ class CodeTryHandler extends AbstractHandler{
                    KsRepository ksRepository) {
         super(commands, tgApi, rolesRepository)
         this.ksRepository = ksRepository
-        acceptedRoles = [Role.Team]
+        acceptedRoles = [Role.Team,Role.Admin]
     }
 
     @Override

@@ -62,12 +62,14 @@ class BotController {
             @RequestParam(value="password", required=false) String password,
             @RequestParam(value="gamelogin", required=false) String gamelogin,
             @RequestParam(value="gamepassword", required=false) String gamepassword,
+            @RequestParam(value="url", required=false) String url,
             @RequestParam(value="engine", required=false) String engine) throws Exception {
         CredentialsRepository repository = CredentialsRepository.instance
         repository.login = login
         repository.password = password
         repository.gameLogin = gamelogin
         repository.gamePassword= gamepassword
+        repository.url= url
         app.setKs(KsHandlerName.valueOf(engine))
         println(repository.toString() + " " + app.ks)
         return "redirect:/";

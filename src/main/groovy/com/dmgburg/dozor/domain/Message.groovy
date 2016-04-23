@@ -2,9 +2,11 @@ package com.dmgburg.dozor.domain
 
 import groovy.transform.AutoClone
 import groovy.transform.CompileStatic
+import org.codehaus.jackson.annotate.JsonIgnoreProperties
 import org.codehaus.jackson.annotate.JsonProperty
 
 @CompileStatic
+@JsonIgnoreProperties(ignoreUnknown=true)
 @AutoClone(includeFields = true)
 class Message {
     @JsonProperty(value = "message_id" )int messageId

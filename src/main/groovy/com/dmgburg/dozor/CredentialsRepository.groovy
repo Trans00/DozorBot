@@ -41,7 +41,7 @@ class CredentialsRepository {
     }
 
     Boolean getApplicationEnabled() {
-        return props.applicationEnabled ?: true
+        return props.applicationEnabled != null ? Boolean.valueOf(props.applicationEnabled.toString()) : true
     }
 
     void setApplicationEnabled(Boolean applicationEnabled) {
