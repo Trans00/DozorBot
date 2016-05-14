@@ -56,6 +56,12 @@ class BotController {
         return "redirect:/";
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "/relogin")
+    public String relogin() throws Exception {
+        CredentialsRepository.instance.loginRequired = true
+        return "redirect:/";
+    }
+
     @RequestMapping(method = RequestMethod.POST,path = "/credentials")
     public String setCredentials(
             @RequestParam(value="login", required=false) String login,
