@@ -34,19 +34,20 @@ class Application implements Runnable {
                 for (Update update : updates) {
                     lastUpdate = update.update_id
                     log.info("Processing update: ${update.update_id} ${update.message}")
-                    if (CredentialsRepository.instance.applicationEnabled) {
-                        getHandlers(update).each { Handler handler ->
-                            handler.handle(update.message)
-                        }
-                    } else {
-                        log.info("Skipping update: app disabled")
+
+                    getHandlers(update).each { Handler handler ->
+                        handler.handle(update.message)
                     }
                 }
                 sleep(sleepTime)
-                if (lastUpdate == 0) {
-                    updates = api.getUpdates()
+                if (CredentialsRepository.instance.applicationEnabled) {
+                    if (lastUpdate == 0) {
+                        updates = api.getUpdates()
+                    } else {
+                        updates = api.getUpdates(lastUpdate + 1)
+                    }
                 } else {
-                    updates = api.getUpdates(lastUpdate + 1)
+                    log.info("Skipping update: app disabled")
                 }
             } catch (Throwable t) {
                 log.error("Unhandled exception: ", t)
