@@ -29,7 +29,7 @@ class Application implements Runnable {
         LocalApi api = LocalApi.instance
         log.info("Application started")
         List<Update> updates = []
-        while (true) {
+        while (false) {
             try {
                 for (Update update : updates) {
                     lastUpdate = update.update_id
