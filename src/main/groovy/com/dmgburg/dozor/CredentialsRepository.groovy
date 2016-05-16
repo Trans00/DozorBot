@@ -15,7 +15,7 @@ class CredentialsRepository {
 
     String filename
     CredentialsRepository() {
-        this(System.getenv().get("OPENSHIFT_DATA_DIR") + File.pathSeparator + "credentials.properties");
+        this(System.getenv().get("OPENSHIFT_DATA_DIR") + File.separator + "credentials.properties");
     }
 
     public static synchronized CredentialsRepository getInstance() {

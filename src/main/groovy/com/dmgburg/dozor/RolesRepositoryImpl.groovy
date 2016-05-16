@@ -18,11 +18,11 @@ import static com.dmgburg.dozor.security.Role.Unauthentificated
 class RolesRepositoryImpl implements RolesRepository {
     Map<Integer, Player> playersByChatId = new ConcurrentHashMap<>()
     Queue<User> pendingRequests = new ArrayBlockingQueue<>(10)
-    private ObjectMapper mapper;
+    private ObjectMapper mapper = new ObjectMapper();
     private String filename;
 
     private RolesRepositoryImpl(){
-        this(System.getenv().get("OPENSHIFT_DATA_DIR") + File.pathSeparator + "players.json");
+        this(System.getenv().get("OPENSHIFT_DATA_DIR") + File.separator + "players.json");
     }
 
     private RolesRepositoryImpl(String filename) {
@@ -48,7 +48,7 @@ class RolesRepositoryImpl implements RolesRepository {
             }
         } catch (EOFException ignore){
         }catch (Exception e) {
-            log.error("Load game failed with unexpected error: ", e);
+            log.error("Load players failed with unexpected error: ", e);
         }
 
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();

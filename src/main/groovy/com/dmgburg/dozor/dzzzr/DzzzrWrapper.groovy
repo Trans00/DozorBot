@@ -94,6 +94,7 @@ class DzzzrWrapper {
                            password: credentialsRepository.password])
                     .execute()
                     .cookies()
+            log.info("Coockies found: $cookies")
         }
     }
 }
