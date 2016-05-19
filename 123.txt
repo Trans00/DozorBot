@@ -1,7 +1,360 @@
-{"ok":true,"result":[
-{"update_id":317844047,
-"message":{"message_id":3578,"from":{"id":49007195,"first_name":"Eugene","last_name":"Kovalenko","username":"zorgyk"},"chat":{"id":-7856658,"title":"\u0421&\u041e, \u043f\u043e\u043b\u0435\u0432\u043e\u0439 \u0447\u0430\u0442","type":"group"},"date":1460651224,"left_chat_participant":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"},"left_chat_member":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"}}},
-{"update_id":317844048,
-"message":{"message_id":3579,"from":{"id":49007195,"first_name":"Eugene","last_name":"Kovalenko","username":"zorgyk"},"chat":{"id":-7856658,"title":"\u0421&\u041e, \u043f\u043e\u043b\u0435\u0432\u043e\u0439 \u0447\u0430\u0442","type":"group"},"date":1460651335,"new_chat_participant":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"},"new_chat_member":{"id":100394567,"first_name":"Guerre","username":"GuerreDLC"}}},
-{"update_id":317844049,
-"message":{"message_id":3580,"from":{"id":111268484,"first_name":"Dinya","username":"DinyaG"},"chat":{"id":111268484,"first_name":"Dinya","username":"DinyaG","type":"private"},"date":1460879123,"text":"\/start","entities":[{"type":"bot_command","offset":0,"length":6}]}}]}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<script id="facebook-jssdk" src="//connect.facebook.net/en_US/all.js#xfbml=1"></script><script type="text/javascript" src="//vk.com/js/api/openapi.js?79"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    var tabContainers = $('div.soctabs > div');
+    tabContainers.hide().filter(':first').show();
+    
+    $('div.soctabs ul.soctabNavigation a').click(function () {
+        tabContainers.hide();
+        tabContainers.filter(this.hash).show();
+        $('div.soctabs ul.soctabNavigation a').removeClass('selected');
+        $(this).addClass('selected');
+        return false;
+    }).filter(':first').click();
+});
+</script>
+<link type="text/css" rel="stylesheet" href="niftyCorners.css" media="screen"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head><body><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px; "><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; " src="http://staticxx.facebook.com/connect/xd_arbiter.php?version=42#channel=f2a1549d54&amp;origin=http%3A%2F%2Fclassic.dzzzr.ru"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; " src="https://staticxx.facebook.com/connect/xd_arbiter.php?version=42#channel=f2a1549d54&amp;origin=http%3A%2F%2Fclassic.dzzzr.ru"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px; "><div></div></div></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+<title>DozoR / Москва</title>
+<link rel="STYLESHEET" type="text/css" href="dozor.css">
+<link rel="STYLESHEET" type="text/css" href="styleGlobal.css">
+<link rel="STYLESHEET" type="text/css" href="niftyCorners.css">
+<link rel="icon" href="/favicon.ico" type="image/x-icon"> 
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> 
+<script src="niftycube.js" type="text/javascript"></script>
+<script>
+clr = 0;
+clr1 = 0;
+</script>
+<script type="text/javascript">
+window.onload=function(){
+Nifty("div.grayBox,div.boxOrang","normal");
+}
+</script> 
+	<script type="text/javascript">
+var xajaxRequestUri="http://classic.dzzzr.ru/moscow/?section=registr&noform=1&err=25&se=NOQFCYIICXUIAOZDF&ulogin=golden_surfer";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_CheckLogin(){return xajax.call("CheckLogin", arguments, 1);}
+	</script>
+	<script type="text/javascript" src="./xajax_js/xajax.js"></script>
+	<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: ./xajax_js/xajax.js'); } }, 6000);
+	</script>
+
+
+<table cellpadding="0" cellspacing="0" width="100%" align="left" border="0">
+	<tbody><tr>
+		<td colspan="2" style="padding-top: 60px; padding-left: 80px; padding-bottom: 20px;"><div style="float: left;"><imgsrc="images banner_bottom.gif"="" alt="" border="0"></imgsrc="images></div>
+		<div align="center" style="padding-right: 45px;"></div></td>		
+	</tr>
+	<tr style="background: url(images/news/dozor.jpg) top left no-repeat; height: 210px;" onclick="document.location='?'" onmouseover="style.cursor='hand'">
+		<td colspan="2" style="padding-left: 475px;">
+				<div style="width: 390px;" class="Top">- это много новых друзей</div>
+		</td>		
+	</tr>
+	<tr>
+		<td valign="top" width="230" style="padding-left: 70px;">
+			<table cellpadding="0" cellspacing="0" width="200" align="left" class="Menu" border="0">
+				<tbody><tr height="48" align="center">
+					<td colspan="2">
+										<form>
+					<strong>DRугие проекты:</strong><br>
+					<div style="padding-top:3px;">
+					<select name="url" onchange="document.location=this.value" style="font-size:14px">
+						<option value="http://classic.dzzzr.ru/moscow/?section=anons">DozoR.classic
+					</option><option value="http://lite.dzzzr.ru/moscow/">DozoR.lite											</option><option value="http://online.dzzzr.ru/moscow/?section=anons">DozoR.online
+						</option><option value="http://www.game-kadr.ru/moscow/?section=anons">KaDR
+										</option></select>
+					</div>
+					</form>
+										</td>
+				</tr>
+							<!--
+				<tr height="48" align="left">
+					<td valign="top" width="37"><img src="images/news/main.gif" alt="" border="0"></td>
+					<td valign="top" width="196" style="padding-top: 10px; padding-left: 20px;"><a href=".">на главную</a></td>
+				</tr>
+				-->
+				<tr height="48" align="left">
+					<td><img src="images/news/news.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=anons&amp;league=2">анонсы игр</a></td>
+				</tr>
+				<tr height="48">
+					<td align="left"><img src="images/news/zavisimost.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=drmania" style="color:#ff8600">DozoR-мания</a></td>
+				</tr>
+				<!--
+				<tr height="48" align="left">
+					<td><img src="images/news/news1.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=news">новости</a></td>
+				</tr>
+				-->
+				<tr height="48" align="left">
+					<td><img src="images/news/arhiv.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=arc">архив игр</a></td>
+				</tr>
+				<tr height="48" align="left">
+					<td><img src="images/news/pravila.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=rules">правила</a></td>
+				</tr>			
+				<tr height="48" align="left">
+					<td><img src="images/news/faq.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=faq">FAQ</a></td>
+				</tr>
+				<tr height="48" align="left">
+					<td><img src="images/news/about.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=about">о проектe</a></td>
+				</tr>
+				<tr height="48" align="left">
+					<td><img src="images/news/reiting.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=rating&amp;sgms=1">рейтинг команд</a></td>
+				</tr>
+												<tr height="48" align="left">
+					<td><img src="images/news/forum.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="http://www.dzzzr.ru/forum/forumdisplay.php?f=403">форум</a></td>
+				</tr>
+								<tr height="48" align="left">
+					<td><img src="images/news/registr.gif" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=registr">регистрация</a></td>
+				</tr>
+								<tr height="48" align="left">
+					<td><img src="images/news/partner.jpg" width="36" height="25" alt="" border="0"></td>
+					<td style="padding-left: 20px;"><a href="?section=partner">DRузья</a></td>
+				</tr>
+								<tr style="height: 178px;">
+						<form method="post"></form>
+						<input type="hidden" name="action" value="auth">
+						<td colspan="2" style="padding-left: 10px;" valign="top">
+						<div style="padding-top: 27px;" class="Title">вход на сайт</div>
+						<div style="padding-bottom: 9px;  width: 165px;"><input type="text" name="login" class="InputOne" value="имя пользователя" onfocus="select();if(!clr){this.value='';clr=1}" style="width: 165px;"></div>
+						<div><input type="password" name="password" class="InputOne" value="********" onfocus="select();if(!clr1){this.value='';clr1=1}"><input type="submit" value="ok" class="submit" style="height:18px;"></div>
+						<div class="Registrtion"><a href="?section=registr">регистрация</a>   |   <a href="?section=registr&amp;remind=1">забыли пароль?</a></div>
+						
+												
+						</td>	
+						
+				</tr>
+								<tr>
+					<td colspan="2" height="107" valign="top">
+
+						
+
+												
+						<br>					<div style="width: 187px; height: 107px;margin-top:200px;opacity:0.5">
+					<div style="float: left; padding-right: 8px; padding-bottom: 8px;">
+
+
+
+
+						
+<script language="javascript"><!--
+Mu="u6851.00.spylog.com";Md=document;Mnv=navigator;Mp=0;
+Md.cookie="b=b";Mc=0;if(Md.cookie)Mc=1;Mrn=Math.random();
+Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mt=(new Date()).getTimezoneOffset();
+Mz="p="+Mp+"&rn="+Mrn+"&c="+Mc+"&t="+Mt;
+if(self!=top){Mfr=1;}else{Mfr=0;}Msl="1.0";
+//--></script>
+      <script language="javascript1.1"><!--
+Mpl="";Msl="1.1";Mj = (Mnv.javaEnabled()?"Y":"N");Mz+='&j='+Mj;
+//--></script>
+      <script language="javascript1.2"><!--
+Msl="1.2";Ms=screen;Mpx=(Mn==0)?Ms.colorDepth:Ms.pixelDepth;
+Mz+="&wh="+Ms.width+'x'+Ms.height+"&px="+Mpx;
+//--></script>
+      <script language="javascript1.3"><!--
+Msl="1.3";//--></script>
+      <script language="javascript"><!--
+My="";My+="<a href='http://"+Mu+"/cnt?cid=685100&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+My+="<img  style='filter:alpha(opacity=40)' src='http://"+Mu+"/cnt?cid=685100&"+Mz+"&sl="+Msl+"&r="+escape(Md.referrer)+"&fr="+Mfr+"&pg="+escape(window.location.href);
+My+="' border=0 width=88 height=31 alt='SpyLOG'>";
+My+="</a>";Md.write(My);//--></script><a href="http://u6851.00.spylog.com/cnt?cid=685100&amp;f=3&amp;p=0&amp;rn=0.8024045908823609" target="_blank"><img style="filter:alpha(opacity=40)" src="http://u6851.00.spylog.com/cnt?cid=685100&amp;p=0&amp;rn=0.8024045908823609&amp;c=1&amp;t=-180&amp;j=N&amp;wh=1280x1024&amp;px=32&amp;sl=1.3&amp;r=http%3A//classic.dzzzr.ru/moscow/&amp;fr=0&amp;pg=http%3A//classic.dzzzr.ru/moscow/%3Fsection%3Dregistr%26noform%3D1%26err%3D25%26se%3DNOQFCYIICXUIAOZDF%26ulogin%3Dgolden_surfer" border="0" width="88" height="31" alt="SpyLOG"></a>
+					</div>
+					<div style="padding-bottom: 8px;">
+<!--begin of Top100 logo--><a href="http://top100.rambler.ru/top100/"> <img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-violet2.gif" alt="Rambler's Top100" border="0" height="31" width="88" style="filter:alpha(opacity=40)"></a><!--end of Top100 logo -->					
+					</div>
+					<div style="float: left; padding-right: 8px; padding-bottom: 8px;">
+<!-- HotLog -->
+      <script type="text/javascript" language="javascript">
+hotlog_js="1.0";
+hotlog_r=""+Math.random()+"&s=338070&im=112&r="+escape(document.referrer)+"&pg="+
+escape(window.location.href);
+document.cookie="hotlog=1; path=/"; hotlog_r+="&c="+(document.cookie?"Y":"N");
+          </script>
+      <script type="text/javascript" language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")
+          </script>
+      <script type="text/javascript" language="javascript1.2">
+hotlog_js="1.2";
+hotlog_r+="&wh="+screen.width+'x'+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?
+screen.colorDepth:screen.pixelDepth)</script>
+      <script type="text/javascript" language="javascript1.3">hotlog_js="1.3"</script>
+      <script type="text/javascript" language="javascript">hotlog_r+="&js="+hotlog_js;
+document.write("<a href='http://click.hotlog.ru/?338070' target='_top'><img "+
+" style='filter:alpha(opacity=40)' src='http://hit15.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&' border=0 width=88 height=31 alt=HotLog><\/a>")
+          </script><a href="http://click.hotlog.ru/?338070" target="_top"><img style="filter:alpha(opacity=40)" src="http://hit15.hotlog.ru/cgi-bin/hotlog/count?0.8228240595199168&amp;s=338070&amp;im=112&amp;r=http%3A//classic.dzzzr.ru/moscow/&amp;pg=http%3A//classic.dzzzr.ru/moscow/%3Fsection%3Dregistr%26noform%3D1%26err%3D25%26se%3DNOQFCYIICXUIAOZDF%26ulogin%3Dgolden_surfer&amp;c=Y&amp;j=N&amp;wh=1280x1024&amp;px=32&amp;js=1.3&amp;" border="0" width="88" height="31" alt="HotLog"></a>
+      <noscript> &lt;a href="http://click.hotlog.ru/?338070" target="_top"&gt;&lt;img
+ src="http://hit15.hotlog.ru/cgi-bin/hotlog/count?s=338070&amp;im=112"
+ alt="HotLog" style='filter:alpha(opacity=40)' border="0" height="31" width="88"&gt;&lt;/a&gt; </noscript><!-- /HotLog -->					
+					</div>
+					<div style="padding-bottom: 9px;">
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click;dzzzrru' "+
+"target=_blank><img src='http://counter.yadro.ru/hit;dzzzrru?t16.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня' "+
+"border=0 width=88 height=31><\/a>")//--></script><a href="http://www.liveinternet.ru/click;dzzzrru" target="_blank"><img src="http://counter.yadro.ru/hit;dzzzrru?t16.6;rhttp%3A//classic.dzzzr.ru/moscow/;s1280*1024*32;uhttp%3A//classic.dzzzr.ru/moscow/%3Fsection%3Dregistr%26noform%3D1%26err%3D25%26se%3DNOQFCYIICXUIAOZDF%26ulogin%3Dgolden_surfer;0.8559450614266098" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" border="0" width="88" height="31"></a><!--/LiveInternet-->
+					</div>
+					<div style="float: left; padding-right: 8px;">
+<!--Rating@Mail.ru COUNTEr-->
+      <script language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></script>
+      <script language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script>
+      <script language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script>
+      <script language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></script>
+      <script language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=1023416"'+
+' target=_top><img style="filter:alpha(opacity=40)" src="http://dd.c9.bf.a0.top.list.ru/counter'+
+'?id=1023416;t=56;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=31 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></script><a href="http://top.mail.ru/jump?from=1023416" target="_top"><img style="filter:alpha(opacity=40)" src="http://dd.c9.bf.a0.top.list.ru/counter?id=1023416;t=56;js=13;r=http%3A//classic.dzzzr.ru/moscow/;j=false;s=1280*1024;d=32;rand=0.3298715853597969" alt="Рейтинг@Mail.ru" border="0" height="31" width="88/"></a><!-- 
+      <noscript> <a target="_top"
+ href="http://top.mail.ru/jump?from=1023416"><img
+style='filter:alpha(opacity=40)' src="http://dd.c9.bf.a0.top.list.ru/counter?js=na;id=1023416;t=56"
+ alt="Рейтинг@Mail.ru" border="0" height="31" width="88"></a> </noscript>
+      <script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//--><!--/COUNTER-->					
+					</div>
+					<div>
+<a href="http://www.vvv.ru/cnt.php3?id=5499" target="_top"> <img style="filter:alpha(opacity=40)" src="http://cnt.vvv.ru/cgi-bin/cnt?id=5499" alt="Экстремальный портал VVV.RU" border="0" height="31" width="88"></a>					
+					</div>
+
+					
+					</div>				
+
+<!--begin of Rambler's Top100 code --><a href="http://top100.rambler.ru/top100/"> <img style="filter:alpha(opacity=1)" src="http://counter.rambler.ru/top100.cnt?857488" alt="" border="0" height="1" width="1"></a><!--end of Top100 code-->
+ 
+
+
+  					</td>
+				</tr>
+			</tbody></table>
+		</td>
+		<td align="left" valign="top" style="background: url(images/fon_registr.gif) top right no-repeat; height: 100%;">
+			<table border="0" cellpadding="0" cellspacing="0" align="left" width="100%" style="height: 100%">
+				<tbody><tr>
+					<td align="left" width="25%" valign="top">
+					<table width="400"><tbody><tr><td></td></tr></tbody></table>
+					<!-- CONTENT -->
+										<div class="ContentTitle">Регистрация</div>
+					<div><div style="float: left; padding-right: 8px;"><img src="images/znak.gif" width="20" height="21" alt="" border="0"></div><div style="color: #ff7700;"><b>Ошибка авторизации</b></div></div><br>					
+					<!-- CONTENT END -->
+					</td>
+					<td width="135">
+					<img src="images/inv.gif" width="135" border="0" height="1">
+					</td>
+					<td width="230" valign="top"><div style="padding-top:500px;padding-right:15px">
+<div class="grayBox" style="padding-top: 0px; padding-bottom: 0px; "><b style="margin-left: -10px; margin-right: -10px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(0, 0, 0); margin-bottom: 5px; background-position: initial initial; background-repeat: initial initial; " class="niftycorners"><b class="r1" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r2" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r3" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r4" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b></b><div style="text-align:center"><center><div class="MiniTitle">Календарь игр<br><br></div>
+<style>
+.cal td {
+	padding : 3px 3px 3px 3px;
+}
+</style>
+<table bgcolor="505050" cellpadding="8" class="cal"><tbody><tr><td><strong>Май</strong><table border="0" cellspacing="0" cellpadding="2"><tbody><tr class="cal" align="right"><td>пн</td><td>вт</td><td>ср</td><td>чт</td><td>пт</td><td><span style'color:#ff7800'="">сб</span></td><td><span style'color:#990000'="">вс</span></td></tr><tr class="cal" id="tr_17" align="right"><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td><td></td></tr><tr align="right"><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td></td></tr><tr align="right"><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td></td></tr><tr align="right"><td>16</td><td>17</td><td>18</td><td bgcolor="#808080">19</td><td>20</td><td><a href="http://classic.dzzzr.ru/moscow/?section=anons&amp;league=3#2016-05-21" style="color:#ff7800;font-weight:bold" title="DozoR.Classic / Метро 2033; 
+DozoR.Classic / Я никогда не умел рисовать; 
+DozoR.Classic / Inside out; ">21</a></td><td>22</td><td></td></tr><tr align="right"><td>23</td><td>24</td><td>25</td><td><a href="http://online.dzzzr.ru/msk/?section=anons&amp;league=#2016-05-26" style="color:#3399ff;font-weight:bold" title="DozoR.Online / Лига Восток (17.00) &quot;Россия vs Америки&quot;.; 
+DozoR.Online / Лига Запад (20.00) &quot;Россия vs Америки&quot;.; ">26</a></td><td><a href="http://lite.dzzzr.ru/moscow/?section=anons&amp;league=#2016-05-27" style="color:#ffff33;font-weight:bold" title="DozoR.Lite / Москва Египетская; ">27</a></td><td>28</td><td>29</td><td></td></tr><tr align="right"><td>30</td><td>31</td><td colspan="5"></td><td></td></tr></tbody></table></td></tr></tbody></table><br><span style="color:#ff7800">classic</span> <span style="color:#ffff33">lite</span> <span style="color:#3399ff">online</span> <br></center></div><b style="margin-left: -10px; margin-right: -10px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(0, 0, 0); margin-top: 5px; background-position: initial initial; background-repeat: initial initial; " class="niftycorners"><b class="r4" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r3" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r2" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r1" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b></b></div><div class="grayBox" style="text-align: left; padding-top: 0px; padding-bottom: 0px; "><b style="margin-left: -10px; margin-right: -10px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(0, 0, 0); margin-bottom: 5px; background-position: initial initial; background-repeat: initial initial; " class="niftycorners"><b class="r1" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r2" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r3" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r4" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b></b>						<br><div class="MiniTitle">Мега 2016 </div>
+						<div class="Date">2 марта 2016 г.</div>
+						<div id="min_156" style="display:block"><p>2-3 июля</p></div><a href="?section=news#156">подробности »</a><b style="margin-left: -10px; margin-right: -10px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(0, 0, 0); margin-top: 5px; background-position: initial initial; background-repeat: initial initial; " class="niftycorners"><b class="r4" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r3" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r2" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r1" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b></b></div><!-- VK Widget -->
+<div class="grayBox" style="opacity: 0.8; padding-top: 0px; padding-bottom: 0px; "><b style="margin-left: -10px; margin-right: -10px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(0, 0, 0); margin-bottom: 5px; background-position: initial initial; background-repeat: initial initial; " class="niftycorners"><b class="r1" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r2" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r3" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r4" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b></b><div style="text-align:center">
+
+<div class="soctabs">
+    <ul class="soctabNavigation">
+        <li><a class="selected" href="#first">ВКонтакте</a></li>
+        <li><a class="" href="#second">Facebook</a></li>
+    </ul>
+    
+    <div id="first" style="display: block; ">
+     <center>
+      <!-- VK Widget -->
+      <div id="vk_groups" style="width: 200px; background-image: none; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; height: 290px; background-position: initial initial; background-repeat: initial initial; "><iframe name="fXDec84c" frameborder="0" src="http://vk.com/widget_community.php?app=0&amp;width=200px&amp;_ver=1&amp;gid=1552967&amp;mode=0&amp;color1=&amp;color2=&amp;color3=&amp;class_name=&amp;height=290&amp;url=http%3A%2F%2Fclassic.dzzzr.ru%2Fmoscow%2F%3Fsection%3Dregistr%26noform%3D1%26err%3D25%26se%3DNOQFCYIICXUIAOZDF%26ulogin%3Dgolden_surfer&amp;referrer=http%3A%2F%2Fclassic.dzzzr.ru%2Fmoscow%2F&amp;title=DozoR%20%2F%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&amp;154ca831c83" width="200" height="200" scrolling="no" id="vkwidget1" style="overflow-x: hidden; overflow-y: hidden; height: 290px; "></iframe></div>
+      <script type="text/javascript">
+      VK.Widgets.Group("vk_groups", {mode: 0, width: "200", height: "290"}, 1552967);
+      </script>
+     </center>
+    </div>
+    <div id="second" style="display: none; ">
+		<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fdozor.world&amp;width=200&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:258px;" allowtransparency="true"></iframe>
+    </div>
+</div>
+
+
+
+
+</div><b style="margin-left: -10px; margin-right: -10px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(0, 0, 0); margin-top: 5px; background-position: initial initial; background-repeat: initial initial; " class="niftycorners"><b class="r4" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r3" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r2" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b><b class="r1" style="background-color: rgb(38, 38, 38); border-top-color: rgb(19, 19, 19); border-right-color: rgb(19, 19, 19); border-bottom-color: rgb(19, 19, 19); border-left-color: rgb(19, 19, 19); "></b></b></div>
+						
+
+					</div>
+					</td>
+				
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>	
+		<tr>
+		<td style="padding-top: 135px; padding-left: 70px; padding-bottom: 50px;">
+		<div style="float: left;"><imgsrc="images banner_bottom.gif"="" alt="" border="0"></imgsrc="images></div>
+		<div align="right">
+		<div style="color: #ff7800; line-height: 26px; font-family: Arial, Helvetica, sans-serif; padding-right: 85px; width: 200px; text-align: left;">(c) Dozor Night Game<br>
+		<a href="?section=orgdata" style="color:ff7800">Андропова Ирина</a>
+		<a href="mailto:moscow@dzzzr.ru" style="color:ff7800">moscow@dzzzr.ru</a><br>
+		тел: +7 (968) 868-92-29<br>ICQ: не используется<br>
+		Skype: boehomka<br>				<a href="?section=corporate" style="color:ff7800">Организация корпоративных игр</a>
+				</div>
+				<div style="color:#afafaf; line-height: 26px; font-family: Arial, Helvetica, sans-serif; padding-right: 85px; width: 200px; text-align: left;">Дизайн: МК-Студио</div>
+		</div>
+				</td>		
+	</tr>
+	<tr style="background: url(images/city_new1.jpg) bottom no-repeat left ; height: 268px;">
+		<td colspan="2"></td>
+	</tr>
+</tbody></table>
+
+
+
+
+</body></html>

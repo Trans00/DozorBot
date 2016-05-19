@@ -2,12 +2,15 @@ package com.dmgburg.dozor.dzzzr
 
 import com.dmgburg.dozor.AuthorizationException
 import com.dmgburg.dozor.CredentialsRepository
+import com.dmgburg.dozor.PhantomJSWraper
 import groovy.util.logging.Slf4j
 import org.apache.http.HttpStatus
 import org.jsoup.Connection
 import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import org.openqa.selenium.By
+import org.openqa.selenium.WebDriver
 
 import static org.jsoup.Connection.Method.POST
 
@@ -82,18 +85,15 @@ class DzzzrWrapper {
     private void loginIfRequired(Connection connection, String baseUrl) {
         if (!cookies) {
             log.info("Login cookies not found, trying to log in")
-            cookies = connection
-                    .url(baseUrl)
-                    .header('Referer', 'http://classic.dzzzr.ru/moscow/go/')
-                    .header('Origin', 'http://classic.dzzzr.ru')
-                    .header('Authorization', 'Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
-                    .method(POST)
-                    .data([notags  : "",
-                           action  : "auth",
-                           login   : credentialsRepository.login,
-                           password: credentialsRepository.password])
-                    .execute()
-                    .cookies()
+            WebDriver driver = PhantomJSWraper.instance.getDriver()
+            driver.get("http://classic.dzzzr.ru/moscow/")
+            driver.findElement(By.cssSelector("input[type=\"text\"][name=\"login\"]")).sendKeys("golden_surfer")
+            driver.findElement(By.cssSelector("input[type=\"password\"][name=\"password\"]")).sendKeys("a123456789")
+            driver.findElement(By.cssSelector("input[type=\"submit\"][value=\"ok\"]")).click()
+            cookies = [:]
+            driver.manage().cookies.each{
+                cookies.put(it.name,it.value)
+            }
             log.info("Coockies found: $cookies")
         }
     }
