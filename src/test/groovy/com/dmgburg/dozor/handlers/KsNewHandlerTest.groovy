@@ -15,14 +15,11 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import static com.dmgburg.dozor.security.Role.Team
-import static com.dmgburg.dozor.security.Role.Unauthentificated
 import static org.mockito.Mockito.*
 
 class KsNewHandlerTest {
 
     Message message
-    KsNewHandler handler
     @Mock
     ChatStateRepository chatStateRepository
     @Mock
@@ -46,7 +43,7 @@ class KsNewHandlerTest {
         message.from = user
         message.text = "random message"
         when(user.chat).thenReturn(chat)
-        when(rolesRepository.getRoles(any(Chat))).thenReturn([Team])
+        when(rolesRepository.getAuthentificated(any(Chat))).thenReturn([Team])
         handler = new KsNewHandler(tgApi, ksRepository, chatStateRepository, rolesRepository)
     }
 
@@ -69,7 +66,7 @@ class KsNewHandlerTest {
 
     @Test
     void "should not set ks in ksRepository when user Unauthentificated"() {
-        when(rolesRepository.getRoles(chat)).thenReturn([Unauthentificated])
+        when(rolesRepository.getAuthentificated(chat)).thenReturn([Unauthentificated])
         message.text = "1,2+,3,2,1+,null"
         when(chatStateRepository.getState(chat)).thenReturn(ChatState.KS_NEW)
         handler.handle(message)

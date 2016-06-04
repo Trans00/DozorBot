@@ -10,8 +10,6 @@ import com.dmgburg.dozor.domain.Message
 import groovy.transform.CompileStatic
 
 import static com.dmgburg.dozor.handlers.Command.KS
-import static com.dmgburg.dozor.security.Role.Admin
-import static com.dmgburg.dozor.security.Role.Team
 
 @CompileStatic
 class KsHandler extends AbstractHandler{
@@ -21,7 +19,7 @@ class KsHandler extends AbstractHandler{
               KsRepository ksRepository = KsRepositoryImpl.instance,
               RolesRepository rolesRepository = RolesRepositoryImpl.instance) {
         super([KS],tgApi,rolesRepository)
-        acceptedRoles = [Admin,Team]
+        acceptUnauthentificated = false
         this.ksRepository = ksRepository
     }
 

@@ -65,15 +65,27 @@
         </table>
         <input type="submit" value="Отправить">
     </form>
+    <h2>Заявки</h2>
     <tbody>
-        <c:forEach items="${pendingUsers}" var="user" varStatus="gameIndex">
+        <c:forEach items="${pendingRequests}" var="user" varStatus="gameIndex">
             <tr>
             <form id="add_user" method="post" action="addUser">
                 <input type="hidden" name="id" value="${user.id}">
                 <td><c:out value="${user.name}"/></td>
-                <td><input type="submit" name="role" value="Admin"></td>
-                <td><input type="submit" name="role" value="Team"></td>
-                <td><input type="submit" name="role" value="Unauthentificated"></td>
+                <button name="auth" value="true" type="submit">Свой</button>
+                <button name="auth" value="false" type="submit">Чужой</button>
+            </form>
+            </tr>
+        </c:forEach>
+    </tbody>
+    <h2>Игроки</h2>
+    <tbody>
+        <c:forEach items="${users}" var="user" varStatus="gameIndex">
+            <tr>
+            <form id="add_user" method="post" action="removeUser">
+                <input type="hidden" name="id" value="${user.id}">
+                <td><c:out value="${user.name}"/></td>
+                <td><input type="submit" name="role" value="Убрать"></td>
             </form>
             </tr>
         </c:forEach>

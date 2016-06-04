@@ -1,13 +1,21 @@
 package com.dmgburg.dozor.domain
 
-import com.dmgburg.dozor.security.Role
-
 class Player {
-    int chatId
-    Set<Role> roles
+    int id
+    String name
 
-    Player(int chatId, Set<Role> roles) {
-        this.chatId = chatId
-        this.roles = roles
+    Player(){}
+
+    Player(int id, String name) {
+        this.id = id
+        this.name = name
+    }
+
+    void setId(int chatId) {
+        this.id = chatId
+    }
+
+    int getId() {
+        return id
     }
 }

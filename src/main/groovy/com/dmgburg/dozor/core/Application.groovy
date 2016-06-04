@@ -5,7 +5,6 @@ import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.handlers.*
 import com.dmgburg.dozor.handlers.plugin.DzzzrPlugin
 import com.dmgburg.dozor.handlers.plugin.EncounterPlugin
-import com.dmgburg.dozor.handlers.plugin.ManualKsPlugin
 import com.dmgburg.dozor.handlers.plugin.Plugin
 import groovy.util.logging.Slf4j
 
@@ -18,7 +17,6 @@ class Application implements Runnable {
     private Map<String, Handler> handlersById = [start: new StartHandler(),
                                                  want : new WantHandler(),
                                                  tea  : new TeaHandler(),
-                                                 admin: new AdminHandler(),
                                                  ks   : new DzzzrPlugin()]
 
     public static void main(String[] args) {
@@ -61,8 +59,6 @@ class Application implements Runnable {
 
     void setKs(KsHandlerName name) {
         switch (name) {
-            case MANUAL: setKsPlugin(new ManualKsPlugin())
-                break
             case DZZZR: setKsPlugin(new DzzzrPlugin())
                 break
             case ENC: setKsPlugin(new EncounterPlugin())

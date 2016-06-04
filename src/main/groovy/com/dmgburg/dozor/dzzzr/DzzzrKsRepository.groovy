@@ -30,9 +30,6 @@ class DzzzrKsRepository implements KsRepository {
         Document parsed = null
         try {
             parsed = dzzzrWrapper.html
-            if(!valid(parsed)){
-                dzzzrWrapper.cookies.clear()
-            }
             Element mainColumn = getMainColumn(parsed)
             Element mainMission = getMainMission(mainColumn)
             Map ks = [:]

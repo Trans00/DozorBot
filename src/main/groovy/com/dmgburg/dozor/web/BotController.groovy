@@ -4,7 +4,6 @@ import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.RolesRepositoryImpl
 import com.dmgburg.dozor.core.Application
 import com.dmgburg.dozor.core.KsHandlerName
-import com.dmgburg.dozor.security.Role
 import groovy.util.logging.Slf4j
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -32,7 +31,8 @@ class BotController {
         model.addAttribute("credentialsRepository", CredentialsRepository.instance);
         model.addAttribute("tryEnabled", CredentialsRepository.instance.tryEnabled.toString());
         model.addAttribute("appEnabled", CredentialsRepository.instance.applicationEnabled.toString());
-        model.addAttribute("pendingUsers", RolesRepositoryImpl.instance.pendingRequests);
+        model.addAttribute("users", RolesRepositoryImpl.instance.playersByChatId.values());
+        model.addAttribute("pendingRequests", RolesRepositoryImpl.instance.pendingRequestsById.values());
         return "hello";
     }
 
@@ -44,9 +44,16 @@ class BotController {
 
     @RequestMapping(method = RequestMethod.POST,path = "/addUser")
     public String addUser(@RequestParam(value="id") int id,
-                          @RequestParam(value="role") String role) throws Exception {
-        RolesRepositoryImpl.instance.addRole(id, Role.valueOf(role));
-        log.info("$id ${Role.valueOf(role)}")
+                          @RequestParam(value="auth") String auth) throws Exception {
+        RolesRepositoryImpl.instance.authentificate(id, auth == "true");
+        log.info("$id was authentificated as $auth")
+        return "redirect:/";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,path = "/removeUser")
+    public String removeUser(@RequestParam(value="id") int id) throws Exception {
+        RolesRepositoryImpl.instance.authentificate(id, false);
+        log.info("$id was removed")
         return "redirect:/";
     }
 

@@ -1,6 +1,6 @@
 package com.dmgburg.dozor.core
 
-import com.dmgburg.dozor.ChatStateRepositoryImpl
+import com.dmgburg.dozor.RolesRepositoryImpl
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.dzzzr.DzzzrKsRepository
 import com.dmgburg.dozor.handlers.*
@@ -11,10 +11,8 @@ class HelloTG {
     static int lastUpdate = 0
     static long sleepTime = 1000
     static List<Handler> handlers = [new StartHandler(),
-                                     new HelpHandler(),
                                      new WantHandler(),
-                                     new KsHandler(new DzzzrKsRepository()),
-                                     new CancelHandler(ChatStateRepositoryImpl.instance),
+                                     new KsHandler(LocalApi.instance, new DzzzrKsRepository(), RolesRepositoryImpl.instance),
                                      new TeaHandler()]
 
     public static void main(String[] args) {
@@ -36,9 +34,9 @@ class HelloTG {
                 }
                 sleep(sleepTime)
                 updates = api.getUpdates(lastUpdate + 1)
-            }catch (Throwable t){
+            } catch (Throwable t) {
                 log.error("Unhandled exception: ", t)
-                if(updates.size()>0) {
+                if (updates.size() > 0) {
                     updates.remove(0)
                 }
             }

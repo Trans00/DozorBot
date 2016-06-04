@@ -86,10 +86,10 @@ class DzzzrWrapper {
         if (!cookies) {
             log.info("Login cookies not found, trying to log in")
             WebDriver driver = PhantomJSWraper.instance.getDriver()
-            driver.get("http://classic.dzzzr.ru/moscow/")
+            driver.get(baseUrl.replace("http://","http://${CredentialsRepository.instance.gameLogin}:${CredentialsRepository.instance.gamePassword}@"))
             driver.findElement(By.cssSelector("input[type=\"text\"][name=\"login\"]")).sendKeys("golden_surfer")
             driver.findElement(By.cssSelector("input[type=\"password\"][name=\"password\"]")).sendKeys("a123456789")
-            driver.findElement(By.cssSelector("input[type=\"submit\"][value=\"ok\"]")).click()
+            driver.findElement(By.cssSelector("input[type=\"submit\"][value=\" ok \"]")).click()
             cookies = [:]
             driver.manage().cookies.each{
                 cookies.put(it.name,it.value)

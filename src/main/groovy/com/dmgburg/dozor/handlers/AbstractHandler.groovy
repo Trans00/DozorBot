@@ -6,7 +6,6 @@ import com.dmgburg.dozor.core.LocalApi
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Chat
 import com.dmgburg.dozor.domain.Message
-import com.dmgburg.dozor.security.Role
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.slf4j.Logger
@@ -19,7 +18,7 @@ abstract class AbstractHandler implements Handler {
     protected TgApi tgApi
     protected dropEmptyText = true
     protected List<Command> commands
-    protected List<Role> acceptedRoles = [Role.Unauthentificated]
+    protected boolean acceptUnauthentificated = true
     protected RolesRepository rolesRepository
     AbstractHandler(List<Command> commands = [],
                     TgApi tgApi = LocalApi.instance,
@@ -50,7 +49,7 @@ abstract class AbstractHandler implements Handler {
     }
 
     private boolean authorized(Chat chat){
-        rolesRepository.getRoles(chat).find{acceptedRoles.contains(it)}
+        rolesRepository.getAuthentificated(chat.id) || acceptUnauthentificated
     }
 
     @Override

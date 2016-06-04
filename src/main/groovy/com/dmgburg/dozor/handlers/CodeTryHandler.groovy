@@ -6,7 +6,6 @@ import com.dmgburg.dozor.RolesRepositoryImpl
 import com.dmgburg.dozor.core.LocalApi
 import com.dmgburg.dozor.core.TgApi
 import com.dmgburg.dozor.domain.Message
-import com.dmgburg.dozor.security.Role
 import groovy.transform.CompileStatic
 
 @CompileStatic
@@ -19,7 +18,7 @@ class CodeTryHandler extends AbstractHandler{
                    KsRepository ksRepository) {
         super(commands, tgApi, rolesRepository)
         this.ksRepository = ksRepository
-        acceptedRoles = [Role.Team,Role.Admin]
+        acceptUnauthentificated = false
     }
 
     @Override
