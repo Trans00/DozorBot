@@ -1,4 +1,6 @@
 package com.dmgburg.dozor.core
+
+import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.domain.ReplyKeyboardMarkup
 import com.dmgburg.dozor.domain.Update
 import com.dmgburg.dozor.domain.UpdatesResult
@@ -23,7 +25,7 @@ class LocalApi implements TgApi {
             RESTClient client = new RESTClient("https://api.telegram.org/")
             client.contentType = ContentType.TEXT
 
-            resp = client.post(path: "/bot${Credentials.AUTH_TOKEN}/${request.methodName}",
+            resp = client.post(path: "/bot${CredentialsRepository.instance.getAuthToken()}/${request.methodName}",
                     body: request.parameters, requestContentType: ContentType.URLENC)
         } catch (HttpResponseException exception) {
             try {

@@ -45,8 +45,7 @@ class Application implements Runnable {
                         updates = api.getUpdates(lastUpdate + 1)
                     }
                 } else {
-                    updates.clear()
-                    log.info("Skipping update: app disabled")
+                    updates.clear()                    log.info("Skipping update: app disabled")
                 }
             } catch (Throwable t) {
                 log.error("Unhandled exception: ", t)

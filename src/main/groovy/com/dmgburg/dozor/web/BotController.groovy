@@ -29,6 +29,7 @@ class BotController {
     public String onePage(ModelMap model) throws Exception {
         model.addAttribute("plugin", app.ks);
         model.addAttribute("credentialsRepository", CredentialsRepository.instance);
+        model.addAttribute("credentialsRepository", CredentialsRepository.instance);
         model.addAttribute("tryEnabled", CredentialsRepository.instance.tryEnabled.toString());
         model.addAttribute("appEnabled", CredentialsRepository.instance.applicationEnabled.toString());
         model.addAttribute("users", RolesRepositoryImpl.instance.playersByChatId.values());
@@ -71,6 +72,7 @@ class BotController {
 
     @RequestMapping(method = RequestMethod.POST,path = "/credentials")
     public String setCredentials(
+            @RequestParam(value="token", required=false) String token,
             @RequestParam(value="login", required=false) String login,
             @RequestParam(value="password", required=false) String password,
             @RequestParam(value="gamelogin", required=false) String gamelogin,
@@ -78,6 +80,7 @@ class BotController {
             @RequestParam(value="url", required=false) String url,
             @RequestParam(value="engine", required=false) String engine) throws Exception {
         CredentialsRepository repository = CredentialsRepository.instance
+        repository.authToken = token
         repository.login = login
         repository.password = password
         repository.gameLogin = gamelogin

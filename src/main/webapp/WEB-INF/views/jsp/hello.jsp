@@ -22,6 +22,10 @@
         <table>
             <tbody>
                 <tr>
+                    <td>Токен</td>
+                    <td><input type="text" name="token" size="20" value="${credentialsRepository.authToken}"></td>
+                </tr>
+                <tr>
                     <td>Логин</td>
                     <td><input type="text" name="login" size="20" value="${credentialsRepository.login}"></td>
                 </tr>

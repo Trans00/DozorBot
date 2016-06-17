@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 @Slf4j
 class CredentialsRepository {
     private static CredentialsRepository instance;
+    private String AUTH_TOKEN = ""
     Properties props = new Properties()
 
     String filename
@@ -48,6 +49,13 @@ class CredentialsRepository {
         props.applicationEnabled = applicationEnabled
     }
 
+    public String getAuthToken(){
+        return props.authToken ?: AUTH_TOKEN
+    }
+
+    public void setAuthToken(String token){
+        props.authToken = token
+    }
 
     public String getGameLogin() {
         return props.gameLogin
