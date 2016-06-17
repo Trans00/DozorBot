@@ -5,21 +5,15 @@ import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.PhantomJSWraper
 import groovy.util.logging.Slf4j
 import org.apache.http.HttpStatus
-import org.jsoup.Connection
 import org.jsoup.HttpStatusException
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
-
-import static org.jsoup.Connection.Method.POST
+import org.openqa.selenium.*
+import org.openqa.selenium.firefox.FirefoxProfile
 
 @Slf4j
 class DzzzrWrapper {
 
     CredentialsRepository credentialsRepository
-    Map<String, String> cookies
-
+    WebDriver driver
     DzzzrWrapper() {
         this.credentialsRepository = CredentialsRepository.instance
     }
@@ -28,18 +22,13 @@ class DzzzrWrapper {
         this.credentialsRepository = credentialsRepository
     }
 
-    Document getHtml() {
+    String getHtml() {
         try {
             log.info("Requesting ${credentialsRepository.url} for ks")
             String baseUrl = credentialsRepository.url
-            Connection connection = Jsoup.connect(credentialsRepository.url)
-            loginIfRequired(connection, baseUrl)
-            return connection
-                    .url(credentialsRepository.url)
-                    .header('Authorization', 'Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
-                    .cookies(cookies)
-                    .data([notags: "", err: "22"])
-                    .get()
+            WebDriver driver = loginIfRequired(baseUrl)
+            driver.get(baseUrl.replace("http://", "http://${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}@"))
+            return driver.pageSource
         } catch (HttpStatusException e) {
             if (HttpStatus.SC_UNAUTHORIZED == e.statusCode) {
                 throw new AuthorizationException("Autorization failed: ", e);
@@ -48,53 +37,40 @@ class DzzzrWrapper {
         }
     }
 
-    Document tryCode(String code) {
-        try {
-            log.info("Trying code $code")
+            String tryCode(String code) {
+                try {
+                    log.info("Trying code $code")
             String baseUrl = credentialsRepository.url
-            Connection connection = Jsoup.connect(credentialsRepository.url)
-            loginIfRequired(connection, baseUrl)
-            def result = connection.url(baseUrl)
-                    .header('Referer', 'http://classic.dzzzr.ru/moscow/go/')
-                    .header('Origin', 'http://classic.dzzzr.ru')
-                    .header('Authorization', 'Basic ' + "${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}".getBytes('iso-8859-1').encodeBase64())
-                    .postDataCharset("windows-1251")
-                    .method(POST)
-                    .cookies(cookies)
-                    .data([log    : "on",
-                           mes    : "",
-                           legend : "on",
-                           nostat : "",
-                           notext : "",
-                           refresh: "0",
-                           bonus  : "",
-                           kladMap: "",
-                           notags : "",
-                           cod    : code,
-                           action : "entcod"])
-                    .execute()
-                    result.parse()
+            WebDriver driver = loginIfRequired(baseUrl)
+            log.info("Login cookies not found, trying to log in")
+
+            driver.get(baseUrl.replace("http://","http://${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}@"))
+            driver.findElement(By.cssSelector("form[name=\"codeform\"]>div[class=\"codeform\"]>input[name=\"cod\"]")).sendKeys(code)
+            driver.findElement(By.cssSelector("form[name=\"codeform\"]>div[class=\"codeform\"]>input[name=\"cod\"]")).sendKeys(Keys.ENTER)
+
+            log.info("Page after submit: ${driver.pageSource}")
+            driver.findElement(By.cssSelector("div[class=\"sysmsg\"]")).text
         } catch (HttpStatusException e) {
             if (HttpStatus.SC_UNAUTHORIZED == e.statusCode) {
                 throw new AuthorizationException("Autorization failed: ", e);
             }
+            credentialsRepository.loginRequired = true
             throw e;
         }
     }
 
-    private void loginIfRequired(Connection connection, String baseUrl) {
-        if (!cookies) {
+    private WebDriver loginIfRequired(String baseUrl) {
+        if(driver == null || credentialsRepository.loginRequired) {
             log.info("Login cookies not found, trying to log in")
-            WebDriver driver = PhantomJSWraper.instance.getDriver()
-            driver.get(baseUrl.replace("http://","http://${CredentialsRepository.instance.gameLogin}:${CredentialsRepository.instance.gamePassword}@"))
-            driver.findElement(By.cssSelector("input[type=\"text\"][name=\"login\"]")).sendKeys("golden_surfer")
-            driver.findElement(By.cssSelector("input[type=\"password\"][name=\"password\"]")).sendKeys("a123456789")
-            driver.findElement(By.cssSelector("input[type=\"submit\"][value=\" ok \"]")).click()
-            cookies = [:]
-            driver.manage().cookies.each{
-                cookies.put(it.name,it.value)
-            }
-            log.info("Coockies found: $cookies")
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.setPreference("network.http.phishy-userpass-length", 255);
+//            driver = new FirefoxDriver(profile);
+            driver = PhantomJSWraper.instance.driver
+            driver.get(baseUrl.replace("http://","http://${credentialsRepository.gameLogin}:${credentialsRepository.gamePassword}@"))
+            driver.findElement(By.cssSelector("input[type=\"text\"][name=\"login\"]")).sendKeys(credentialsRepository.login)
+            driver.findElement(By.cssSelector("input[type=\"password\"][name=\"password\"]")).sendKeys(credentialsRepository.password)
+            driver.findElement(By.cssSelector("input[type=\"submit\"][value=\" ok \"]")).submit()
         }
+        return driver
     }
 }

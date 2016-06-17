@@ -3,6 +3,7 @@ package com.dmgburg.dozor.dzzzr
 import com.dmgburg.dozor.CredentialsRepository
 import com.dmgburg.dozor.KsRepository
 import groovy.util.logging.Slf4j
+import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
@@ -29,7 +30,7 @@ class DzzzrKsRepository implements KsRepository {
     Map<String, String> getKs() {
         Document parsed = null
         try {
-            parsed = dzzzrWrapper.html
+            parsed = Jsoup.parse(dzzzrWrapper.html)
             Element mainColumn = getMainColumn(parsed)
             Element mainMission = getMainMission(mainColumn)
             Map ks = [:]
@@ -41,10 +42,6 @@ class DzzzrKsRepository implements KsRepository {
             log.error("Error parsing html: \n${parsed?.html()}\n", t)
             return ["Не удалось получить КС":" что-то сломалось :-("]
         }
-    }
-
-    boolean valid(Document document) {
-        false
     }
 
     static String getMissionTitle(Element element) {
@@ -130,14 +127,10 @@ class DzzzrKsRepository implements KsRepository {
         while(System.currentTimeMillis() - lastSentCode.get() <= codesFrequency){
             sleep(100)
         }
-        Element sysMessage = dzzzrWrapper.tryCode(code).select("div.sysmsg").first()
+        String result = dzzzrWrapper.tryCode(code)
+        log.info("Sent code returned: $result")
         lastSentCode.set(System.currentTimeMillis())
-        StringBuilder sb = new StringBuilder()
-        sysMessage.childNodes().each {
-            it -> sb.append(it.toString())
-                sb.append("\n")
-        }
-        return sb.toString()
+        return result
     }
 
     @Override

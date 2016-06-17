@@ -2,7 +2,6 @@ package com.dmgburg.dozor.engine
 
 import groovy.transform.CompileStatic
 import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.server.handler.ContextHandler
 import org.eclipse.jetty.servlet.ServletContextHandler
 import org.eclipse.jetty.servlet.ServletHolder
 import org.springframework.core.io.ClassPathResource
@@ -12,7 +11,6 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet
 
 import java.util.concurrent.CountDownLatch
-import java.util.concurrent.atomic.AtomicInteger
 
 @CompileStatic
 public class TestJettyServer {
@@ -41,16 +39,16 @@ public class TestJettyServer {
 
     public void start() throws Exception
     {
-        server = new Server( port );
-
-        ContextHandler context = new ContextHandler();
-        context.setContextPath( "/" );
-        context.setHandler( getServletContextHandler(getContext()) );
-
-        server.setHandler( getServletContextHandler(getContext()) );
-
-        server.start();
-        latch.countDown()
+//        server = new Server( port );
+//
+//        ContextHandler context = new ContextHandler();
+//        context.setContextPath( "/" );
+//        context.setHandler( getServletContextHandler(getContext()) );
+//
+//        server.setHandler( getServletContextHandler(getContext()) );
+//
+//        server.start();
+//        latch.countDown()
     }
 
     public void stop(){

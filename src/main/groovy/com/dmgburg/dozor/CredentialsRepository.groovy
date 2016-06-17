@@ -74,7 +74,9 @@ class CredentialsRepository {
     }
 
     String getTryEnabled() {
-        props.'tryEnabled'?:false
+        String enabled = props.'tryEnabled'
+        if(!enabled){return false}
+        return Boolean.valueOf(enabled)
     }
 
     void setGameLogin(String gameLogin) {
@@ -107,8 +109,13 @@ class CredentialsRepository {
     }
 
     boolean getLoginRequired() {
-        def result = loginRequired
-        props.loginRequired = false
+        String value = props.loginRequired
+        boolean result
+        if(value == null) {
+           result = false
+        } else {
+            result = Boolean.valueOf(value)
+        }
         return result
     }
 

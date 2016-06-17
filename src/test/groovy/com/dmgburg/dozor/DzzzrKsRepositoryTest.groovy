@@ -4,16 +4,12 @@ import com.dmgburg.dozor.configs.HtmlPublishingContext
 import com.dmgburg.dozor.dzzzr.DzzzrKsRepository
 import com.dmgburg.dozor.dzzzr.DzzzrWrapper
 import com.dmgburg.dozor.engine.TestJettyServer
-import org.junit.AfterClass
 import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
-
+import static com.dmgburg.dozor.configs.HtmlPublishingContext.Mode.Dzzzr
 import static com.dmgburg.dozor.configs.HtmlPublishingContext.Mode.Unit
 import static com.dmgburg.dozor.configs.HtmlPublishingContext.setMode
 import static org.mockito.Mockito.when
@@ -40,18 +36,18 @@ class DzzzrKsRepositoryTest {
         when(credentialsRepository.gamePassword).thenReturn("password")
     }
 
-    @BeforeClass
-    static void start() {
-        CountDownLatch latch = new CountDownLatch(1)
-        server = new TestJettyServer(latch)
-        server.start()
-        latch.await(60, TimeUnit.SECONDS)
-    }
-
-    @AfterClass
-    static void destroy() {
-        server.stop()
-    }
+//    @BeforeClass
+//    static void start() {
+//        CountDownLatch latch = new CountDownLatch(1)
+//        server = new TestJettyServer(latch)
+//        server.start()
+//        latch.await(60, TimeUnit.SECONDS)
+//    }
+//
+//    @AfterClass
+//    static void destroy() {
+//        server.stop()
+//    }
 
     @Test
     void "should return 1 ks from html when 1 ks exist"() {
@@ -122,6 +118,13 @@ class DzzzrKsRepositoryTest {
 
     @Test
     void "test"() {
+        when(credentialsRepository.url).thenReturn("http://classic.dzzzr.ru/moscow/go")
+        when(credentialsRepository.login).thenReturn("golden_surfer")
+        when(credentialsRepository.gameLogin).thenReturn("moscow_Mari_ann")
+        when(credentialsRepository.password).thenReturn("5745325")
+        when(credentialsRepository.gamePassword).thenReturn("574936")
+        def wrapper = new DzzzrWrapper(credentialsRepository)
+        wrapper.tryCode("40инструкция")
 //        WebDriver driver = PhantomJSWraper.instance.getDriver()
 //        driver.get("http://classic.dzzzr.ru/moscow/")
 //        driver.findElement(By.cssSelector("input[type=\"text\"][name=\"login\"]")).sendKeys("golden_surfer")

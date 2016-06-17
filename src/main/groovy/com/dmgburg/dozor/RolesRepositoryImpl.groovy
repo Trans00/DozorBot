@@ -25,16 +25,18 @@ class RolesRepositoryImpl implements RolesRepository {
 
     private RolesRepositoryImpl(String filename) {
         this.filename = filename;
-        playersByChatId.put(111268484, new Player(111268484, "Trans00"))
-//        playersByChatId.put(23468109, new Player(23468109, true))
-        playersByChatId.put(49007195, new Player(49007195, "Zorgik")) //Zorgik
-        playersByChatId.put(48569908, new Player(48569908, "Dizax")) //Dizax
-        playersByChatId.put(33418283, new Player(33418283, "Lion")) //Lion
-        playersByChatId.put(34445229, new Player(34445229, "Mari")) //Mari
-        playersByChatId.put(25055826, new Player(25055826, "EKaterina")) //EKaterina
-        playersByChatId.put(159080001, new Player(159080001, "Ruslan")) //Ruslan
-        playersByChatId.put(21103097, new Player(21103097, "Dasha")) //Dasha
-        playersByChatId.put(94601591, new Player(94601591, "Vladimir")) //Vladimir
+        playersByChatId.put(111268484, new Player(111268484, "DinyaG"))
+        playersByChatId.put(49007195, new Player(100394567, "GuerreDLC"))
+        playersByChatId.put(49007195, new Player(46698719, "Yohanga "))
+        playersByChatId.put(49007195, new Player(23468109, "Damet"))
+        playersByChatId.put(49007195, new Player(49007195, "Zorgik"))
+        playersByChatId.put(48569908, new Player(48569908, "Dizax"))
+        playersByChatId.put(33418283, new Player(33418283, "Lion"))
+        playersByChatId.put(34445229, new Player(34445229, "Mari"))
+        playersByChatId.put(25055826, new Player(25055826, "EKaterina"))
+        playersByChatId.put(159080001, new Player(159080001, "Ruslan"))
+        playersByChatId.put(21103097, new Player(21103097, "Dasha"))
+        playersByChatId.put(94601591, new Player(94601591, "Vladimir"))
 
         try {
             List<Player> players = mapper.readValue(new File(filename),
@@ -77,8 +79,9 @@ class RolesRepositoryImpl implements RolesRepository {
 
     void saveGame() {
         try {
-            log.info("Persisting players: " + filename);
-            mapper.writeValue(new File(filename), playersByChatId.values());
+            def file = new File(filename)
+            log.info("Persisting players: " + file.absolutePath);
+            mapper.writeValue(file, playersByChatId.values());
         } catch (IOException e) {
             log.error("Save players failed: ", e);
         }
